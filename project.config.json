@@ -23,7 +23,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.9.3",
 	"appid": "wxe1f564d00f76340a",
-	"projectname": "mobileDJ",
+	"projectname": "mobile-dj-mini",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
