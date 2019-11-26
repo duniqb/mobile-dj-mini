@@ -2,30 +2,6 @@
 var config = require("./config.js")
 App({
   onLaunch: function() {
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    wx.setStorageSync('config', config)
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
     // 在 app 启动时尝试获取本地 sessionId
     try {
       var value = wx.getStorageSync('sessionId')
@@ -45,15 +21,17 @@ App({
       },
       success: res => {
         if (res.data.meta.status === 200) {
-          console.log("登录状态：" + res.data.meta.msg)
+          console.log("登录状态1：" + res.data.meta.msg)
         } else if (res.data.meta.status === 400) {
-          console.log("登录状态：" + res.data.meta.msg)
+          console.log("登录状态1：" + res.data.meta.msg)
           // 发起登录
           this.login();
         }
       }
     })
+
   },
+
   // 登录
   login: function() {
     wx.login({
@@ -61,7 +39,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log(res)
         wx.request({
-          url: config.login,
+          url: config.loginUrl,
           data: {
             code: res.code
           },
@@ -72,6 +50,20 @@ App({
             wx.setStorage({
               key: "sessionId",
               data: res.data.data
+            })
+
+            wx.request({
+              url: config.sessionUrl,
+              data: {
+                sessionId: this.sessionId
+              },
+              success: res => {
+                if (res.data.meta.status === 200) {
+                  console.log("登录状态2：" + res.data.meta.msg)
+                } else if (res.data.meta.status === 400) {
+                  console.log("登录状态2：" + res.data.meta.msg)
+                }
+              }
             })
           }
         })

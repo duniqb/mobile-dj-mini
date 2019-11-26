@@ -1,3 +1,4 @@
+"use strict";
 var host = 'http://localhost:8080/';
 var config = {
   host,
