@@ -31,5 +31,6 @@
     "pages/news/index",
     "pages/discovery/index",
     "pages/mine/index"
-  ]
+  ],
+  "sitemapLocation": "sitemap86.json"
 }
