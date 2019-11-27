@@ -1,4 +1,10 @@
 {
+  "pages": [
+    "pages/index/index",
+    "pages/mine/index",
+    "pages/news/index",
+    "pages/discovery/index"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -26,11 +32,5 @@
       }
     ]
   },
-  "pages": [
-    "pages/index/index",
-    "pages/news/index",
-    "pages/discovery/index",
-    "pages/mine/index"
-  ],
   "sitemapLocation": "sitemap86.json"
 }

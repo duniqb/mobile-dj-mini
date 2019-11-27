@@ -5,31 +5,31 @@ Page({
     swiperList: [{
       id: 0,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+      url: 'http://www.djtu.edu.cn/Upload/image/20181026/ca811cd7-7137-462a-ab03-d4ce5acb17ef.jpg'
     }, {
       id: 1,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+        url: 'http://www.djtu.edu.cn/Upload/image/20181026/dfdd9496-2ddf-460d-8575-3bd4eb73571f.jpg',
     }, {
       id: 2,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+        url: 'http://www.djtu.edu.cn/Upload/image/20181026/6db1a643-1ddb-4fda-9e8d-44d92ba9e03a.jpg'
     }, {
       id: 3,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+        url: 'http://www.djtu.edu.cn/Upload/image/20181026/50f61c67-82ec-4c4e-8b41-f4bffaf032af.jpg'
     }, {
       id: 4,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
+        url: 'http://www.djtu.edu.cn/Upload/image/20181026/fe54e8a4-b5b1-4454-8b26-5e4629f2da8f.jpg'
     }, {
       id: 5,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
+        url: 'http://www.djtu.edu.cn/Upload/image/20181026/c57bcd5a-f6fa-4d2c-8e2a-bf3b7069a01e.jpg'
     }, {
       id: 6,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+        url: 'http://www.djtu.edu.cn/Upload/image/20181029/b0a49974-7348-4932-9986-8b82362c3568.jpg'
     }],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,

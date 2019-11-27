@@ -8,5 +8,9 @@ Page({
   onShow() {
     this.getTabBar().init();
   },
-
+  menuCard: function(e) {
+    this.setData({
+      menuCard: e.detail.value
+    });
+  },
 })

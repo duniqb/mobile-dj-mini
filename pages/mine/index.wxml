@@ -1,1 +1,40 @@
-我的
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <image class="cu-avatar radius margin-left" src="https://tvax1.sinaimg.cn/crop.0.0.959.959.180/6cb17e18ly8g60x3408gyj20qn0qnn8q.jpg?KID=imgbed,tva&Expires=1574792102&ssig=aagi5WnbYG"  ></image>
+    <view class="text-xl">ColorUI组件库
+      <text class="text-df">v2.0</text>
+    </view>
+    <view class="margin-top-sm">
+      <text>By:文晓港</text>
+    </view>
+    <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+
+  <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg ">
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
+        <text class="cuIcon-discoverfill text-orange"></text>
+        <text class="text-grey">账号绑定</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-grey">反馈建议</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="contact">
+        <text class="cuIcon-btn text-olive"></text>
+        <text class="text-grey">联系客服</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
+        <text class="cuIcon-discoverfill text-orange"></text>
+        <text class="text-grey">关于</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
