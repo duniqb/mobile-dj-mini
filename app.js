@@ -1,6 +1,21 @@
 //app.js
 var config = require("./config.js")
 App({
+  serverUrl: "http://localhost:8080",
+
+  // 将 user 全局保存在本地缓存，下次打开不用登陆
+  setGlobalUserInfo: function(user) {
+    wx.setStorageSync("userInfo", user);
+  },
+  getGlobalUserInfo: function() {
+    return wx.getStorageSync("userInfo");
+  },
+  globalData: {
+    userInfo: null,
+    sessionId: '',
+    iv: '',
+    encryptData: ''
+  },
   onLaunch: function() {
     // 在 app 启动时尝试获取本地 sessionId
     try {
@@ -96,12 +111,5 @@ App({
         })
       }
     })
-  },
-
-  globalData: {
-    userInfo: null,
-    sessionId: '',
-    iv: '',
-    encryptData: ''
   }
 })

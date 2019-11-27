@@ -28,3 +28,14 @@
 .switch-music::before {
   content: "\e6db";
 }
+
+.tip-wrap {
+  height: 100%；;
+}
+
+.tip {
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  height: 200px;
+}
+

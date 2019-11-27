@@ -5,13 +5,20 @@
     "pages/news/index",
     "pages/discovery/index"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取天气信息"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "掌上大交",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents": {},
+  "usingComponents": {
+    "van-loading": "./vant/dist/loading/index"
+  },
   "tabBar": {
     "custom": true,
     "color": "#000000",

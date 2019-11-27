@@ -45,3 +45,7 @@ map,.mapBox{
   width: 750rpx;
   height: 300rpx;
 }
+
+.info {
+  background-image: url(https://mat1.gtimg.com/pingjs/ext2020/tianqi/mobilev2/982194185a079fad9fd6d7eac312b378.png);
+}

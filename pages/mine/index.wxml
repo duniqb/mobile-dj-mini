@@ -1,5 +1,5 @@
 <scroll-view scroll-y class="scrollPage">
-  <view class="UCenter-bg">
+  <view class="info UCenter-bg info">
     <image class="cu-avatar radius margin-left" src="https://tvax1.sinaimg.cn/crop.0.0.959.959.180/6cb17e18ly8g60x3408gyj20qn0qnn8q.jpg?KID=imgbed,tva&Expires=1574792102&ssig=aagi5WnbYG"  ></image>
     <view class="text-xl">ColorUI组件库
       <text class="text-df">v2.0</text>
