@@ -2,14 +2,15 @@
 var config = require("./config.js")
 App({
   serverUrl: "http://localhost:8080",
-
+  userInfo: null,
   // 将 user 全局保存在本地缓存，下次打开不用登陆
-  setGlobalUserInfo: function(user) {
-    wx.setStorageSync("userInfo", user);
+  setGlobalUserInfo: function(userInfo) {
+    wx.setStorageSync("userInfo", userInfo);
   },
   getGlobalUserInfo: function() {
     return wx.getStorageSync("userInfo");
   },
+
   globalData: {
     userInfo: null,
     sessionId: '',
@@ -21,14 +22,14 @@ App({
     try {
       var value = wx.getStorageSync('sessionId')
       if (value) {
-        console.log('sessionId 获取成功')
+        console.log('本地 sessionId 获取成功')
         this.sessionId = value
         console.log(value)
       }
     } catch (e) {
-      console.log('sessionId 获取失败')
+      console.log('本地 sessionId 获取失败')
     }
-    // 在 app 启动时检查登录状态，如果登录不存在就立刻登录
+    // 检查登录状态，如果登录不存在就立刻登录
     wx.request({
       url: config.sessionUrl,
       data: {
@@ -36,15 +37,14 @@ App({
       },
       success: res => {
         if (res.data.meta.status === 200) {
-          console.log("登录状态1：" + res.data.meta.msg)
+          console.log("登录态1：" + res.data.meta.msg)
         } else if (res.data.meta.status === 400) {
-          console.log("登录状态1：" + res.data.meta.msg)
+          console.log("登录态1：" + res.data.meta.msg)
           // 发起登录
           this.login();
         }
       }
     })
-
   },
 
   // 登录
@@ -52,34 +52,39 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res)
         wx.request({
           url: config.loginUrl,
           data: {
             code: res.code
           },
           success: res => {
-            console.log('sessionId是：' + res.data.data)
-            this.sessionId = res.data.data
-            // 存储 sessionId
-            wx.setStorage({
-              key: "sessionId",
-              data: res.data.data
-            })
-
-            wx.request({
-              url: config.sessionUrl,
-              data: {
-                sessionId: this.sessionId
-              },
-              success: res => {
-                if (res.data.meta.status === 200) {
-                  console.log("登录状态2：" + res.data.meta.msg)
-                } else if (res.data.meta.status === 400) {
-                  console.log("登录状态2：" + res.data.meta.msg)
+            if (res.data.meta.status === 200) {
+              console.log('sessionId是：' + res.data.data)
+              this.sessionId = res.data.data
+              // 存储 sessionId
+              wx.setStorage({
+                key: "sessionId",
+                data: res.data.data
+              })
+              // 再次检查登录态
+              wx.request({
+                url: config.sessionUrl,
+                data: {
+                  sessionId: this.sessionId
+                },
+                success: res => {
+                  if (res.data.meta.status === 200) {
+                    console.log("登录态2：" + res.data.meta.msg)
+                  } else if (res.data.meta.status === 400) {
+                    console.log("登录态2：" + res.data.meta.msg)
+                    // 发起登录
+                    this.login();
+                  }
                 }
-              }
-            })
+              })
+            } else if (res.data.meta.status === 400) {
+              console.log("获取 sessionId 失败" + res.data.meta.msg)
+            }
           }
         })
       }
@@ -87,7 +92,7 @@ App({
   },
 
   // 测试解密
-  decryt: function() {
+  decryt: function(sessionId, iv, encryptData) {
     wx.getUserInfo({
       success: res => {
         console.log(res);
@@ -107,6 +112,7 @@ App({
           success: res => {
             console.log('解密后：')
             console.log(res)
+            return res;
           }
         })
       }

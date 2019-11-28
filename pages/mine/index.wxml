@@ -1,12 +1,18 @@
 <scroll-view scroll-y class="scrollPage">
-  <view class="info UCenter-bg info">
-    <image class="cu-avatar radius margin-left" src="https://tvax1.sinaimg.cn/crop.0.0.959.959.180/6cb17e18ly8g60x3408gyj20qn0qnn8q.jpg?KID=imgbed,tva&Expires=1574792102&ssig=aagi5WnbYG"  ></image>
-    <view class="text-xl">ColorUI组件库
-      <text class="text-df">v2.0</text>
-    </view>
-    <view class="margin-top-sm">
-      <text>By:文晓港</text>
-    </view>
+  <view class="UCenter-bg info">
+    <block wx:if="{{isRegister}}">
+      <image class="cu-avatar radius margin-center" src="{{avatarUrl}}"></image>
+      <view class="margin-top-sm">
+        <text> </text>
+      </view>
+      <view class="text-xl">{{nickName}}</view>
+
+    </block>
+    <block wx:if="{{!isRegister}}">
+      <view class="padding flex flex-direction">
+        <button class="cu-btn bg-red margin-tb-sm lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">登录</button>
+      </view>
+    </block>
     <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
 
@@ -24,15 +30,9 @@
       </button>
     </view>
     <view class="cu-item arrow">
-      <button class="cu-btn content" open-type="contact">
-        <text class="cuIcon-btn text-olive"></text>
-        <text class="text-grey">联系客服</text>
-      </button>
-    </view>
-    <view class="cu-item arrow">
       <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
-        <text class="cuIcon-discoverfill text-orange"></text>
-        <text class="text-grey">关于</text>
+        <text class="cuIcon-magic text-green"></text>
+        <text class="text-grey">关于我们</text>
       </navigator>
     </view>
   </view>

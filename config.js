@@ -6,6 +6,9 @@ var config = {
   sessionUrl: host + 'api/v1/mini/session',
   decryptUrl: host + 'api/v1/mini/decrypt',
   tipUrl: host + 'api/v1/mini/tip',
+  addUrl: host + 'api/v1/mini/add',
+  queryUrl: host + 'api/v1/mini/query',
+  registerUrl: host + 'api/v1/mini/register',
 }
 
 module.exports = config;

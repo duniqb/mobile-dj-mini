@@ -99,11 +99,8 @@ Page({
     });
     try {
       var value = wx.getStorageSync('province')
-      console.log('获取 省份')
       if (value) {
-        console.log('获取 省份成功')
         this.province = value;
-        console.log(this.province)
       }
     } catch (e) {
       // Do something when catch error
@@ -238,9 +235,6 @@ Page({
 
   // 获取提示信息
   getTip: function() {
-    wx.showLoading({
-      title: '正在加载',
-    })
     var that = this;
     wx.request({
       url: config.tipUrl,
@@ -253,7 +247,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        wx.hideLoading();
         that.setData({
           weather: res.data.data.weather,
           degree: res.data.data.degree + '℃',
