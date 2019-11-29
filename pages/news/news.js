@@ -46,7 +46,6 @@ Page({
         type: e.currentTarget.dataset.id + 1
       },
       success: res => {
-        console.log(res.data)
         if (res.data.meta.status == 200) {
           wx.hideLoading();
           if (e.currentTarget.dataset.id + 1 == 1) {
@@ -79,6 +78,7 @@ Page({
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -94,7 +94,6 @@ Page({
         type: 1
       },
       success: res => {
-        console.log(res.data)
         if (res.data.meta.status == 200) {
           wx.hideLoading();
           this.setData({
@@ -187,7 +186,6 @@ Page({
         page: page
       },
       success: res => {
-        console.log(res.data)
         if (res.data.meta.status == 200) {
           wx.hideLoading();
           // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示

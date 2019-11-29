@@ -11,6 +11,7 @@ var config = {
   registerUrl: host + 'api/v1/mini/register',
 
   newsUrl: host + 'api/v1/news/list',
+  detailUrl: host + 'api/v1/news/detail',
 }
 
 module.exports = config;

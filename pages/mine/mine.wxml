@@ -6,7 +6,6 @@
         <text> </text>
       </view>
       <view class="text-xl">{{nickName}}</view>
-
     </block>
     <block wx:if="{{!isRegister}}">
       <view class="padding flex flex-direction">

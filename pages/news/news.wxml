@@ -17,9 +17,11 @@
   <view class="cu-timeline" wx:for="{{focusList}}" wx:key>
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
-      <view class="content">
-        {{item.title}}
-      </view>
+      <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">
+        <view class="content" data-id="{{item.id}}">
+          {{item.title}}
+        </view>
+      </navigator>
     </view>
   </view>
 </block>
@@ -27,9 +29,11 @@
   <view class="cu-timeline" wx:for="{{multipleList}}" wx:key>
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
-      <view class="content">
-        {{item.title}}
-      </view>
+      <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">
+        <view class="content" bindtap="detail" data-id="{{item.id}}">
+          {{item.title}}
+        </view>
+      </navigator>
     </view>
   </view>
 </block>
@@ -37,9 +41,11 @@
   <view class="cu-timeline" wx:for="{{noticeList}}" wx:key>
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
-      <view class="content">
-        {{item.title}}
-      </view>
+      <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">
+        <view class="content" bindtap="detail" data-id="{{item.id}}">
+          {{item.title}}
+        </view>
+      </navigator>
     </view>
   </view>
 </block>
