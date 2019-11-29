@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/news/index",
-    "pages/mine/index",
+    "pages/news/news",
+    "pages/mine/mine",
     "pages/index/index",
-    "pages/discovery/index"
+    "pages/discovery/discovery"
   ],
   "permission": {
     "scope.userLocation": {
@@ -29,13 +29,13 @@
         "pagePath": "pages/index/index"
       },
       {
-        "pagePath": "pages/news/index"
+        "pagePath": "pages/news/news"
       },
       {
-        "pagePath": "pages/discovery/index"
+        "pagePath": "pages/discovery/discovery"
       },
       {
-        "pagePath": "pages/mine/index"
+        "pagePath": "pages/mine/mine"
       }
     ]
   },

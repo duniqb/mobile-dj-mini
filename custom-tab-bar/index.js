@@ -9,17 +9,17 @@ Component({
       {
         icon: 'newspaper-o',
         text: '资讯',
-        url: '/pages/news/index'
+        url: '/pages/news/news'
       },
       {
         icon: 'eye-o',
         text: '发现',
-        url: '/pages/discovery/index'
+        url: '/pages/discovery/discovery'
       },
       {
         icon: 'contact',
         text: '我',
-        url: '/pages/mine/index'
+        url: '/pages/mine/mine'
       }
     ]
   },
