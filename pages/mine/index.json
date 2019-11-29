@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-toast": "../../vant/dist/toast/index"
+  },
   "navigationBarTitleText": "我"
 }

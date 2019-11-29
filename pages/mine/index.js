@@ -9,7 +9,6 @@ Page({
   },
   onLoad: function() {
     this.userInfo = app.getGlobalUserInfo();
-    console.log(this.isRegister)
     // 检查是否已注册
     this.checkRegister();
   },
@@ -35,8 +34,6 @@ Page({
               'content-type': 'application/x-www-form-urlencoded'
             },
             success: res => {
-
-              console.log(res.data)
               that.setData({
                 nickName: res.data.data.nickname,
                 avatarUrl: res.data.data.avatarUrl
@@ -51,7 +48,6 @@ Page({
         }
       }
     })
-    console.log(that.isRegister)
   },
 
   onShow() {
@@ -63,16 +59,23 @@ Page({
     });
   },
   // 获取用户信息事件
+
   onGotUserInfo: function(e) {
     var that = this;
-    console.log(e.detail.userInfo)
+    // this.Toast.loading({
+    //   mask: true,
+    //   message: '正在登录...'
+    // });
+    wx.showLoading({
+      title: '正在登录',
+    })
+    var that = this;
     // 成功获取 userInfo 后给此页面赋值
     this.userInfo = e.detail.userInfo;
     that.setData({
       avatarUrl: e.detail.userInfo.avatarUrl,
       nickName: e.detail.userInfo.nickName
     })
-    console.log(this.userInfo)
     // 保存用户
     wx.request({
       url: config.addUrl,
@@ -92,11 +95,23 @@ Page({
       },
       success: res => {
         if (res.data.meta.status === 200) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '登录成功',
+            icon: 'success',
+            duration: 2000
+          })
           console.log("保存用户：" + res.data.meta.msg)
           that.setData({
             isRegister: true,
           })
         } else if (res.data.meta.status === 400) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '登录失败',
+            icon: 'none',
+            duration: 2000
+          })
           console.log("保存用户：" + res.data.meta.msg)
         }
       }

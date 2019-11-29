@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/news/index",
     "pages/mine/index",
     "pages/index/index",
-    "pages/news/index",
     "pages/discovery/index"
   ],
   "permission": {
