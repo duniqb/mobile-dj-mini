@@ -5,7 +5,7 @@
       <view class="text-gray text-sm text-middle ">
         <text class="margin-lr-xs"></text>{{time}}
         <text class="margin-lr-xs"></text>{{from}}
-        <text class="cuIcon-attention margin-lr-xs"></text>{{browse}}
+        <text class="margin-lr-xs"></text>{{browse}}浏览
       </view>
     </view>
     <view class="content">

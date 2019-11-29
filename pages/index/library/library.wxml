@@ -1,0 +1,63 @@
+<van-search class="search" value="{{ value }}" placeholder="请输入图书名" show-action bind:search="onSearch" bind:cancel="onCancel" />
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{1==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="{{1}}">
+      读者热点
+    </view>
+    <view class="cu-item flex-sub {{2==TabCur?'text-green cur':''}}" bindtap="tabSelect" data-id="{{2}}">
+      荐购热点
+    </view>
+    <view class="cu-item flex-sub {{3==TabCur?'text-orange cur':''}}" bindtap="tabSelect" data-id="{{3}}">
+      分类热点
+    </view>
+    <view class="cu-item flex-sub {{4==TabCur?'text-red cur':''}}" bindtap="tabSelect" data-id="{{4}}">
+      专业热点
+    </view>
+  </view>
+</scroll-view>
+<block wx:if="{{TabCur == 1}}">
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item" wx:for="{{readerHotList}}" wx:key>
+      <view class="content">
+        <text class="">{{item.curNo}}. </text>
+        <text class="text-grey">{{item.bookName}}</text>
+      </view>
+      <view class="action">
+        <view class="cu-tag round bg-blue light">{{item.hot}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur == 2}}">
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item" wx:for="{{recommendHotList}}" wx:key>
+      <view class="content">
+        <text class="">{{item.curNo}}. </text>
+        <text class="text-grey">{{item.bookName}}</text>
+      </view>
+      <view class="action">
+        <view class="cu-tag round bg-green light">{{item.hot}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur ==3}}">
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item" wx:for="{{bookCateList}}" wx:key>
+      <view class="content">
+        <text class="">{{item.id}}. </text>
+        <text class="text-grey">{{item.cate}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur == 4}}">
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item" wx:for="{{collegeList}}" wx:key>
+      <view class="content">
+        <text class="">{{item.curNo + 1}}. </text>
+        <text class="text-grey">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</block>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/library/library",
     "pages/index/index",
     "pages/news/news",
     "pages/news/detail/detail",
@@ -14,11 +15,10 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "掌上大交",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "van-loading": "./vant/dist/loading/index"
+    "van-search": "./vant/dist/search/index"
   },
   "tabBar": {
     "custom": true,

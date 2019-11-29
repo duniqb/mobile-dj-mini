@@ -12,6 +12,11 @@ var config = {
 
   newsUrl: host + 'api/v1/news/list',
   detailUrl: host + 'api/v1/news/detail',
+
+  hotlUrl: host + 'api/v1/library/hot',
+  categorylUrl: host + 'api/v1/library/category',
+  bookCateUrl: host + 'api/v1/library/bookCate',
+  collegeUrl: host + 'api/v1/library/college',
 }
 
 module.exports = config;

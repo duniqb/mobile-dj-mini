@@ -55,7 +55,8 @@ Page({
       icon: 'search',
       color: 'yellow',
       badge: 0,
-      name: '图书查询'
+      name: '图书查询',
+      navUrl: './library/library'
     }, {
       icon: 'repair',
       color: 'olive',
