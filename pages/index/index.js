@@ -96,31 +96,31 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'LDDBZ-2JWW5-XBIIX-Q35KA-F7US6-54B4X'
     });
-    // try {
-    //   var value = wx.getStorageSync('province')
-    //   if (value) {
-    //     this.province = value;
-    //   }
-    // } catch (e) {
-    //   // Do something when catch error
-    // }
+    try {
+      var value = wx.getStorageSync('province')
+      if (value) {
+        this.province = value;
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
 
-    // try {
-    //   var value = wx.getStorageSync('province')
-    //   if (value) {
-    //     this.province = value;
-    //   }
-    // } catch (e) {
-    //   // Do something when catch error
-    // }
-    // try {
-    //   var value = wx.getStorageSync('city')
-    //   if (value) {
-    //     this.city = value;
-    //   }
-    // } catch (e) {
-    //   // Do something when catch error
-    // }
+    try {
+      var value = wx.getStorageSync('province')
+      if (value) {
+        this.province = value;
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+    try {
+      var value = wx.getStorageSync('city')
+      if (value) {
+        this.city = value;
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
     this.getLocation();
   },
   DotStyle(e) {
