@@ -19,3 +19,8 @@
 .cu-modal {
   z-index: 2;
 }
+
+.modal-content {
+  text-align: left;
+  margin-left:30rpx;
+}

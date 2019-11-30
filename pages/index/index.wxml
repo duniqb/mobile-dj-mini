@@ -18,12 +18,15 @@
     </view>
   </view>
 
+
+  <!-- 提示区 -->
   <view class="tip-wrap">
-    <!-- 提示区 -->
     <view class="padding bg-white tip">
       <view class="text-left padding">{{weather}}　{{degree}} </view>
       <view class="text-left padding">{{tips}}</view>
-      <view class="text-left padding"></view>
+      <block wx:if="{{festivalTips != null}}">
+        <view class="text-left padding">{{festivalTips}}</view>
+      </block>
     </view>
   </view>
 </view>

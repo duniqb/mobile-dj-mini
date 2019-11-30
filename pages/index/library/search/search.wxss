@@ -30,3 +30,8 @@
   margin-top: 10rpx;
   margin-left: 30rpx;
 }
+
+.modal-content {
+  text-align: left;
+  margin-left: 30rpx;
+}

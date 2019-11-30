@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require("../../../config.js")
+var config = require('../../../config.js')
 
 Page({
 
@@ -7,45 +7,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '',
-    time: '',
-    from: '',
-    browse: '',
-    content: [],
-    image: []
+    dayOfTerm: null,
+    endOfTermDay: null,
+    endOfVacationDay: null,
+    weekOfTerm: null,
+    weekOfYear: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(params) {
-    wx.showLoading({
-      title: '正在加载',
-    })
+  onLoad: function(options) {
+    var that = this;
     wx.request({
-      url: config.detailUrl,
+      url: config.calendarUrl,
       data: {
         // sessionId: app.sessionId,
-        type: params.type,
-        id: params.id
       },
       success: res => {
         if (res.data.meta.status == 200) {
-          wx.hideLoading();
-          this.setData({
-            title: res.data.data.title,
-            time: res.data.data.time,
-            from: res.data.data.from,
-            browse: res.data.data.browse + '浏览',
-            content: res.data.data.content,
-            image: res.data.data.image
-          })
-        } else if (res.data.meta.status == 400) {
-          wx.hideLoading();
-          wx.showToast({
-            title: '加载失败',
-            icon: 'none',
-            duration: 2000
+          that.setData({
+            dayOfTerm: res.data.data.dayOfTerm,
+            endOfTermDay: res.data.data.endOfTermDay,
+            endOfVacationDay: res.data.data.endOfVacationDay,
+            weekOfTerm: res.data.data.weekOfTerm,
+            weekOfYear: res.data.data.weekOfYear
           })
         }
       }

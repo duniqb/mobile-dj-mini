@@ -7,14 +7,11 @@ Page({
     degree: '',
     weather: '',
     tips: '',
+    festivalTips: null,
     province: null,
     city: '',
     cardCur: 0,
     swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/ca811cd7-7137-462a-ab03-d4ce5acb17ef.jpg'
-    }, {
       id: 1,
       type: 'image',
       url: 'http://www.djtu.edu.cn/Upload/image/20181026/dfdd9496-2ddf-460d-8575-3bd4eb73571f.jpg',
@@ -52,7 +49,7 @@ Page({
       badge: 0,
       name: '一卡通'
     }, {
-      icon: 'search',
+      icon: 'searchlist',
       color: 'yellow',
       badge: 0,
       name: '图书查询',
@@ -76,7 +73,8 @@ Page({
       icon: 'calendar',
       color: 'pink',
       badge: 0,
-      name: '校历'
+      name: '校历',
+      navUrl: './calendar/calendar'
     }, {
       icon: 'group',
       color: 'purple',
@@ -98,34 +96,32 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'LDDBZ-2JWW5-XBIIX-Q35KA-F7US6-54B4X'
     });
-    try {
-      var value = wx.getStorageSync('province')
-      if (value) {
-        this.province = value;
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
+    // try {
+    //   var value = wx.getStorageSync('province')
+    //   if (value) {
+    //     this.province = value;
+    //   }
+    // } catch (e) {
+    //   // Do something when catch error
+    // }
 
-    try {
-      var value = wx.getStorageSync('province')
-      if (value) {
-        this.province = value;
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-    try {
-      var value = wx.getStorageSync('city')
-      if (value) {
-        this.city = value;
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
+    // try {
+    //   var value = wx.getStorageSync('province')
+    //   if (value) {
+    //     this.province = value;
+    //   }
+    // } catch (e) {
+    //   // Do something when catch error
+    // }
+    // try {
+    //   var value = wx.getStorageSync('city')
+    //   if (value) {
+    //     this.city = value;
+    //   }
+    // } catch (e) {
+    //   // Do something when catch error
+    // }
     this.getLocation();
-    // 获取提示信息
-    // this.getTip();
   },
   DotStyle(e) {
     this.setData({
@@ -223,13 +219,10 @@ Page({
               key: "city",
               data: res.result.ad_info.city
             })
-            // wx.showToast({
-            //   title: `当前位置： ` + that.data.city,
-            //   icon: 'none'
-            // });
           }
         });
         that.getTip();
+        that.getFestival();
       }
     })
   },
@@ -256,9 +249,24 @@ Page({
       }
     })
   },
+  getFestival: function() {
+    var that = this;
+    wx.request({
+      url: config.festivalUrl,
+      data: {
+        // sessionId: app.sessionId,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          festivalTips: that.randomTip(res.data.data)
+        })
+      }
+    })
+  },
   randomTip: function(tips) {
     return tips[Math.floor(Math.random() * tips.length)]
   }
-
-
 })

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/calendar/calendar",
     "pages/index/library/search/search",
     "pages/index/library/library",
     "pages/news/news",
@@ -19,7 +20,8 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "van-search": "./vant/dist/search/index"
+    "van-search": "./vant/dist/search/index",
+    "calendar": "plugin://calendar/calendar"
   },
   "tabBar": {
     "custom": true,
@@ -41,5 +43,11 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap86.json"
+  "sitemapLocation": "sitemap86.json",
+  "plugins": {
+    "calendar": {
+      "version": "1.1.3",
+      "provider": "wx92c68dae5a8bb046"
+    }
+  }
 }

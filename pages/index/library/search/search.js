@@ -19,7 +19,7 @@ Page({
       title: '正在搜索',
     })
     wx.request({
-      url: config.queryUrl,
+      url: config.queryLibraryUrl,
       data: {
         // sessionId: app.sessionId,
         name: params.name
@@ -30,7 +30,6 @@ Page({
           that.setData({
             list: res.data.data
           })
-          console.log(that.data.list)
         } else if (res.data.meta.status == 400) {
           wx.hideLoading();
           wx.showToast({

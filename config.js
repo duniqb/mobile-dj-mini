@@ -18,7 +18,10 @@ var config = {
   bookCateUrl: host + 'api/v1/library/bookCate',
   collegeUrl: host + 'api/v1/library/college',
   showUrl: host + 'api/v1/library/show',
-  queryUrl: host + 'api/v1/library/query',
+  queryLibraryUrl: host + 'api/v1/library/query',
+
+  festivalUrl: host + 'api/v1/calendar/festival',
+  calendarUrl: host + 'api/v1/calendar/calendar',
 }
 
 module.exports = config;
