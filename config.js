@@ -17,6 +17,7 @@ var config = {
   categorylUrl: host + 'api/v1/library/category',
   bookCateUrl: host + 'api/v1/library/bookCate',
   collegeUrl: host + 'api/v1/library/college',
+  showUrl: host + 'api/v1/library/show',
 }
 
 module.exports = config;

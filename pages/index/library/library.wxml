@@ -1,4 +1,7 @@
+<!-- 搜索框 -->
 <van-search class="search" value="{{ value }}" placeholder="请输入图书名" show-action bind:search="onSearch" bind:cancel="onCancel" />
+
+<!-- 4 个 Tab -->
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
     <view class="cu-item flex-sub {{1==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="{{1}}">
@@ -17,7 +20,7 @@
 </scroll-view>
 <block wx:if="{{TabCur == 1}}">
   <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{readerHotList}}" wx:key>
+    <view class="cu-item" wx:for="{{readerHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -30,7 +33,7 @@
 </block>
 <block wx:if="{{TabCur == 2}}">
   <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{recommendHotList}}" wx:key>
+    <view class="cu-item" wx:for="{{recommendHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -61,3 +64,55 @@
     </view>
   </view>
 </block>
+
+<!-- 模态框 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{bookDetail.bookName}}</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-list menu">
+        <view class="cu-item">
+          <view class="content">
+            <text class="text-grey">作者：{{bookDetail.author}}</text>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content">
+            <text class="text-grey">出版社：{{bookDetail.publisher}}</text>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content">
+            <text class="text-grey">ISBN号：{{bookDetail.isbn}}</text>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content">
+            <text class="text-grey">CALIS号：{{bookDetail.calis}}</text>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content">
+            <text class="text-grey">索书号：{{bookDetail.index}}</text>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content detail-content">
+            <text class="text-grey">馆藏复本详情</text>
+            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key>{{index + 1}}.{{item}}</view>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="content">
+            <view class="text-left padding text-grey">{{bookDetail.summary == null ? '无简介': bookDetail.summary}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -16,7 +16,43 @@ Page({
     // 图书分类法总类列表
     bookCateList: [],
     // 学院列表
-    collegeList: []
+    collegeList: [],
+    bookName: '',
+    bookDetail: null
+  },
+  // 显示图书详情的模态框
+  showModal(e) {
+    var that = this;
+    wx.request({
+      url: config.showUrl,
+      data: {
+        // sessionId: app.sessionId,
+        id: e.currentTarget.dataset.id
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          that.setData({
+            bookDetail: res.data.data
+          })
+          that.setData({
+            // modalName: e.currentTarget.dataset.target
+            modalName: e.currentTarget.dataset.target,
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
   // tab 切换
   tabSelect(e) {
