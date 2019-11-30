@@ -1,3 +1,18 @@
+.detail {
+  margin-left: 30rpx;
+  font-size: 25rpx;
+}
+
+.detail-list {
+  padding-top: 15rpx;
+  margin-top: 1rpx;
+  height: 200rpx;
+}
+
+.bookName {
+  margin-left: 30rpx;
+}
+
 .nav {
   margin-top: 40rpx;
 }
@@ -14,8 +29,4 @@
 .detail {
   margin-top: 10rpx;
   margin-left: 30rpx;
-}
-
-.cu-modal {
-  z-index: 2;
 }

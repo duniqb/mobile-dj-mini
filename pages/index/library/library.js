@@ -18,9 +18,40 @@ Page({
     // 学院列表
     collegeList: [],
     bookName: '',
-    bookDetail: null
+    bookDetail: null,
+    value: '',
   },
-  // 显示图书详情的模态框
+  /**
+   * 监听搜索框改变
+   */
+  onChange(e) {
+    this.setData({
+      value: e.detail
+    });
+  },
+  /**
+   * 搜索图书
+   */
+  onSearch(e) {
+    var that = this;
+    if (this.data.value === '') {
+      wx.showToast({
+        title: '请输入关键词',
+        icon: 'none'
+      });
+      return;
+    }
+    // 开始搜索
+    if (this.data.value) {
+      // 跳转到搜索列表页，并将关键词带过去
+      wx.navigateTo({
+        url: './search/search?name=' + this.data.value
+      })
+    }
+  },
+  /**
+   * 显示图书详情的模态框
+   */
   showModal(e) {
     var that = this;
     wx.request({
@@ -47,14 +78,15 @@ Page({
         }
       }
     })
-
   },
   hideModal(e) {
     this.setData({
       modalName: null
     })
   },
-  // tab 切换
+  /**
+   * tab 切换
+   */
   tabSelect(e) {
     var that = this;
     this.setData({

@@ -1,5 +1,7 @@
 <!-- 搜索框 -->
-<van-search class="search" value="{{ value }}" placeholder="请输入图书名" show-action bind:search="onSearch" bind:cancel="onCancel" />
+<van-search value="{{ value  }}" placeholder="请输入关键词" use-action-slot bind:search="onSearch" bind:change="onChange">
+  <view slot="action" bind:tap="onSearch">搜索</view>
+</van-search>
 
 <!-- 4 个 Tab -->
 <scroll-view scroll-x class="bg-white nav">
@@ -78,33 +80,32 @@
       <view class="cu-list menu">
         <view class="cu-item">
           <view class="content">
-            <text class="text-grey">作者：{{bookDetail.author}}</text>
+            <text class="text-grey">作者：{{bookDetail.author == null ? '无' : bookDetail.author}}</text>
           </view>
         </view>
         <view class="cu-item">
           <view class="content">
-            <text class="text-grey">出版社：{{bookDetail.publisher}}</text>
+            <text class="text-grey">出版社：{{bookDetail.publisher == null ? '无' : bookDetail.publisher}}</text>
           </view>
         </view>
         <view class="cu-item">
           <view class="content">
-            <text class="text-grey">ISBN号：{{bookDetail.isbn}}</text>
+            <text class="text-grey">ISBN号：{{bookDetail.isbn == null ? '无' : bookDetail.isbn}}</text>
           </view>
         </view>
         <view class="cu-item">
           <view class="content">
-            <text class="text-grey">CALIS号：{{bookDetail.calis}}</text>
+            <text class="text-grey">CALIS号：{{bookDetail.calis == null ? '无' : bookDetail.calis}}</text>
           </view>
         </view>
         <view class="cu-item">
           <view class="content">
-            <text class="text-grey">索书号：{{bookDetail.index}}</text>
+            <text class="text-grey">索书号：{{bookDetail.index == null ? '无' : bookDetail.index}}</text>
           </view>
         </view>
         <view class="cu-item">
           <view class="content detail-content">
-            <text class="text-grey">馆藏复本详情</text>
-            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key>{{index + 1}}.{{item}}</view>
+            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key>{{index + 1}}. {{item}}</view>
           </view>
         </view>
         <view class="cu-item">
