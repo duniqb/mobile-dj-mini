@@ -20,6 +20,45 @@ Page({
     bookName: '',
     bookDetail: null,
     value: '',
+    // 分类热点下面的二级列表是否显示
+    showBookCate: true,
+    showBookCateDetail: false,
+    bookCateDetailList: []
+  },
+  back() {
+    this.setData({
+      showBookCate: !this.data.showBookCate,
+      showBookCateDetail: !this.data.showBookCateDetail
+    })
+  },
+  /**
+   * 展示分类热点下面的二级
+   */
+  clickCateHot(e) {
+    var that = this;
+    wx.request({
+      url: config.libraryCategoryUrl,
+      data: {
+        // sessionId: app.sessionId,
+        cate: e.currentTarget.dataset.id,
+        type: 2
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          that.setData({
+            bookCateDetailList: res.data.data,
+            showBookCateDetail: true,
+            showBookCate: false
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
   },
   /**
    * 监听搜索框改变

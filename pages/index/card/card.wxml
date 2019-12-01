@@ -1,0 +1,12 @@
+<van-cell-group>
+  <van-field value="{{ username }}" clearable label="学号" placeholder="请输入学号" bind:change="onChange1"  />
+  <van-field value="{{ password }}" type="password" label="密码" placeholder="请输入一卡通密码" icon="question-o" bind:click-icon="onClickIcon" bind:change="onChange2" />
+  <van-field value="{{ verifyCode }}" clearable label="验证码" placeholder="请输入验证码" bind:change="onChange3">
+  </van-field>
+</van-cell-group>
+<view class="image-border align-center ">
+  <image class="image" src="{{verifyUrl}}" bindtap="changeVerify"></image>
+</view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-blue lg" bindtap="post">登 录</button>
+</view>

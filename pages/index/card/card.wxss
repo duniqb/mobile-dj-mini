@@ -1,0 +1,14 @@
+.image {
+  margin-top: 30rpx;
+  margin-right: 30rpx;
+  text-align: center;
+  height: 70rpx;
+  width: 210rpx;
+}
+.image-border {
+  text-align: center;
+}
+.button {
+   margin-top: 30rpx;
+  text-align: center;
+}

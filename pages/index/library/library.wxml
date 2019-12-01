@@ -20,6 +20,7 @@
     </view>
   </view>
 </scroll-view>
+<!-- 读者热点 -->
 <block wx:if="{{TabCur == 1}}">
   <view class="cu-list menu sm-border card-menu margin-top">
     <view class="cu-item" wx:for="{{readerHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
@@ -33,6 +34,7 @@
     </view>
   </view>
 </block>
+<!-- 荐购热点 -->
 <block wx:if="{{TabCur == 2}}">
   <view class="cu-list menu sm-border card-menu margin-top">
     <view class="cu-item" wx:for="{{recommendHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
@@ -46,19 +48,45 @@
     </view>
   </view>
 </block>
-<block wx:if="{{TabCur ==3}}">
-  <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{bookCateList}}" wx:key>
+
+<!-- 分类热点 -->
+<block wx:if="{{TabCur == 3}}">
+  <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCate}}">
+    <view class="cu-item arrow" wx:for="{{bookCateList}}" wx:key bindtap="clickCateHot" data-id="{{item.param}}">
       <view class="content">
         <text class="">{{item.id}}. </text>
         <text class="text-grey">{{item.cate}}</text>
       </view>
     </view>
   </view>
+  <!-- 分类热点的二级列表 -->
+  <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCateDetail}}">
+    <view class="cu-item " bindtap="back">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+    <view class="cu-item " wx:for="{{bookCateDetailList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+      <view class="content">
+        <text class="">{{item.curNo}}. </text>
+        <text class="text-grey">{{item.bookName}}</text>
+      </view>
+      <view class="action">
+        <view class="cu-tag round bg-orange light">{{item.hot}}</view>
+      </view>
+    </view>
+    <view class="cu-item " bindtap="back">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+  </view>
 </block>
+
+<!-- 专业热点 -->
 <block wx:if="{{TabCur == 4}}">
   <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{collegeList}}" wx:key>
+    <view class="cu-item arrow" wx:for="{{collegeList}}" wx:key>
       <view class="content">
         <text class="">{{item.curNo + 1}}. </text>
         <text class="text-grey">{{item.name}}</text>

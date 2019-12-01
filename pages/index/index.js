@@ -39,48 +39,59 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     iconList: [{
+      id: 0,
       icon: 'read',
       color: 'red',
       badge: 0,
       name: '教务'
     }, {
+      id: 1,
       icon: 'news',
       color: 'orange',
       badge: 0,
-      name: '一卡通'
+      name: '一卡通',
+        navUrl: './card/card'
     }, {
+      id: 2,
       icon: 'searchlist',
       color: 'yellow',
       badge: 0,
       name: '图书查询',
       navUrl: './library/library'
     }, {
+      id: 3,
       icon: 'repair',
       color: 'olive',
       badge: 0,
       name: '后勤报修'
     }, {
+      id: 4,
       icon: 'font',
       color: 'cyan',
       badge: 0,
-      name: '四六级'
+      name: '四六级',
+      navUrl: './grade/grade'
     }, {
+      id: 5,
       icon: 'time',
       color: 'mauve',
       badge: 0,
       name: '校车时刻'
     }, {
+      id: 6,
       icon: 'calendar',
       color: 'pink',
       badge: 0,
       name: '校历',
       navUrl: './calendar/calendar'
     }, {
+      id: 7,
       icon: 'group',
       color: 'purple',
       badge: 0,
       name: '就业信息'
     }, {
+      id: 8,
       icon: 'apps',
       color: 'blue',
       badge: 0,
@@ -89,6 +100,18 @@ Page({
     gridCol: 3,
     skin: false
   },
+  /**
+   * 点击九宫格
+   */
+  bindGrid: function(e) {
+    if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8) {
+      wx.showToast({
+        title: '未完成的功能',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
   onLoad() {
     this.towerSwiper('swiperList');
     // 初始化towerSwiper 传已有的数组名即可
@@ -96,15 +119,6 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'LDDBZ-2JWW5-XBIIX-Q35KA-F7US6-54B4X'
     });
-    try {
-      var value = wx.getStorageSync('province')
-      if (value) {
-        this.province = value;
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-
     try {
       var value = wx.getStorageSync('province')
       if (value) {

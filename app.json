@@ -1,9 +1,12 @@
 {
   "pages": [
+    "pages/index/library/library",
     "pages/index/index",
+
+    "pages/index/card/card",
+    "pages/index/grade/grade",
     "pages/index/calendar/calendar",
     "pages/index/library/search/search",
-    "pages/index/library/library",
     "pages/news/news",
     "pages/news/detail/detail",
     "pages/mine/mine",
@@ -21,7 +24,7 @@
   },
   "usingComponents": {
     "van-search": "./vant/dist/search/index",
-    "calendar": "plugin://calendar/calendar"
+    "van-field": "./vant/dist/field/index"
   },
   "tabBar": {
     "custom": true,
@@ -44,10 +47,5 @@
     ]
   },
   "sitemapLocation": "sitemap86.json",
-  "plugins": {
-    "calendar": {
-      "version": "1.1.3",
-      "provider": "wx92c68dae5a8bb046"
-    }
-  }
+  "plugins": {}
 }

@@ -11,7 +11,7 @@
   <!-- 九宫格 -->
   <view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}">
     <view class="cu-item" wx:for="{{iconList}}" wx:key>
-      <navigator open-type="navigate" hover-class='none' url="{{item.navUrl}}">
+      <navigator open-type="navigate" hover-class='none' url="{{item.navUrl}}" bindtap="bindGrid" data-id="{{item.id}}">
         <view class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
         <text>{{item.name}}</text>
       </navigator>

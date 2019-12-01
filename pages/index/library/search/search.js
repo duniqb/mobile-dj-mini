@@ -33,7 +33,7 @@ Page({
         } else if (res.data.meta.status == 400) {
           wx.hideLoading();
           wx.showToast({
-            title: '搜索失败',
+            title: '没有结果',
             icon: 'none',
             duration: 2000
           })

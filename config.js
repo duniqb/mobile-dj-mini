@@ -19,9 +19,16 @@ var config = {
   collegeUrl: host + 'api/v1/library/college',
   showUrl: host + 'api/v1/library/show',
   queryLibraryUrl: host + 'api/v1/library/query',
+  libraryCategoryUrl: host + 'api/v1/library/category',
 
   festivalUrl: host + 'api/v1/calendar/festival',
   calendarUrl: host + 'api/v1/calendar/calendar',
+
+  infoUrl: host + 'api/v1/student/info',
+  gradeUrl: host + 'api/v1/student/grade',
+
+  cardVerifyUrl: host + 'api/v1/card/verify',
+  cardLoginUrl: host + 'api/v1/card/login',
 }
 
 module.exports = config;
