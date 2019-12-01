@@ -61,7 +61,7 @@
   </view>
   <!-- 分类热点的二级列表 -->
   <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCateDetail}}">
-    <view class="cu-item " bindtap="back">
+    <view class="cu-item " bindtap="bookCateBack">
       <view class="content text-middle">
         <text class="text-grey">返回上一级</text>
       </view>
@@ -75,7 +75,7 @@
         <view class="cu-tag round bg-orange light">{{item.hot}}</view>
       </view>
     </view>
-    <view class="cu-item " bindtap="back">
+    <view class="cu-item " bindtap="bookCateBack">
       <view class="content text-middle">
         <text class="text-grey">返回上一级</text>
       </view>
@@ -85,11 +85,71 @@
 
 <!-- 专业热点 -->
 <block wx:if="{{TabCur == 4}}">
-  <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item arrow" wx:for="{{collegeList}}" wx:key>
+  <view class="cu-list menu sm-border card-menu margin-top" wx:if="{{showCollege}}">
+    <view class="cu-item arrow" wx:for="{{collegeList}}" wx:key bindtap="clickMajorHot" data-id="{{item.name}}">
       <view class="content">
         <text class="">{{item.curNo + 1}}. </text>
         <text class="text-grey">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 专业热点的二级列表 - 专业列表 -->
+  <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showMajor}}">
+    <view class="cu-item " bindtap="backCollegeList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+    <view class="cu-item " wx:for="{{majorList}}" wx:key bindtap="clickMajorList" data-id="{{item.name}}">
+      <view class="content">
+        <text class="">{{item.curNo + 1}}. </text>
+        <text class="text-grey">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="cu-item " bindtap="backCollegeList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+  </view>
+  <!-- 专业热点的三级列表 - 课程列表 -->
+  <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showCourse}}">
+    <view class="cu-item " bindtap="backMajorList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+    <view class="cu-item " wx:for="{{courseList}}" wx:key bindtap="clickCourseList" data-id="{{item.sq}}">
+      <view class="content">
+        <text class="">{{item.curNo + 1}}. </text>
+        <text class="text-grey">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="cu-item " bindtap="backMajorList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+  </view>
+  <!-- 专业热点的四级列表 - 图书列表 -->
+  <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showMajorDetail}}">
+    <view class="cu-item " bindtap="backCourseList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
+      </view>
+    </view>
+    <view class="cu-item " wx:for="{{majorDetailList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+      <view class="content">
+        <text class="">{{item.curNo}}. </text>
+        <text class="text-grey">{{item.bookName}}</text>
+      </view>
+      <view class="action">
+        <view class="cu-tag round bg-red light">{{item.hot}}</view>
+      </view>
+    </view>
+    <view class="cu-item " bindtap="backCourseList">
+      <view class="content text-middle">
+        <text class="text-grey">返回上一级</text>
       </view>
     </view>
   </view>

@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/index/library/library",
     "pages/index/index",
-
+    "pages/index/library/library",
     "pages/index/card/card",
     "pages/index/grade/grade",
     "pages/index/calendar/calendar",

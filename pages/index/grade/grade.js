@@ -41,11 +41,11 @@ Page({
                   gradeList: res.data.data,
                 })
               } else if (res.data.meta.status === 400) {
-                  wx.showToast({
-                    title: '没有结果',
-                    icon: 'none',
-                    duration: 2000
-                  })
+                wx.showToast({
+                  title: '没有记录',
+                  icon: 'none',
+                  duration: 2000
+                })
               }
             }
           })

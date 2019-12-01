@@ -20,12 +20,143 @@ Page({
     bookName: '',
     bookDetail: null,
     value: '',
-    // 分类热点下面的二级列表是否显示
+    // 分类热点下面的二级列表
     showBookCate: true,
     showBookCateDetail: false,
-    bookCateDetailList: []
+    bookCateDetailList: [],
+
+    // 专业热点下面的
+    // 学院
+    showCollege: true,
+    // 专业
+    showMajor: false,
+    majorList: [],
+    // 课程
+    showCourse: false,
+    courseList: [],
+    // 临时保存学院名字，供查看三级时用
+    tempCollege: '',
+    // 展示专业图书列表
+    showMajorDetail: false,
+    majorDetailList: []
   },
-  back() {
+  /**
+   * 专业热点，从图书列表页返回课程列表，返回上一级
+   */
+  backCourseList() {
+    this.setData({
+      showMajorDetail: false,
+      showCourse: true
+    })
+  },
+  /**
+   * 展示专业热点下面的四级 - 图书列表
+   */
+  clickCourseList(e) {
+    wx.request({
+      url: config.hotUrl,
+      data: {
+        // sessionId: app.sessionId,
+        sq: e.currentTarget.dataset.id,
+        type: 6
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          this.setData({
+            showMajorDetail: true,
+            showCourse: false,
+            majorDetailList: res.data.data
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.showToast({
+            title: '没有记录',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  /**
+   * 专业热点，从课程返回专业，返回上一级
+   */
+  backMajorList() {
+    this.setData({
+      showCourse: false,
+      showMajor: true
+    })
+  },
+  /**
+   * 展示专业热点下面的三级
+   */
+  clickMajorList(e) {
+    var that = this;
+    wx.request({
+      url: config.libraryMajorUrl,
+      data: {
+        // sessionId: app.sessionId,
+        major: e.currentTarget.dataset.id,
+        college: this.data.tempCollege
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          that.setData({
+            courseList: res.data.data.list,
+            showMajor: false,
+            showCourse: true
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.showToast({
+            title: '没有记录',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  /**
+   * 专业热点，从专业返回学院，返回上一级
+   */
+  backCollegeList() {
+    this.setData({
+      showCollege: true,
+      showMajor: false
+    })
+  },
+  /**
+   * 展示专业热点下面的二级
+   */
+  clickMajorHot(e) {
+    var that = this;
+    wx.request({
+      url: config.libraryMajorUrl,
+      data: {
+        // sessionId: app.sessionId,
+        college: e.currentTarget.dataset.id
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          that.setData({
+            majorList: res.data.data.list,
+            showCollege: false,
+            showMajor: true,
+            tempCollege: e.currentTarget.dataset.id
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.showToast({
+            title: '没有记录',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  /**
+   * 分类热点，返回上一级
+   */
+  bookCateBack() {
     this.setData({
       showBookCate: !this.data.showBookCate,
       showBookCateDetail: !this.data.showBookCateDetail
@@ -52,7 +183,7 @@ Page({
           })
         } else if (res.data.meta.status == 400) {
           wx.showToast({
-            title: '加载失败',
+            title: '没有记录',
             icon: 'none',
             duration: 2000
           })
@@ -143,7 +274,7 @@ Page({
       return;
     }
     // 判断是哪种图书热点
-    var url = config.hotlUrl;
+    var url = config.hotUrl;
     // 读者热点-近2年入藏复本总借量
     if (e.currentTarget.dataset.id == 1) {
       var type = 2;
@@ -209,9 +340,9 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    // 页面加载，请求交大要闻
+    // 页面加载，请求读者热点
     wx.request({
-      url: config.hotlUrl,
+      url: config.hotUrl,
       data: {
         // sessionId: app.sessionId,
         type: 2

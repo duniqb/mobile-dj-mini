@@ -13,13 +13,14 @@ var config = {
   newsUrl: host + 'api/v1/news/list',
   detailUrl: host + 'api/v1/news/detail',
 
-  hotlUrl: host + 'api/v1/library/hot',
+  hotUrl: host + 'api/v1/library/hot',
   categorylUrl: host + 'api/v1/library/category',
   bookCateUrl: host + 'api/v1/library/bookCate',
   collegeUrl: host + 'api/v1/library/college',
   showUrl: host + 'api/v1/library/show',
   queryLibraryUrl: host + 'api/v1/library/query',
   libraryCategoryUrl: host + 'api/v1/library/category',
+  libraryMajorUrl: host + 'api/v1/library/major',
 
   festivalUrl: host + 'api/v1/calendar/festival',
   calendarUrl: host + 'api/v1/calendar/calendar',
