@@ -30,6 +30,12 @@ var config = {
 
   cardVerifyUrl: host + 'api/v1/card/verify',
   cardLoginUrl: host + 'api/v1/card/login',
+
+  jobCalendarUrl: host + 'api/v1/job/calendar',
+  jobDemandListUrl: host + 'api/v1/job/demandList',
+  jobRecruitListUrl: host + 'api/v1/job/recruitList',
+  jobDemandUrl: host + 'api/v1/job/demand',
+  jobRecruitUrl: host + 'api/v1/job/recruit',
 }
 
 module.exports = config;

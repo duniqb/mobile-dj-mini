@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/job/job",
+    "pages/index/job/demand/demand",
+    "pages/index/job/recruit/recruit",
     "pages/mine/about/update/update",
     "pages/mine/about/about",
     "pages/mine/mine",
@@ -25,7 +28,8 @@
   },
   "usingComponents": {
     "van-search": "./vant/dist/search/index",
-    "van-field": "./vant/dist/field/index"
+    "van-field": "./vant/dist/field/index",
+    "van-datetime-picker": "./vant/dist/datetime-picker/index"
   },
   "tabBar": {
     "custom": true,

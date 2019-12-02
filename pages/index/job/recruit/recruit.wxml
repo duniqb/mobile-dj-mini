@@ -1,0 +1,112 @@
+<view class="cu-card article no-card">
+  <!-- 标题来源时间 -->
+  <view class="cu-item shadow">
+    <view class="title">
+      <view class="text-cut">{{title}}</view>
+      <view class="text-gray text-sm text-middle ">
+        <text class="margin-lr-xs"></text>{{releaseDate}}
+        <text class="margin-lr-xs"></text>{{from == null ? '' : from}}
+        <text class="margin-lr-xs"></text>{{browser}}
+      </view>
+    </view>
+  </view>
+  <!-- 企业信息 -->
+  <block wx:if="{{companyInfo}}">
+    <view class="cu-list menu">
+      <view class="cu-item">
+        <view class="content text-middle ">
+          <text class="text-bold">企业信息</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{companyName !== ''}}">
+      <view class="cu-item">
+        <view class="content-no-margin">
+          <text class="text-grey">企业名称：{{companyName}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{companyProperties !== ''}}">
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">单位性质：{{companyProperties}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{competentDepartment !== ''}}">
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">主管部门：{{competentDepartment}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{companyRegion !== ''}}">
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">单位地区：{{companyRegion}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{address !== ''}}">
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">详细地址：{{address}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu" wx:if="{{zipCode !== ''}}">
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">邮政编码：{{zipCode}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 招聘信息 -->
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content text-middle ">
+        <text class="text-bold">招聘信息</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content-no-margin">
+        <text class="text-orange">地点：{{place}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-orange">日期：{{date}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-orange">时间：{{time}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content text-middle ">
+        <text class="text-bold">详细信息</text>
+      </view>
+    </view>
+  </view>
+  <!-- 正文 -->
+  <view class="cu-item shadow">
+    <view class="content" wx:for="{{content}}" wx:key>
+      <view class="desc">
+        <block wx:if="{{item != ''}}">
+          <view class="text-content">{{item}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

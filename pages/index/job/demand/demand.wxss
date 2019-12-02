@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+}
+
+.text-content {
+  text-indent: 2em;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.content {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.image {
+ margin: auto;
+ margin-top: 10rpx;
+ margin-bottom: 10rpx;
+}

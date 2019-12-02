@@ -89,7 +89,8 @@ Page({
       icon: 'group',
       color: 'purple',
       badge: 0,
-      name: '就业信息'
+      name: '就业信息',
+      navUrl: './job/job'
     }, {
       id: 8,
       icon: 'apps',
@@ -286,7 +287,7 @@ Page({
   randomTip: function(tips) {
     return tips[Math.floor(Math.random() * tips.length)]
   },
-  
+
   /**
    * 用户点击右上角分享
    */

@@ -22,7 +22,7 @@
 
 .modal-content {
   text-align: left;
-  margin-left:30rpx;
+  margin-left: 30rpx;
 }
 
 .text-middle {
