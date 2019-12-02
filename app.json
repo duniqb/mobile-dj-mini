@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/mine/about/update/update",
+    "pages/mine/about/about",
+    "pages/mine/mine",
     "pages/index/library/library",
     "pages/index/card/card",
     "pages/index/grade/grade",
@@ -8,7 +11,6 @@
     "pages/index/library/search/search",
     "pages/news/news",
     "pages/news/detail/detail",
-    "pages/mine/mine",
     "pages/discovery/discovery"
   ],
   "permission": {

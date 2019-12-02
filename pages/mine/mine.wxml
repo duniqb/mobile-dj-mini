@@ -17,19 +17,25 @@
 
   <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg ">
     <view class="cu-item arrow">
-      <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
+      <navigator class="content" open-type="navigate" hover-class="none" url="../list/list">
         <text class="cuIcon-discoverfill text-orange"></text>
         <text class="text-grey">账号绑定</text>
       </navigator>
     </view>
     <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="share">
+        <text class="cuIcon-share text-blue"></text>
+        <text class="text-grey">分享同学</text>
+      </button>
+    </view>
+        <view class="cu-item arrow">
       <button class="cu-btn content" open-type="feedback">
         <text class="cuIcon-writefill text-cyan"></text>
         <text class="text-grey">反馈建议</text>
       </button>
     </view>
     <view class="cu-item arrow">
-      <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
+      <navigator class="content" open-type="navigate" hover-class="none" url="./about/about">
         <text class="cuIcon-magic text-green"></text>
         <text class="text-grey">关于我们</text>
       </navigator>

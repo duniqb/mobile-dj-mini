@@ -293,9 +293,9 @@ Page({
     }
 
     // 请求标签所在的列表
-    wx.showLoading({
-      title: '正在加载',
-    })
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
     wx.request({
       url: url,
       data: {
@@ -304,7 +304,7 @@ Page({
       },
       success: res => {
         if (res.data.meta.status == 200) {
-          wx.hideLoading();
+          // wx.hideLoading();
           if (e.currentTarget.dataset.id == 1) {
             that.setData({
               readerHotList: res.data.data
@@ -323,7 +323,7 @@ Page({
             })
           }
         } else if (res.data.meta.status == 400) {
-          wx.hideLoading();
+          // wx.hideLoading();
           wx.showToast({
             title: '加载失败',
             icon: 'none',
@@ -337,9 +337,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.showLoading({
-      title: '正在加载',
+    wx.showShareMenu({
+      withShareTicket: true
     })
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
     // 页面加载，请求读者热点
     wx.request({
       url: config.hotUrl,
@@ -354,7 +357,7 @@ Page({
             readerHotList: res.data.data
           })
         } else if (res.data.meta.status == 400) {
-          wx.hideLoading();
+          // wx.hideLoading();
           wx.showToast({
             title: '加载失败',
             icon: 'none',
@@ -410,7 +413,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(ops) {
+    return {
+      title: '我发现一个很有用的校园小程序，推荐给你~',
+      path: 'pages/index/index', // 路径，传递参数到指定页面。
+      success: function(res) {},
+      fail: function(res) {}
+    }
   }
 })

@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../config.js')
+var config = require("../../../config.js")
 
 Page({
 
@@ -7,37 +7,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dayOfTerm: null,
-    endOfTermDay: null,
-    endOfVacationDay: null,
-    weekOfTerm: null,
-    weekOfYear: null
-  },
 
+  },
+  CopyLink(e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.link,
+      success: res => {
+        wx.showToast({
+          title: '已复制',
+          duration: 1000,
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     wx.showShareMenu({
       withShareTicket: true
-    })
-    var that = this;
-    wx.request({
-      url: config.calendarUrl,
-      data: {
-        // sessionId: app.sessionId,
-      },
-      success: res => {
-        if (res.data.meta.status == 200) {
-          that.setData({
-            dayOfTerm: res.data.data.dayOfTerm,
-            endOfTermDay: res.data.data.endOfTermDay,
-            endOfVacationDay: res.data.data.endOfVacationDay,
-            weekOfTerm: res.data.data.weekOfTerm,
-            weekOfYear: res.data.data.weekOfYear
-          })
-        }
-      }
     })
   },
 

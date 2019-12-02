@@ -50,7 +50,7 @@ Page({
       color: 'orange',
       badge: 0,
       name: '一卡通',
-        navUrl: './card/card'
+      navUrl: './card/card'
     }, {
       id: 2,
       icon: 'searchlist',
@@ -136,6 +136,9 @@ Page({
       // Do something when catch error
     }
     this.getLocation();
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
   DotStyle(e) {
     this.setData({
@@ -282,5 +285,17 @@ Page({
   },
   randomTip: function(tips) {
     return tips[Math.floor(Math.random() * tips.length)]
+  },
+  
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function(ops) {
+    return {
+      title: '我发现一个很有用的校园小程序，推荐给你~',
+      path: 'pages/index/index', // 路径，传递参数到指定页面。
+      success: function(res) {},
+      fail: function(res) {}
+    }
   }
 })

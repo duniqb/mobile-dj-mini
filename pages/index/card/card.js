@@ -85,6 +85,9 @@ Page({
    */
   onLoad: function(options) {
     this.changeVerify();
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
 
   /**
@@ -132,7 +135,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(ops) {
+    return {
+      title: '我发现一个很有用的校园小程序，推荐给你~',
+      path: 'pages/index/index', // 路径，传递参数到指定页面。
+      success: function(res) {},
+      fail: function(res) {}
+    }
   }
 })
