@@ -10,13 +10,13 @@
     </navigator>
   </view>
   <view class="cu-item">
-    <navigator open-type="navigate" hover-class='none' url="" data-id="1">
+    <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="1">
       <view class="cuIcon-search text-orange"></view>
       <text>进度查询</text>
     </navigator>
   </view>
   <view class="cu-item">
-    <navigator open-type="navigate" hover-class='none' url="" data-id="2">
+    <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="2">
       <view class="cuIcon-appreciate text-green"></view>
       <text>维修评价</text>
     </navigator>

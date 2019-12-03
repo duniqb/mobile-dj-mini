@@ -8,8 +8,8 @@ Page({
    */
   data: {
     noticeShow: false,
-    noticeTitle: '旅顺一期今日检查水电',
-    noticeContent: '旅顺一期今日检查水电，，旅顺一期今日检查水电，，旅顺一期今日检查水电，，旅顺一期今日检查水电，，旅顺一期今日检查水电，',
+    noticeTitle: '',
+    noticeContent: '',
     noticeDate: '2019-10-10',
     iconList: [{
       icon: 'repair',
@@ -87,14 +87,14 @@ Page({
       },
       success: res => {
         if (res.data.meta.status == 200) {
-          // if (res.data.data.content != '') {
+          if (res.data.data.content != '') {
           that.setData({
             noticeShow: true,
-            // noticeTitle: res.data.data.title,
-            // noticeContent: res.data.data.content,
-            // noticeDate: res.data.data.date
+            noticeTitle: res.data.data.title,
+            noticeContent: res.data.data.content,
+            noticeDate: res.data.data.date
           })
-          // }
+          }
         } else if (res.data.meta.status == 400) {
           wx.showToast({
             title: '查询通知失败',
@@ -152,6 +152,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: '我发现一个很有用的校园小程序，推荐给你~',
+      path: 'pages/index/index', // 路径，传递参数到指定页面。
+      success: function(res) {},
+      fail: function(res) {}
+    }
   }
 })

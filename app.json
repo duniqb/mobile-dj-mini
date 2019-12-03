@@ -1,7 +1,12 @@
 {
   "pages": [
-    "pages/index/logistics/logistics",
     "pages/index/index",
+    "pages/index/logistics/progress/progress",
+    "pages/index/logistics/evaluate/evaluate",
+    "pages/index/logistics/logistics",
+
+    "pages/index/logistics/progress/detail/detail",
+ 
     "pages/index/job/job",
     "pages/index/job/demand/demand",
     "pages/index/job/recruit/recruit",
@@ -31,7 +36,8 @@
     "van-search": "./vant/dist/search/index",
     "van-field": "./vant/dist/field/index",
     "van-datetime-picker": "./vant/dist/datetime-picker/index",
-    "van-notice-bar": "./vant/dist/notice-bar/index"
+    "van-notice-bar": "./vant/dist/notice-bar/index",
+    "van-rate": "./vant/dist/rate/index"
   },
   "tabBar": {
     "custom": true,

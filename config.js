@@ -50,6 +50,7 @@ var config = {
   logisticsNoticeUrl: host + 'api/v1/logistics/notice',
   logisticsRecentUrl: host + 'api/v1/logistics/recent',
   logisticsReportUrl: host + 'api/v1/logistics/report',
+  logisticsEvaluateUrl: host + 'api/v1/logistics/evaluate',
 }
 
 module.exports = config;
