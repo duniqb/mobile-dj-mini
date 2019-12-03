@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/logistics/logistics",
     "pages/index/index",
     "pages/index/job/job",
     "pages/index/job/demand/demand",
@@ -29,7 +30,8 @@
   "usingComponents": {
     "van-search": "./vant/dist/search/index",
     "van-field": "./vant/dist/field/index",
-    "van-datetime-picker": "./vant/dist/datetime-picker/index"
+    "van-datetime-picker": "./vant/dist/datetime-picker/index",
+    "van-notice-bar": "./vant/dist/notice-bar/index"
   },
   "tabBar": {
     "custom": true,

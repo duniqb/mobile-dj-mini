@@ -16,7 +16,7 @@
   <view class='text-center margin-bottom text-lg  text-grey'>关于掌上大交</view>
   <view class='text-content'>
     <view>Hi！同学们~欢迎使用掌上大交小程序！</view>
-    <view class='margin-top-sm'>这是我们开发的一款校园辅助微信小程序。不仅可以在这里查询成绩，图书，校历等，还有更多功能等你发现，或者你有一些好的想法可以在客服消息或GitHub 里提交给我们，我们会逐步开发出来。</view>
+    <view class='margin-top-sm'>这是我们开发的一款校园辅助微信小程序。不仅可以在这里查询成绩，图书，校历等，还有更多功能等你发现，或者你有一些好的想法可以在客服消息或 GitHub 里提交给我们，我们会逐步开发出来。</view>
     <view class='margin-top-sm'>小程序已经公开源码，前端借助了 ColorUI 与 Vant 组件库，在此感谢！后端出于安全考虑就不公开源码了，但在 README 页面提供了思路介绍。如果这个小程序有帮到你，或者你觉得很赞，可以在 GitHub 里点个 Star 支持一下！</view>
     <view class='margin-top-sm' bindtap="CopyLink" data-link="https://github.com/aitwzl">
       <text class="cuIcon-github text-grey"></text> 点击复制仓库地址：https://github.com/aitwzl

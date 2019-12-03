@@ -63,7 +63,8 @@ Page({
       icon: 'repair',
       color: 'olive',
       badge: 0,
-      name: '后勤报修'
+      name: '后勤报修',
+      navUrl: './logistics/logistics'
     }, {
       id: 4,
       icon: 'font',
