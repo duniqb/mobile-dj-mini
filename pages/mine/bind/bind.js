@@ -116,7 +116,7 @@ Page({
     var that = this;
     wx.showModal({
       title: '退出登录',
-      content: '即将退出登录，这将删除您所有的登录信息，确认继续？',
+      content: '即将退出登录，这将删除所有的登录信息，确认继续？',
       success(res) {
         if (res.confirm) {
           that.exitJw();

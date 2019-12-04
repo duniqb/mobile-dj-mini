@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/mine/bind/bind",
     "pages/mine/mine",
   
-    "pages/index/index",
+
     "pages/index/logistics/progress/progress",
     "pages/index/logistics/logistics",
     "pages/index/logistics/report/report",

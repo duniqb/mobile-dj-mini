@@ -9,7 +9,11 @@ Page({
     isExist: false,
     gradeList: []
   },
-
+  loginBtn() {
+    wx.navigateTo({
+      url: '../../mine/bind/bind',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -22,8 +26,8 @@ Page({
     wx.request({
       url: config.infoUrl,
       data: {
-        // sessionId: app.sessionId
-        username: 1821010431
+        sessionId: app.sessionId
+        // username: 1821010431
       },
       success: res => {
         if (res.data.meta.status === 200) {
@@ -34,8 +38,8 @@ Page({
           wx.request({
             url: config.gradeUrl,
             data: {
-              // sessionId: app.sessionId,
-              username: 1821010431
+              sessionId: app.sessionId,
+              // username: 1821010431
             },
             success: res => {
               console.log(res.data)
@@ -70,7 +74,47 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this;
+    // 检查是否已存在该学生信息
+    if (!that.data.isExist) {
+      wx.request({
+        url: config.infoUrl,
+        data: {
+          sessionId: app.sessionId
+          // username: 1821010431
+        },
+        success: res => {
+          if (res.data.meta.status === 200) {
+            that.setData({
+              isExist: true
+            })
+            // 获取等级考试信息
+            wx.request({
+              url: config.gradeUrl,
+              data: {
+                sessionId: app.sessionId,
+              },
+              success: res => {
+                console.log(res.data)
+                if (res.data.meta.status === 200) {
+                  that.setData({
+                    gradeList: res.data.data,
+                  })
+                } else if (res.data.meta.status === 400) {
+                  wx.showToast({
+                    title: '没有记录',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              }
+            })
+          } else if (res.data.meta.status === 400) {
+            console.log("查询失败 " + res.data.meta.msg)
+          }
+        }
+      })
+    }
   },
 
   /**

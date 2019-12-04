@@ -7,3 +7,7 @@
   color: #888;
   display: block;
 }
+
+.text-middle {
+  text-align: center;
+}
