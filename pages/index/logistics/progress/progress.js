@@ -37,54 +37,64 @@ Page({
    */
   onSearch(e) {
     var that = this;
-    if (this.data.value === '') {
+    if (this.data.value == '') {
       wx.showToast({
-        title: '请输入电话号码',
+        title: '请填写手机号码',
         icon: 'none'
-      });
+      })
+      return;
+    }
+    // 校验手机号
+    var patt = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/i;
+    if (this.data.value.search(patt) == 0) {
+      // 合格
+    } else {
+      wx.showToast({
+        title: '手机号码格式不正确',
+        icon: 'none'
+      })
       return;
     }
     // 开始查询，将最新维修隐藏
-    if (this.data.value) {
-      that.setData({
-        showRecent: false
-      })
-      wx.showLoading({
-        title: '正在查询',
-      })
-      wx.request({
-        url: config.logisticsListUrl,
-        data: {
-          // sessionId: app.sessionId,
-          phone: this.data.value
-        },
-        success: res => {
-          if (res.data.meta.status == 200) {
-            wx.hideLoading();
-            that.setData({
-              repairList: res.data.data,
-              showRecent: false,
-              showRepair: true,
-            })
-          } else if (res.data.meta.status == 400) {
-            wx.hideLoading();
-            wx.showToast({
-              title: '查询失败',
-              icon: 'none',
-              duration: 2000
-            })
-          }
+    that.setData({
+      showRecent: false
+    })
+    wx.showLoading({
+      title: '正在查询',
+    })
+    wx.request({
+      url: config.logisticsListUrl,
+      data: {
+        // sessionId: app.sessionId,
+        phone: this.data.value
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          wx.hideLoading();
+          that.setData({
+            repairList: res.data.data,
+            showRecent: false,
+            showRepair: true,
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '查询失败',
+            icon: 'none',
+            duration: 2000
+          })
         }
-      })
-    }
+      }
+    })
   },
   /**
    * 监听查询框改变
    */
-  onChange(e) {
+  onPhoneChange(event) {
+    console.log(event.detail.value)
     this.setData({
-      value: e.detail
-    });
+      value: event.detail.value,
+    })
   },
   /**
    * 生命周期函数--监听页面加载

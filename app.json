@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/logistics/report/report",
-    "pages/index/logistics/logistics",
     "pages/index/logistics/progress/progress",
+    "pages/index/logistics/logistics",
+    "pages/index/logistics/report/report",
     "pages/index/logistics/evaluate/evaluate",
     "pages/index/logistics/progress/detail/detail",
     "pages/index/job/job",
