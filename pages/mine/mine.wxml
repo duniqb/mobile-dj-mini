@@ -9,7 +9,7 @@
     </block>
     <block wx:if="{{!isRegister}}">
       <view class="padding flex flex-direction">
-        <button class="cu-btn bg-red margin-tb-sm lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">登　录</button>
+        <button class="cu-btn bg-blue margin-tb-sm lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">登　录</button>
       </view>
     </block>
     <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>

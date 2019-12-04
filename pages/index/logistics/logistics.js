@@ -88,12 +88,12 @@ Page({
       success: res => {
         if (res.data.meta.status == 200) {
           if (res.data.data.content != '') {
-          that.setData({
-            noticeShow: true,
-            noticeTitle: res.data.data.title,
-            noticeContent: res.data.data.content,
-            noticeDate: res.data.data.date
-          })
+            that.setData({
+              noticeShow: true,
+              noticeTitle: res.data.data.title,
+              noticeContent: res.data.data.content,
+              noticeDate: res.data.data.date
+            })
           }
         } else if (res.data.meta.status == 400) {
           wx.showToast({

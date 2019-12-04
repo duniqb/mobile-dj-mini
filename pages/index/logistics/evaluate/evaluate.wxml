@@ -52,5 +52,5 @@
 </view>
 
 <view class="content text-middle-btn" wx:if="{{showEvaluate}}">
-  <button class="cu-btn bg-green text-middle-btn" bindtap="bindButton">提交评价</button>
+  <button class="cu-btn bg-blue text-middle-btn" bindtap="bindButton">提交评价</button>
 </view>

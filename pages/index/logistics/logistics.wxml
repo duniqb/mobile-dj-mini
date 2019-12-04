@@ -4,7 +4,7 @@
 <!-- 宫格 -->
 <view class="cu-list grid col-2 no-border">
   <view class="cu-item">
-    <navigator open-type="navigate" hover-class='none' url="" data-id="0">
+    <navigator open-type="navigate" hover-class='none' url="./report/report" data-id="0">
       <view class="cuIcon-repair text-red"></view>
       <text>故障报修</text>
     </navigator>

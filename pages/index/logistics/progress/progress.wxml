@@ -27,7 +27,7 @@
       </view>
       <view class="cu-item" wx:if="{{item.showEvaluate}}">
         <view class="content text-middle">
-          <button class="cu-btn bg-green" bindtap="bindButton" data-id="{{item.listNumber}}">去评价</button>
+          <button class="cu-btn bg-blue" bindtap="bindButton" data-id="{{item.listNumber}}">去评价</button>
         </view>
       </view>
     </view>

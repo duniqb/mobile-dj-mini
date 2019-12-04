@@ -47,7 +47,7 @@
   </view>
   <view class="cu-item" wx:if="{{showEvaluate}}">
     <view class="content text-middle">
-      <button class="cu-btn bg-green" bindtap="bindButton">去评价</button>
+      <button class="cu-btn bg-blue" bindtap="bindButton">去评价</button>
     </view>
   </view>
   <view class="cu-item">
