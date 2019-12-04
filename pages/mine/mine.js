@@ -66,10 +66,6 @@ Page({
 
   onGotUserInfo: function(e) {
     var that = this;
-    // this.Toast.loading({
-    //   mask: true,
-    //   message: '正在登录...'
-    // });
     wx.showLoading({
       title: '正在登录',
     })

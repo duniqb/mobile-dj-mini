@@ -63,35 +63,43 @@ Page({
       return;
     }
     // 校验通过
-    wx.showLoading({
-      title: '正在提交',
-    })
-    wx.request({
-      url: config.logisticsReportUrl,
-      data: {
-        // sessionId: app.sessionId,
-        buildingId: this.data.buildingId,
-        description: this.data.describe,
-        distinctId: this.data.distinctId,
-        equipmentId: this.data.equipmentId,
-        phone: this.data.phone,
-        place: this.data.place,
-        roomId: this.data.roomId,
-      },
-      success: res => {
-        if (res.data.meta.status == 200) {
-          wx.hideLoading();
-          that.setData({
-            showReportButton: false
+    wx.showModal({
+      title: '报修',
+      content: '即将提交报修信息，确认继续？',
+      success(res) {
+        if (res.confirm) {
+          wx.showLoading({
+            title: '正在提交',
           })
-        } else if (res.data.meta.status == 400) {
-          wx.hideLoading();
-          wx.showToast({
-            title: '报修失败',
-            icon: 'none',
-            duration: 2000
+          wx.request({
+            url: config.logisticsReportUrl,
+            data: {
+              // sessionId: app.sessionId,
+              buildingId: this.data.buildingId,
+              description: this.data.describe,
+              distinctId: this.data.distinctId,
+              equipmentId: this.data.equipmentId,
+              phone: this.data.phone,
+              place: this.data.place,
+              roomId: this.data.roomId,
+            },
+            success: res => {
+              if (res.data.meta.status == 200) {
+                wx.hideLoading();
+                that.setData({
+                  showReportButton: false
+                })
+              } else if (res.data.meta.status == 400) {
+                wx.hideLoading();
+                wx.showToast({
+                  title: '报修失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            }
           })
-        }
+        } else if (res.cancel) {}
       }
     })
   },

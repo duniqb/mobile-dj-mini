@@ -51,6 +51,12 @@ var config = {
   logisticsRecentUrl: host + 'api/v1/logistics/recent',
   logisticsReportUrl: host + 'api/v1/logistics/report',
   logisticsEvaluateUrl: host + 'api/v1/logistics/evaluate',
+
+  // 教务
+  jwExistUrl: host + 'api/v1/jw/exist',
+  jwVerifyUrl: host + 'api/v1/jw/verify',
+  jwLoginUrl: host + 'api/v1/jw/login',
+  jwClearUrl: host + 'api/v1/jw/clear',
 }
 
 module.exports = config;

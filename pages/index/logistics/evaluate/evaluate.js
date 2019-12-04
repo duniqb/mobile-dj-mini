@@ -30,40 +30,47 @@ Page({
       });
       return;
     }
-    // 开始查询
-    if (this.data.message) {
-      wx.showLoading({
-        title: '正在提交',
-      })
-      wx.request({
-        url: config.logisticsEvaluateUrl,
-        data: {
-          // sessionId: app.sessionId,
-          phone: this.data.phone,
-          listNumber: this.data.listNumber,
-          listWord: this.data.message,
-          listScore: this.data.value
-        },
-        success: res => {
-          if (res.data.meta.status == 200) {
-            wx.hideLoading();
-            that.setData({
-              showEvaluate: false
+    wx.showModal({
+      title: '提交评价',
+      content: '即将提交评价，确认继续？',
+      success(res) {
+        if (res.confirm) {
+          if (this.data.message) {
+            wx.showLoading({
+              title: '正在提交',
             })
-            wx.navigateBack({
-              delta: 1
-            })
-          } else if (res.data.meta.status == 400) {
-            wx.hideLoading();
-            wx.showToast({
-              title: '评价失败',
-              icon: 'none',
-              duration: 2000
+            wx.request({
+              url: config.logisticsEvaluateUrl,
+              data: {
+                // sessionId: app.sessionId,
+                phone: this.data.phone,
+                listNumber: this.data.listNumber,
+                listWord: this.data.message,
+                listScore: this.data.value
+              },
+              success: res => {
+                if (res.data.meta.status == 200) {
+                  wx.hideLoading();
+                  that.setData({
+                    showEvaluate: false
+                  })
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                } else if (res.data.meta.status == 400) {
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: '评价失败',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              }
             })
           }
-        }
-      })
-    }
+        } else if (res.cancel) {}
+      }
+    })
   },
   /**
    * 监听评分改变

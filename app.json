@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/mine/bind/bind",
+    "pages/mine/mine",
+  
     "pages/index/index",
     "pages/index/logistics/progress/progress",
     "pages/index/logistics/logistics",
@@ -11,7 +14,6 @@
     "pages/index/job/recruit/recruit",
     "pages/mine/about/update/update",
     "pages/mine/about/about",
-    "pages/mine/mine",
     "pages/index/library/library",
     "pages/index/card/card",
     "pages/index/grade/grade",

@@ -17,7 +17,7 @@
 
   <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg ">
     <view class="cu-item arrow">
-      <navigator class="content" open-type="navigate" hover-class="none" url="../list/list">
+      <navigator class="content" open-type="navigate" hover-class="none" url="./bind/bind">
         <text class="cuIcon-discoverfill text-orange"></text>
         <text class="text-grey">账号绑定</text>
       </navigator>

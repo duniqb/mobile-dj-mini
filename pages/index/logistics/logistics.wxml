@@ -73,7 +73,7 @@
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">我知道了</button>
+        <button class="cu-btn bg-blue margin-left" bindtap="hideModal">我知道了</button>
       </view>
     </view>
   </view>
