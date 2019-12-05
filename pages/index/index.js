@@ -138,7 +138,12 @@ Page({
     } catch (e) {
       // Do something when catch error
     }
-    this.getLocation();
+    if (this.city == null || this.province == null) {
+      this.getLocation();
+    } else {
+      this.getTip();
+      this.getFestival();
+    }
     wx.showShareMenu({
       withShareTicket: true
     })
