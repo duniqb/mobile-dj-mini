@@ -1,10 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/jw/jw",
+    "pages/index/jw/credit/credit",
+    "pages/index/jw/detail/detail",
+
     "pages/mine/bind/bind",
     "pages/mine/mine",
-  
-
     "pages/index/logistics/progress/progress",
     "pages/index/logistics/logistics",
     "pages/index/logistics/report/report",

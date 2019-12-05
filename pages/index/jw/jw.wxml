@@ -1,0 +1,64 @@
+<!-- 教务已登录，展示信息 -->
+<view wx:if="{{jwExist}}">
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content text-middle">
+        <text class="">{{name}}，你好！</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 宫格 -->
+  <view class="cu-list grid col-2 no-border">
+    <view class="cu-item">
+      <navigator open-type="navigate" hover-class='none' url="./report/report" data-id="0">
+        <view class="cuIcon-rank text-green"></view>
+        <text>成绩查询</text>
+      </navigator>
+    </view>
+    <view class="cu-item">
+      <navigator open-type="navigate" hover-class='none' url="./credit/credit" data-id="1">
+        <view class="cuIcon-search text-orange"></view>
+        <text>学分查询</text>
+      </navigator>
+    </view>
+    <view class="cu-item">
+      <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="2">
+        <view class="cuIcon-form text-yellow"></view>
+        <text>课程表</text>
+      </navigator>
+    </view>
+    <view class="cu-item">
+      <navigator open-type="navigate" hover-class='none' url="../grade/grade" data-id="3">
+        <view class="cuIcon-font text-cyan"></view>
+        <text>等级考试</text>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 此处应放置到统一绑定页，学生信息不存在，登录查看 -->
+<block wx:if="{{!jwExist}}">
+  <view class="cu-list menu">
+    <view class="cu-item">
+      <view class="content text-middle">
+        <text class="text-grey">你还没有登录教务账号！</text>
+      </view>
+    </view>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-blue lg" bindtap="loginBtn">登录教务</button>
+  </view>
+</block>
+
+<!-- 教务通知 -->
+<view class="cu-timeline" wx:for="{{noticeList}}" wx:key>
+  <view class="time">{{item.releaseDate}}</view>
+  <view class="cu-item">
+    <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}">
+      <view class="content notice-content" data-id="{{item.id}}">
+        {{item.title}}
+      </view>
+    </navigator>
+  </view>
+</view>

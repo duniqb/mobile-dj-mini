@@ -31,6 +31,7 @@ var config = {
   // 学生相关
   infoUrl: host + 'api/v1/student/info',
   gradeUrl: host + 'api/v1/student/grade',
+  studentCreditUrl: host + 'api/v1/student/credit',
 
   // 一卡通
   cardVerifyUrl: host + 'api/v1/card/verify',
@@ -57,6 +58,8 @@ var config = {
   jwVerifyUrl: host + 'api/v1/jw/verify',
   jwLoginUrl: host + 'api/v1/jw/login',
   jwClearUrl: host + 'api/v1/jw/clear',
+  jwNoticeListUrl: host + 'api/v1/jw/noticeList',
+  jwNoticeUrl: host + 'api/v1/jw/notice',
 }
 
 module.exports = config;

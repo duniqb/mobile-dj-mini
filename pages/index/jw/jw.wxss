@@ -1,0 +1,27 @@
+.cu-list+.cu-list {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.text-middle {
+  text-align: center;
+}
+
+.time {
+  width: 140rpx;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  color: #888;
+  display: block;
+  margin-left: 10rpx;
+}
+
+.notice-content {
+  background-color: var(--ghostWhite);
+  color: var(--black);
+  padding: 30rpx;
+  border-radius: 6rpx;
+  display: block;
+  line-height: 1.6;
+}

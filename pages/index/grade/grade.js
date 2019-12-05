@@ -18,16 +18,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
     var that = this;
     // 检查是否已存在该学生信息
     wx.request({
       url: config.infoUrl,
       data: {
         sessionId: app.sessionId
-        // username: 1821010431
       },
       success: res => {
         if (res.data.meta.status === 200) {
@@ -39,10 +35,8 @@ Page({
             url: config.gradeUrl,
             data: {
               sessionId: app.sessionId,
-              // username: 1821010431
             },
             success: res => {
-              console.log(res.data)
               if (res.data.meta.status === 200) {
                 that.setData({
                   gradeList: res.data.data,
@@ -56,9 +50,7 @@ Page({
               }
             }
           })
-        } else if (res.data.meta.status === 400) {
-          console.log("查询失败 " + res.data.meta.msg)
-        }
+        } else if (res.data.meta.status === 400) {}
       }
     })
   },
@@ -81,7 +73,6 @@ Page({
         url: config.infoUrl,
         data: {
           sessionId: app.sessionId
-          // username: 1821010431
         },
         success: res => {
           if (res.data.meta.status === 200) {
@@ -95,7 +86,6 @@ Page({
                 sessionId: app.sessionId,
               },
               success: res => {
-                console.log(res.data)
                 if (res.data.meta.status === 200) {
                   that.setData({
                     gradeList: res.data.data,
@@ -109,9 +99,7 @@ Page({
                 }
               }
             })
-          } else if (res.data.meta.status === 400) {
-            console.log("查询失败 " + res.data.meta.msg)
-          }
+          } else if (res.data.meta.status === 400) {}
         }
       })
     }
@@ -149,11 +137,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(ops) {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
+
   }
 })

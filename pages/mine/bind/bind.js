@@ -7,7 +7,7 @@ Page({
    */
   data: {
     jwExist: false,
-    student: null,
+    name: null,
     verifyUrl: '',
     stuNo: '',
     password: '',
@@ -146,7 +146,7 @@ Page({
           var password = wx.getStorageSync('password');
           that.setData({
             jwExist: false,
-            student: null,
+            name: null,
             stuNo: stuNo,
             password: password
           })
@@ -181,7 +181,7 @@ Page({
           wx.hideLoading();
           that.setData({
             jwExist: true,
-            student: res.data.data
+            name: res.data.data
           })
         } else if (res.data.meta.status === 400) {
           wx.hideLoading();

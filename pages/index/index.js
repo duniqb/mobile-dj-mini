@@ -43,7 +43,8 @@ Page({
       icon: 'read',
       color: 'red',
       badge: 0,
-      name: '教务'
+      name: '教务',
+      navUrl: './jw/jw'
     }, {
       id: 1,
       icon: 'news',

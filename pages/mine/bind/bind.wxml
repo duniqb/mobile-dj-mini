@@ -23,7 +23,7 @@
   <view class="cu-list menu">
     <view class="cu-item">
       <view class="content text-middle">
-        <text class="">{{student.name}}，你好！教务账号已经登录</text>
+        <text class="">{{name}}，你好！教务账号已经登录</text>
       </view>
     </view>
     <view class="cu-item">
