@@ -76,6 +76,7 @@ Page({
             showRecent: false,
             showRepair: true,
           })
+          wx.setStorageSync('repairPhone', that.data.value);
         } else if (res.data.meta.status == 400) {
           wx.hideLoading();
           wx.showToast({
@@ -100,6 +101,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let repairPhone = wx.getStorageSync('repairPhone');
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -113,7 +115,8 @@ Page({
       success: res => {
         if (res.data.meta.status == 200) {
           that.setData({
-            recentList: res.data.data
+            recentList: res.data.data,
+            value: repairPhone
           })
         } else if (res.data.meta.status == 400) {
           wx.showToast({

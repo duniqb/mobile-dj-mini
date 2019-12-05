@@ -19,6 +19,45 @@ Page({
     showEvaluate: true
   },
   /**
+   * 提交评价
+   */
+  submitEvaluate() {
+    var that = this;
+    if (that.data.message) {
+      wx.showLoading({
+        title: '正在提交',
+      })
+      wx.request({
+        url: config.logisticsEvaluateUrl,
+        data: {
+          // sessionId: app.sessionId,
+          phone: this.data.phone,
+          listNumber: this.data.listNumber,
+          listWord: this.data.message,
+          listScore: this.data.value
+        },
+        success: res => {
+          if (res.data.meta.status == 200) {
+            wx.hideLoading();
+            that.setData({
+              showEvaluate: false
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+          } else if (res.data.meta.status == 400) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '评价失败',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+      })
+    }
+  },
+  /**
    * 点击评价按钮
    */
   bindButton() {
@@ -35,39 +74,7 @@ Page({
       content: '即将提交评价，确认继续？',
       success(res) {
         if (res.confirm) {
-          if (this.data.message) {
-            wx.showLoading({
-              title: '正在提交',
-            })
-            wx.request({
-              url: config.logisticsEvaluateUrl,
-              data: {
-                // sessionId: app.sessionId,
-                phone: this.data.phone,
-                listNumber: this.data.listNumber,
-                listWord: this.data.message,
-                listScore: this.data.value
-              },
-              success: res => {
-                if (res.data.meta.status == 200) {
-                  wx.hideLoading();
-                  that.setData({
-                    showEvaluate: false
-                  })
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                } else if (res.data.meta.status == 400) {
-                  wx.hideLoading();
-                  wx.showToast({
-                    title: '评价失败',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              }
-            })
-          }
+          that.submitEvaluate();
         } else if (res.cancel) {}
       }
     })

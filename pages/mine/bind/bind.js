@@ -181,7 +181,7 @@ Page({
           wx.hideLoading();
           that.setData({
             jwExist: true,
-            name: res.data.data
+            name: res.data.data.name
           })
         } else if (res.data.meta.status === 400) {
           wx.hideLoading();
