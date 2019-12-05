@@ -13,6 +13,12 @@ Page({
     page: 1,
     totalPage: 1
   },
+  clickCourse() {
+    wx.showToast({
+      title: '未完成的功能',
+      icon: 'none'
+    })
+  },
   loginBtn() {
     wx.navigateTo({
       url: '../../mine/bind/bind',

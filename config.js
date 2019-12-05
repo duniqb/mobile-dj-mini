@@ -32,6 +32,7 @@ var config = {
   infoUrl: host + 'api/v1/student/info',
   gradeUrl: host + 'api/v1/student/grade',
   studentCreditUrl: host + 'api/v1/student/credit',
+  studentScoreUrl: host + 'api/v1/student/score',
 
   // 一卡通
   cardVerifyUrl: host + 'api/v1/card/verify',

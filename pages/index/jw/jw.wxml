@@ -11,7 +11,7 @@
   <!-- 宫格 -->
   <view class="cu-list grid col-2 no-border">
     <view class="cu-item">
-      <navigator open-type="navigate" hover-class='none' url="./report/report" data-id="0">
+      <navigator open-type="navigate" hover-class='none' url="./score/score" data-id="0">
         <view class="cuIcon-rank text-green"></view>
         <text>成绩查询</text>
       </navigator>
@@ -22,11 +22,11 @@
         <text>学分查询</text>
       </navigator>
     </view>
-    <view class="cu-item">
-      <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="2">
-        <view class="cuIcon-form text-yellow"></view>
-        <text>课程表</text>
-      </navigator>
+    <view class="cu-item" bindtap="clickCourse">
+      <!-- <navigator open-type="navigate" hover-class='none' url="" data-id="2"> -->
+      <view class="cuIcon-form text-yellow"></view>
+      <text>课程表</text>
+      <!-- </navigator> -->
     </view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="../grade/grade" data-id="3">
