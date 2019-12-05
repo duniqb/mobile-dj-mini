@@ -19,7 +19,7 @@
 
 
   <!-- 提示区 -->
-  <view class="tip-wrap">
+  <view class="tip-wrap" wx:if="{{weather != ''}}">
     <view class="padding bg-white tip">
       <view class="text-left padding">{{weather}}　{{degree}} </view>
       <view class="text-left padding">{{tips}}</view>

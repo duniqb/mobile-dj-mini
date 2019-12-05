@@ -261,11 +261,13 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        that.setData({
-          weather: res.data.data.weather,
-          degree: res.data.data.degree + '℃',
-          tips: that.randomTip(res.data.data.tips)
-        })
+        if (res.data.meta.status == 200) {
+          that.setData({
+            weather: res.data.data.weather,
+            degree: res.data.data.degree + '℃',
+            tips: that.randomTip(res.data.data.tips)
+          })
+        }
       }
     })
   },
