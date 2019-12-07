@@ -14,27 +14,27 @@ Page({
     swiperList: [{
       id: 1,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/dfdd9496-2ddf-460d-8575-3bd4eb73571f.jpg',
+      url: config.slideImageUrl + '1.jpg',
     }, {
       id: 2,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/6db1a643-1ddb-4fda-9e8d-44d92ba9e03a.jpg'
+      url: config.slideImageUrl + '2.jpg',
     }, {
       id: 3,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/50f61c67-82ec-4c4e-8b41-f4bffaf032af.jpg'
+      url: config.slideImageUrl + '3.jpg',
     }, {
       id: 4,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/fe54e8a4-b5b1-4454-8b26-5e4629f2da8f.jpg'
+      url: config.slideImageUrl + '4.jpg',
     }, {
       id: 5,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181026/c57bcd5a-f6fa-4d2c-8e2a-bf3b7069a01e.jpg'
+      url: config.slideImageUrl + '5.jpg',
     }, {
       id: 6,
       type: 'image',
-      url: 'http://www.djtu.edu.cn/Upload/image/20181029/b0a49974-7348-4932-9986-8b82362c3568.jpg'
+      url: config.slideImageUrl + '6.jpg',
     }],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,

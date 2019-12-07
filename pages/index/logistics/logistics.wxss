@@ -1,13 +1,11 @@
-.modal-content {
+.notice-content {
   text-indent: 2em;
-  line-height: 45rpx;
-  text-align: left;
-  margin-left: 30rpx;
 }
 
-.modal-date {
+.notice-date {
   text-align: right;
 }
+
 .padding-xl {
   padding: 30rpx;
 }

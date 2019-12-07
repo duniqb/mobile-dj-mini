@@ -1,6 +1,3 @@
-<!-- 通知栏 -->
-<van-notice-bar wx:if="{{noticeShow}}" left-icon="volume-o" text="{{noticeContent}}" bindtap="showModal" data-target="DialogModal1" />
-
 <!-- 宫格 -->
 <view class="cu-list grid col-2 no-border">
   <view class="cu-item">
@@ -76,5 +73,13 @@
         <button class="cu-btn bg-blue margin-left" bindtap="hideModal">我知道了</button>
       </view>
     </view>
+  </view>
+</view>
+
+<view class='margin-xl bg-white padding-xl radius shadow-lg' wx:if="{{noticeShow}}">
+  <view class='text-center margin-bottom text-lg  text-orange'>{{noticeTitle}}</view>
+  <view class='text-content'>
+    <view class='margin-top-sm notice-content'> {{noticeContent}}</view>
+    <view class='margin-top-sm notice-date'> {{noticeDate}}</view>
   </view>
 </view>

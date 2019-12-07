@@ -63,8 +63,10 @@ Page({
     });
   },
   // 获取用户信息事件
-
   onGotUserInfo: function(e) {
+    if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
+      return;
+    }
     var that = this;
     wx.showLoading({
       title: '正在登录',

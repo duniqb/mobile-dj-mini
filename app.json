@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/logistics/logistics",
+    "pages/index/card/card",
     "pages/index/jw/score/score",
     "pages/index/jw/jw",
     "pages/index/jw/credit/credit",
@@ -8,7 +10,6 @@
     "pages/mine/bind/bind",
     "pages/mine/mine",
     "pages/index/logistics/progress/progress",
-    "pages/index/logistics/logistics",
     "pages/index/logistics/report/report",
     "pages/index/logistics/evaluate/evaluate",
     "pages/index/logistics/progress/detail/detail",
@@ -18,7 +19,6 @@
     "pages/mine/about/update/update",
     "pages/mine/about/about",
     "pages/index/library/library",
-    "pages/index/card/card",
     "pages/index/grade/grade",
     "pages/index/calendar/calendar",
     "pages/index/library/search/search",

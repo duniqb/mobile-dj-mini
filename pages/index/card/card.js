@@ -7,32 +7,103 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: '',
+    stuNo: '',
     password: '',
     verifyCode: '',
-    verifyUrl: '',
+    cardLogin: false,
+    cardInfo: null
   },
-  onClickIcon() {
-    wx.showToast({
-      icon: 'none',
-      title: '新生密码为身份证号后6位（除X外）'
-    });
+  /**
+   * 登录按钮
+   */
+  loginBtn() {
+    var that = this;
+    if (this.data.stuNo == '' || this.data.password == '' || this.data.verifyCode == '') {
+      wx.showToast({
+        title: '请填写登录信息',
+        icon: 'none'
+      })
+      return;
+    }
+    wx.showModal({
+      title: '登录一卡通',
+      content: '确认登录？',
+      success(res) {
+        if (res.confirm) {
+          that.loginCard();
+        } else if (res.cancel) {}
+      }
+    })
   },
-  onChange1(e) {
-    console.log(e)
+  /**
+   * 登录
+   */
+  loginCard() {
+    var that = this;
+    // 发起登录
+    wx.showLoading({
+      title: '正在登录',
+    })
+    // 取出Cookie
+    let cookie = wx.getStorageSync('cardCookieKey');
+    let header = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    wx.request({
+      url: config.cardLoginUrl,
+      data: {
+        stuNo: that.data.stuNo,
+        password: that.data.password,
+        verifyCode: that.data.verifyCode,
+      },
+      header,
+      success: res => {
+        if (res.data.meta.status == 200) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '登录成功',
+            icon: 'none',
+            duration: 2000
+          })
+
+          that.setData({
+            cardLogin: true,
+            cardInfo: res.data.data
+          })
+          wx.setStorageSync('stuNo', that.data.stuNo);
+          wx.setStorageSync('passwordCard', that.data.password);
+        } else if (res.data.meta.status == 400) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '登录失败',
+            icon: 'none',
+            duration: 2000
+          })
+          that.changeVerify();
+        }
+      }
+    })
+  },
+  /**
+   * 监听输入框改变
+   */
+  onStuNoChange(event) {
     this.setData({
-      username: e.detail
-    });
+      stuNo: event.detail.value,
+    })
   },
-  onChange2(e) {
+  onPasswordChange(event) {
     this.setData({
-      password: e.detail
-    });
+      password: event.detail.value,
+    })
   },
-  onChange3(e) {
+  onVerifyChange(event) {
     this.setData({
-      verifyCode: e.detail
-    });
+      verifyCode: event.detail.value,
+    })
   },
   /**
    * 改变验证码
@@ -44,50 +115,37 @@ Page({
       data: {
         // sessionId: app.sessionId
       },
-      success: res => {
-        if (res.data.meta.status === 200) {
-          that.setData({
-            verifyUrl: res.data.data
-          })
-        } else if (res.data.meta.status === 400) {
-          console.log("验证码失败 " + res.data.meta.msg)
-        }
-      }
-    })
-  },
-  /**
-   * 提交登录表单
-   */
-  post() {
-    var that = this;
-    wx.request({
-      url: config.cardLoginUrl,
-      data: {
-        // sessionId: app.sessionId
-        username: this.data.username,
-        password: this.data.password,
-        verifyCode: this.data.verifyCode
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: res => {
         if (res.data.meta.status === 200) {
-          console.log(res.data)
-          // that.setData({
-          //   verifyUrl: res.data.data
-          // })
-        } else if (res.data.meta.status === 400) {
-          console.log("验证码失败 " + res.data.meta.msg)
-        }
+          // 保存 Cookie 到 Storage
+          if (res && res.header && res.header['Set-Cookie']) {
+            wx.setStorageSync('cardCookieKey', res.header['Set-Cookie']);
+          }
+          that.setData({
+            verifyUrl: res.data.data
+          })
+        } else if (res.data.meta.status === 400) {}
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.changeVerify();
-    wx.showShareMenu({
-      withShareTicket: true
+    var stuNo = wx.getStorageSync('stuNo');
+    var password = wx.getStorageSync('passwordCard');
+    this.setData({
+      cardLogin: false,
+      name: null,
+      stuNo: stuNo,
+      password: password
     })
+
+    this.changeVerify();
   },
 
   /**
@@ -135,12 +193,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(ops) {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
-  }
+  onShareAppMessage: function(ops) {}
 })

@@ -9,6 +9,7 @@ var config = {
   addUrl: host + 'api/v1/mini/add',
   queryUrl: host + 'api/v1/mini/query',
   registerUrl: host + 'api/v1/mini/register',
+  slideImageUrl: host + 'slide/',
 
   // 新闻
   newsUrl: host + 'api/v1/news/list',

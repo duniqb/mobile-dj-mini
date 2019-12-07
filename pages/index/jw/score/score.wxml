@@ -48,5 +48,4 @@
       <text class="text-grey ">教师：{{item.teacherName}}</text>
     </view>
   </view>
-
 </view>

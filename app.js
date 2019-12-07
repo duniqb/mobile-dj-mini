@@ -1,7 +1,7 @@
 //app.js
 var config = require("./config.js")
 App({
-  serverUrl: "http://localhost:8080",
+  serverUrl: "http://192.168.1.10:8080",
   userInfo: null,
   // 将 user 全局保存在本地缓存，下次打开不用登陆
   setGlobalUserInfo: function(userInfo) {
