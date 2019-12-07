@@ -6,7 +6,7 @@
 
 ## 后端
 
-（此处放仓库地址）
+https://github.com/aitwzl/mobole-dj
 
 后端使用 Java 语言开发，技术栈：
 
