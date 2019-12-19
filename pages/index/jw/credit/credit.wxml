@@ -34,9 +34,9 @@
       </view>
     </view>
   </block>
-  <view class="cu-item">
+  <view class="cu-item"  bindtap="toBind">
     <view class="content text-middle">
-      <text class="text-grey text-sm">数据有误？请重新登录教务账号</text>
+      <text class="text-blue text-sm">数据有误？请重新登录教务账号</text>
     </view>
   </view>
 </view>

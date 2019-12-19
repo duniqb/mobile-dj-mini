@@ -10,7 +10,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">验证码</view>
-    <input placeholder="" value="{{verify}}" type="number" bind:change="onVerifyChange"></input>
+    <input placeholder="" value="{{verify}}" type="number" bind:change="onVerifyChange" bindblur="bindblur"></input>
     <image class="image" src="{{verifyUrl}}" bindtap="changeVerify"></image>
   </view>
   <view class="padding flex flex-direction">

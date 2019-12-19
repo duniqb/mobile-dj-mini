@@ -105,7 +105,7 @@ Page({
       content: '即将提交报修信息，确认继续？',
       success(res) {
         if (res.confirm) {
-          this.reportRepair();
+          that.reportRepair();
         } else if (res.cancel) {}
       }
     })

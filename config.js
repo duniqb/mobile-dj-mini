@@ -1,5 +1,5 @@
 "use strict";
-var host = 'http://192.168.1.10:8080/';
+var host = 'https://dj.xiaoshi98.top/';
 var config = {
   host,
   loginUrl: host + 'api/v1/mini/login',

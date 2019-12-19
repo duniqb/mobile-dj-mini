@@ -37,24 +37,24 @@ Page({
    */
   onSearch(e) {
     var that = this;
-    if (this.data.value == '') {
-      wx.showToast({
-        title: '请填写手机号码',
-        icon: 'none'
-      })
-      return;
-    }
+    // if (this.data.value == '') {
+    //   wx.showToast({
+    //     title: '请填写手机号码',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
     // 校验手机号
-    var patt = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/i;
-    if (this.data.value.search(patt) == 0) {
-      // 合格
-    } else {
-      wx.showToast({
-        title: '手机号码格式不正确',
-        icon: 'none'
-      })
-      return;
-    }
+    // var patt = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/i;
+    // if (this.data.value.search(patt) == 0) {
+    //   // 合格
+    // } else {
+    //   wx.showToast({
+    //     title: '手机号码格式不正确',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
     // 开始查询，将最新维修隐藏
     that.setData({
       showRecent: false

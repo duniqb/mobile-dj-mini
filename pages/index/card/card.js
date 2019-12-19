@@ -18,7 +18,7 @@ Page({
    */
   loginBtn() {
     var that = this;
-    if (this.data.stuNo == '' || this.data.password == '' || this.data.verifyCode == '') {
+    if (this.data.stuNo == '' || this.data.password == '') {
       wx.showToast({
         title: '请填写登录信息',
         icon: 'none'

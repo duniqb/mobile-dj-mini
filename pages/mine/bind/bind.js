@@ -18,7 +18,12 @@ Page({
    */
   loginBtn() {
     var that = this;
-    if (this.data.stuNo == '' || this.data.password == '' || this.data.verify == '') {
+
+    console.log("登录按钮 3个数据：")
+    console.log("1：" + this.data.stuNo)
+    console.log("2：" + this.data.password)
+    console.log("3：" + this.data.verify)
+    if (this.data.stuNo == '' || this.data.password == '') {
       wx.showToast({
         title: '请填写登录信息',
         icon: 'none'
@@ -69,13 +74,14 @@ Page({
             icon: 'none',
             duration: 2000
           })
+
           wx.setStorageSync('stuNo', that.data.stuNo);
           wx.setStorageSync('password', that.data.password);
           this.checkLogin();
         } else if (res.data.meta.status == 400) {
           wx.hideLoading();
           wx.showToast({
-            title: '登录失败',
+            title: '登录失败，请重新登录',
             icon: 'none',
             duration: 2000
           })
@@ -143,12 +149,15 @@ Page({
             duration: 2000
           })
           var stuNo = wx.getStorageSync('stuNo');
-          var password = wx.getStorageSync('password');
+
+          wx.removeStorage({
+            key: 'password',
+            success(res) {}
+          })
           that.setData({
             jwExist: false,
             name: null,
-            stuNo: stuNo,
-            password: password
+            stuNo: stuNo
           })
 
           this.changeVerify();
@@ -178,12 +187,16 @@ Page({
       },
       success: res => {
         if (res.data.meta.status === 200) {
+          console.log("200")
+          console.log(res.data)
           wx.hideLoading();
           that.setData({
             jwExist: true,
             name: res.data.data.name
           })
         } else if (res.data.meta.status === 400) {
+          console.log("400")
+          console.log(res.data)
           wx.hideLoading();
           var stuNo = wx.getStorageSync('stuNo');
           var password = wx.getStorageSync('password');
@@ -235,7 +248,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**

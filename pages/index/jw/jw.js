@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jwExist: false,
+    jwExist: true,
     name: null,
     noticeList: [],
     page: 1,
@@ -40,7 +40,6 @@ Page({
       },
       success: res => {
         if (res.data.meta.status === 200) {
-          console.log(res.data)
           wx.hideLoading();
           that.setData({
             noticeList: res.data.data.list,
@@ -81,8 +80,6 @@ Page({
             stuNo: stuNo,
             password: password
           })
-          // 验证码
-          that.changeVerify();
         }
       }
     })
@@ -98,7 +95,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    // 检查是否已登录教务
+    this.checkLogin();
   },
 
   /**
@@ -141,7 +139,6 @@ Page({
       },
       success: res => {
         if (res.data.meta.status === 200) {
-          console.log(res.data.data)
           wx.hideLoading();
           var noticeList = res.data.data.list;
           var newList = that.data.noticeList;

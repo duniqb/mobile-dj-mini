@@ -15,6 +15,14 @@ Page({
     })
   },
   /**
+   * 点击跳转到绑定页
+   */
+  toBind() {
+    wx.navigateTo({
+      url: '../../mine/bind/bind',
+    })
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {

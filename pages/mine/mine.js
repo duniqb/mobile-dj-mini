@@ -6,6 +6,9 @@ Page({
     avatarUrl: null,
     nickName: null,
     isRegister: false,
+    waveUrl: config.host + 'wave.gif',
+    backImgUrl: config.host + '/slide/back.png'
+
   },
   onLoad: function() {
     this.userInfo = app.getGlobalUserInfo();
@@ -114,7 +117,7 @@ Page({
             icon: 'none',
             duration: 2000
           })
-          console.log("保存用户：" + res.data.meta.msg)
+          console.log("登录失败：" + res.data.meta.msg)
         }
       }
     })

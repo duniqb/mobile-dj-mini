@@ -1,5 +1,5 @@
 <scroll-view scroll-y class="scrollPage">
-  <view class="UCenter-bg info">
+  <view class="UCenter-bg info" style="background-image: url({{backImgUrl}});">
     <block wx:if="{{isRegister}}">
       <image class="cu-avatar radius margin-center" src="{{avatarUrl}}"></image>
       <view class="margin-top-sm">
@@ -12,7 +12,7 @@
         <button class="cu-btn bg-blue margin-tb-sm lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">登　录</button>
       </view>
     </block>
-    <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    <image src="{{waveUrl}}" mode="scaleToFill" class="gif-wave"></image>
   </view>
 
   <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg ">
