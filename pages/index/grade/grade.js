@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isExist: false,
+    isExist: true,
     gradeList: []
   },
   loginBtn() {

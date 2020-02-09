@@ -3,7 +3,7 @@
   <view class="cu-list menu">
     <view class="cu-item">
       <view class="content text-middle">
-        <text class="">{{name}}，你好！</text>
+        <text class="">{{name}}</text>
       </view>
     </view>
   </view>

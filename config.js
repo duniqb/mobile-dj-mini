@@ -1,5 +1,5 @@
 "use strict";
-var host = 'https://dj.xiaoshi98.top/';
+var host = 'http://192.168.2.200:8080/';
 var config = {
   host,
   loginUrl: host + 'api/v1/mini/login',
@@ -62,6 +62,10 @@ var config = {
   jwClearUrl: host + 'api/v1/jw/clear',
   jwNoticeListUrl: host + 'api/v1/jw/noticeList',
   jwNoticeUrl: host + 'api/v1/jw/notice',
+
+  // 校友圈
+  feedListUrl: host + '/api/v1/feed/list',
+  feedDetailUrl: host + '/api/v1/feed/detail'
 }
 
 module.exports = config;

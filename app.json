@@ -1,5 +1,8 @@
 {
   "pages": [
+    
+    "pages/feed/feed",
+    "pages/feed/detail/detail",
     "pages/index/index",
     "pages/index/logistics/logistics",
     "pages/index/card/card",
@@ -23,8 +26,7 @@
     "pages/index/calendar/calendar",
     "pages/index/library/search/search",
     "pages/news/news",
-    "pages/news/detail/detail",
-    "pages/discovery/discovery"
+    "pages/news/detail/detail"
   ],
   "permission": {
     "scope.userLocation": {
@@ -52,15 +54,14 @@
     "color": "#000000",
     "selectedColor": "#000000",
     "backgroundColor": "#000000",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index"
       },
       {
         "pagePath": "pages/news/news"
       },
       {
-        "pagePath": "pages/discovery/discovery"
+        "pagePath": "pages/feed/feed"
       },
       {
         "pagePath": "pages/mine/mine"

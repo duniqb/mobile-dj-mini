@@ -14,8 +14,7 @@ Component({
       {
         icon: 'eye-o',
         text: '发现',
-        // url: '/pages/discovery/discovery',
-        id: 2
+        url: '/pages/feed/feed'
       },
       {
         icon: 'contact',
@@ -33,15 +32,6 @@ Component({
       wx.switchTab({
         url: this.data.list[event.detail].url
       });
-    },
-    click(e) {
-      if (e.currentTarget.dataset.id == 2) {
-        wx.showToast({
-          title: '未完成的功能',
-          icon: 'none',
-          duration: 2000
-        })
-      }
     },
 
     init() {

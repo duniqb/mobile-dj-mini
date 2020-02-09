@@ -1,0 +1,28 @@
+<view class="cu-card dynamic no-card">
+	<view class="cu-item shadow solids-bottom" wx:for="{{feedList}}" wx:key="index">
+		<view class="cu-list menu-avatar">
+			<view class="cu-item">
+				<view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+				<view class="content flex-sub">
+					<view>{{item.nickname}}</view>
+					<view class="text-gray text-sm flex justify-between">
+						{{item.time}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 到详情页 -->
+		<view class="text-content" bindtap="toDetail" id="{{item._id}}">
+			{{item.content}}
+		</view>
+		<!-- 图片 -->
+		<view class="grid flex-sub padding-lr col-3 grid-square" wx:if="{{item.images.length > 0}}">
+			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.images}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.images}}">
+			</view>
+		</view>
+		<view class="text-gray text-lg text-right padding">
+			<text class="cuIcon-appreciatefill margin-lr-xs"></text>{{item.likeList.length == 0 ? '' : item.likeList.length}}
+			<text class="cuIcon-messagefill margin-lr-xs"></text>{{item.commentList.length == 0 ? '' : item.commentList.length}}
+		</view>
+	</view>
+</view>

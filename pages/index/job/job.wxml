@@ -15,7 +15,7 @@
 <!-- 列表 -->
 <block wx:if="{{TabCur == 0}}">
   <!-- 月份选择 -->
-  <van-datetime-picker type="year-month" value="{{ currentDate }}" min-date="{{ minDate }}"  max-date="{{ maxDate }}" bind:input="onInput" bind:confirm="onConfirm" visible-item-count="1" title="选择月份" />
+  <van-datetime-picker type="year-month" value="{{ currentDate }}" min-date="{{ minDate }}"  max-date="{{ maxDate }}" bind:input="onInput" bind:confirm="onConfirm" visible-item-count="2" title="划动选择月份" />
 
   <!-- 列表 -->
   <view class="cu-timeline" wx:for="{{calendarList}}" wx:key>

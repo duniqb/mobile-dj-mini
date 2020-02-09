@@ -1,5 +1,5 @@
 <!-- 选择学期 -->
-<van-picker columns="{{ columns }}" show-toolbar title="选择学期" bind:change="onChange" visible-item-count="1" bind:confirm="onConfirm" />
+<van-picker columns="{{ columns }}" show-toolbar title="划动选择学期" bind:change="onChange" visible-item-count="2" bind:confirm="onConfirm" />
 
 <!-- 查询结果 -->
 <view class="cu-list menu sm-border  margin-top" wx:for="{{scoreList}}" wx:key>

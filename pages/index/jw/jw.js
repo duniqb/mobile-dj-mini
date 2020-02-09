@@ -8,7 +8,7 @@ Page({
    */
   data: {
     jwExist: true,
-    name: null,
+    name: '',
     noticeList: [],
     page: 1,
     totalPage: 1
@@ -69,7 +69,7 @@ Page({
           wx.hideLoading();
           that.setData({
             jwExist: true,
-            name: res.data.data.name
+            name: res.data.data.name + '，你好！'
           })
         } else if (res.data.meta.status === 400) {
           wx.hideLoading();

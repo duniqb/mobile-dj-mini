@@ -1,0 +1,26 @@
+<view class="cu-card dynamic no-card">
+	<view class="cu-item shadow">
+		<view class="cu-list menu-avatar">
+			<view class="cu-item">
+				<view class="cu-avatar round lg" style="background-image:url({{info.avatar}});"></view>
+				<view class="content flex-sub">
+					<view>{{info.nickname}}</view>
+					<view class="text-gray text-sm flex justify-between">
+						{{time}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="text-content">
+			{{info.content}}
+		</view>
+		<view class="grid flex-sub padding-lr col-3 grid-square">
+			<view class="bg-img" style="background-image:url(https://box.bdimg.com/static/fisp_static/common/img/searchbox/logo_news_276_88_1f9876a.png);" wx:for="3" wx:key="index">
+			</view>
+		</view>
+		<view class="text-gray text-sm text-right padding">
+			<text class="cuIcon-appreciatefill margin-lr-xs"></text>{{info.likeList.length == 0 ? '' : info.likeList.length}}
+			<text class="cuIcon-messagefill margin-lr-xs"></text>{{info.commentList.length == 0 ? '' : info.commentList.length}}
+		</view>
+	</view>
+</view>

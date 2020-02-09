@@ -4,7 +4,7 @@ var config = require("../../config.js")
 Page({
   data: {
     avatarUrl: null,
-    nickName: null,
+    nickName: '',
     isRegister: false,
     waveUrl: config.host + 'wave.gif',
     backImgUrl: config.host + '/slide/back.png'
