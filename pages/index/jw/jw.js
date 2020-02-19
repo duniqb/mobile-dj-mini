@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../config.js')
+import { jwNoticeListUrl, jwExistUrl } from '../../../config.js'
 
 Page({
 
@@ -28,12 +28,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu();
     var that = this;
     // 检查是否已登录教务
     this.checkLogin();
     // 加载通知
     wx.request({
-      url: config.jwNoticeListUrl,
+      url: jwNoticeListUrl,
       data: {
         // sessionId: app.sessionId
         page: 1
@@ -60,7 +61,7 @@ Page({
     })
     var that = this;
     wx.request({
-      url: config.jwExistUrl,
+      url: jwExistUrl,
       data: {
         sessionId: app.sessionId
       },
@@ -132,7 +133,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.jwNoticeListUrl,
+      url: jwNoticeListUrl,
       data: {
         // sessionId: app.sessionId
         page: page

@@ -29,7 +29,7 @@
       <!-- </navigator> -->
     </view>
     <view class="cu-item">
-      <navigator open-type="navigate" hover-class='none' url="../grade/grade" data-id="3">
+      <navigator open-type="navigate" hover-class='none' url="./grade/grade" data-id="3">
         <view class="cuIcon-font text-cyan"></view>
         <text>等级考试</text>
       </navigator>
@@ -52,7 +52,7 @@
 </block>
 
 <!-- 教务通知 -->
-<view class="cu-timeline" wx:for="{{noticeList}}" wx:key>
+<view class="cu-timeline" wx:for="{{noticeList}}" wx:key="index">
   <view class="time">{{item.releaseDate}}</view>
   <view class="cu-item">
     <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}">

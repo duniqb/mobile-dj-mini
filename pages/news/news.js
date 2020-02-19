@@ -75,6 +75,14 @@ Page({
             duration: 2000
           })
         }
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showModal({
+          title: '加载失败',
+          showCancel: false,
+          content: '请检查学校网站能否访问\n http://www.djtu.edu.cn'
+        })
       }
     })
   },
@@ -82,7 +90,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -112,6 +120,14 @@ Page({
             duration: 2000
           })
         }
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showModal({
+          title: '加载失败',
+          showCancel: false,
+          content: '请检查学校网站能否访问\n http://www.djtu.edu.cn'
+        })
       }
     })
   },
@@ -119,42 +135,42 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.getTabBar().init();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     var that = this;
     // 获取原先的当前页面和总页面，如果相等就提示没有更多
     if (parseInt(that.data.TabCur) == 0) {
@@ -227,17 +243,5 @@ Page({
         }
       }
     })
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function(ops) {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
   }
 })

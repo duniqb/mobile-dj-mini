@@ -26,7 +26,7 @@
   </view>
 </block>
 <block wx:if="{{TabCur == 1}}">
-  <view class="cu-timeline" wx:for="{{multipleList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{multipleList}}" wx:key="index">
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">
@@ -38,7 +38,7 @@
   </view>
 </block>
 <block wx:if="{{TabCur == 2}}">
-  <view class="cu-timeline" wx:for="{{noticeList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{noticeList}}" wx:key="index">
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">

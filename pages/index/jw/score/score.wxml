@@ -2,7 +2,7 @@
 <van-picker columns="{{ columns }}" show-toolbar title="划动选择学期" bind:change="onChange" visible-item-count="2" bind:confirm="onConfirm" />
 
 <!-- 查询结果 -->
-<view class="cu-list menu sm-border  margin-top" wx:for="{{scoreList}}" wx:key>
+<view class="cu-list menu sm-border  margin-top" wx:for="{{scoreList}}" wx:key="index">
   <view class="cu-item">
     <view class="content text-middle">
       <text class="">{{index + 1}}. {{item.courseName}}</text>

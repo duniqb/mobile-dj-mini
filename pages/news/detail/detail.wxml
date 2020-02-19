@@ -8,9 +8,10 @@
         <text class="margin-lr-xs"></text>{{browse}}
       </view>
     </view>
+    <!-- 图片 -->
     <view class="content">
       <view class="desc">
-        <image wx:for="{{image}}" wx:key="index" class="image" src="{{item}}" mode="widthFix"></image>
+        <image wx:for="{{image}}" bindtap="showImg" data-images="{{item}}" wx:key="index" class="image" src="{{item}}" mode="widthFix"></image>
       </view>
     </view>
     <view class="content" wx:for="{{content}}" wx:key="index">

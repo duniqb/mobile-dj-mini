@@ -1,6 +1,6 @@
 <!-- 学生信息存在 -->
 <block wx:if="{{isExist}}">
-  <view class="cu-timeline" wx:for="{{gradeList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{gradeList}}" wx:key="index">
     <view class="time">{{item.examDate}}</view>
     <view class="cu-item">
       <view class="cu-list menu sm-border card-menu margin-top">

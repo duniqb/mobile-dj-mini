@@ -1,5 +1,7 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import {
+  jwNoticeUrl
+} from '../../../../config.js';
 
 Page({
 
@@ -7,19 +9,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    notice: null
+    notice: null,
+    id: '',
+    title: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(params) {
+  onLoad: function (params) {
     var that = this;
     wx.showLoading({
       title: '正在加载',
     })
     wx.request({
-      url: config.jwNoticeUrl,
+      url: jwNoticeUrl,
       data: {
         // sessionId: app.sessionId
         id: params.id
@@ -28,7 +32,9 @@ Page({
         if (res.data.meta.status === 200) {
           wx.hideLoading();
           that.setData({
-            notice: res.data.data
+            notice: res.data.data,
+            id: params.id,
+            title: res.data.data.title
           })
         } else if (res.data.meta.status === 400) {
           wx.hideLoading();
@@ -45,49 +51,54 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function () {
+    return {
+      title: "【教务通知】" + this.data.title,
+      path: '/pages/index/jw/detail/detail?id=' + this.data.id, // 路径，传递参数到指定页面。
+      success: function (res) {},
+      fail: function (res) {}
+    }
   }
 })
