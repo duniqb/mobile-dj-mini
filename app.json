@@ -1,9 +1,9 @@
 {
   "pages": [
-    
+    "pages/index/index",
     "pages/feed/feed",
     "pages/feed/detail/detail",
-    "pages/index/index",
+
     "pages/index/logistics/logistics",
     "pages/index/card/card",
     "pages/index/jw/score/score",
@@ -69,5 +69,8 @@
     ]
   },
   "sitemapLocation": "sitemap86.json",
-  "plugins": {}
+  "plugins": {},
+  "networkTimeout": {
+    "request": 3000
+  }
 }

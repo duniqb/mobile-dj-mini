@@ -1,9 +1,22 @@
 const app = getApp()
-var QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
+import QQMapWX from '../../libs/qqmap-wx-jssdk.min.js';
+
 var qqmapsdk;
-var config = require('../../config.js')
+import {
+  slideImageUrl,
+  tipUrl,
+  festivalUrl,
+  logisticsNoticeUrl
+} from '../../config.js';
 Page({
   data: {
+    // 后勤通知
+    noticeShow: false,
+    noticeTitle: '',
+    noticeContent: '',
+    noticeDate: '',
+    modalName: null,
+
     degree: '',
     weather: '',
     tips: '',
@@ -14,27 +27,27 @@ Page({
     swiperList: [{
       id: 1,
       type: 'image',
-      url: config.slideImageUrl + '1.jpg',
+      url: slideImageUrl + '1.jpg',
     }, {
       id: 2,
       type: 'image',
-      url: config.slideImageUrl + '2.jpg',
+      url: slideImageUrl + '2.jpg',
     }, {
       id: 3,
       type: 'image',
-      url: config.slideImageUrl + '3.jpg',
+      url: slideImageUrl + '3.jpg',
     }, {
       id: 4,
       type: 'image',
-      url: config.slideImageUrl + '4.jpg',
+      url: slideImageUrl + '4.jpg',
     }, {
       id: 5,
       type: 'image',
-      url: config.slideImageUrl + '5.jpg',
+      url: slideImageUrl + '5.jpg',
     }, {
       id: 6,
       type: 'image',
-      url: config.slideImageUrl + '6.jpg',
+      url: slideImageUrl + '6.jpg',
     }],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -68,11 +81,10 @@ Page({
       navUrl: './logistics/logistics'
     }, {
       id: 4,
-      icon: 'font',
+      icon: 'activity',
       color: 'cyan',
       badge: 0,
-      name: '四六级',
-      navUrl: './grade/grade'
+      name: '失物招领'
     }, {
       id: 5,
       icon: 'time',
@@ -104,9 +116,23 @@ Page({
     skin: false
   },
   /**
+   * 显示后勤通知详情的模态框
+   */
+  showModal(e) {
+    var that = this;
+    that.setData({
+      modalName: e.currentTarget.dataset.target,
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  /**
    * 点击九宫格
    */
-  bindGrid: function(e) {
+  bindGrid: function (e) {
     if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8) {
       wx.showToast({
         title: '未完成的功能',
@@ -214,14 +240,34 @@ Page({
     }
   },
   onShow() {
-    this.getTabBar().init()
+    var that = this;
+    this.getTabBar().init();
+    // 查询后勤通知
+    wx.request({
+      url: logisticsNoticeUrl,
+      data: {
+        // sessionId: app.sessionId,
+      },
+      success: res => {
+        if (res.data.meta.status == 200) {
+          if (res.data.data.content != '') {
+            that.setData({
+              noticeShow: true,
+              noticeTitle: res.data.data.title,
+              noticeContent: res.data.data.content,
+              noticeDate: res.data.data.date
+            })
+          }
+        }
+      }
+    })
   },
   // 获取位置信息
-  getLocation: function() {
+  getLocation: function () {
     var that = this;
     wx.getLocation({
       type: 'gcj02',
-      success: function(res) {
+      success: function (res) {
         var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
         var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180
         //根据经纬度获取所在城市
@@ -230,7 +276,7 @@ Page({
             latitude: latitude,
             longitude: longitude
           },
-          success: function(res) {
+          success: function (res) {
             //address 城市
             that.setData({
               province: res.result.ad_info.province,
@@ -253,10 +299,10 @@ Page({
   },
 
   // 获取提示信息
-  getTip: function() {
+  getTip: function () {
     var that = this;
     wx.request({
-      url: config.tipUrl,
+      url: tipUrl,
       data: {
         sessionId: app.sessionId,
         province: this.province,
@@ -276,10 +322,10 @@ Page({
       }
     })
   },
-  getFestival: function() {
+  getFestival: function () {
     var that = this;
     wx.request({
-      url: config.festivalUrl,
+      url: festivalUrl,
       data: {
         // sessionId: app.sessionId,
       },
@@ -288,24 +334,24 @@ Page({
       },
       success(res) {
         that.setData({
-          festivalTips: that.randomTip(res.data.data)
+          festivalTips: that.randomTip(res.data.data) != undefined ? that.randomTip(res.data.data) : null
         })
       }
     })
   },
-  randomTip: function(tips) {
+  randomTip: function (tips) {
     return tips[Math.floor(Math.random() * tips.length)]
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(ops) {
+  onShareAppMessage: function (ops) {
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
+      success: function (res) {},
+      fail: function (res) {}
     }
   }
 })

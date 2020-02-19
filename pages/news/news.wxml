@@ -14,7 +14,7 @@
 
 <!-- 文章列表 -->
 <block wx:if="{{TabCur == 0}}">
-  <view class="cu-timeline" wx:for="{{focusList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{focusList}}" wx:key="index">
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./detail/detail?id={{item.id}}&type={{item.type}}">

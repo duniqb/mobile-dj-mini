@@ -1,5 +1,12 @@
 const app = getApp()
-var config = require('../../../config.js')
+import {
+  hotUrl,
+  libraryMajorUrl,
+  libraryCategoryUrl,
+  showUrl,
+  bookCateUrl,
+  collegeUrl
+} from '../../../config.js'
 Page({
 
   /**
@@ -54,7 +61,7 @@ Page({
    */
   clickCourseList(e) {
     wx.request({
-      url: config.hotUrl,
+      url: hotUrl,
       data: {
         // sessionId: app.sessionId,
         sq: e.currentTarget.dataset.id,
@@ -92,7 +99,7 @@ Page({
   clickMajorList(e) {
     var that = this;
     wx.request({
-      url: config.libraryMajorUrl,
+      url: libraryMajorUrl,
       data: {
         // sessionId: app.sessionId,
         major: e.currentTarget.dataset.id,
@@ -130,7 +137,7 @@ Page({
   clickMajorHot(e) {
     var that = this;
     wx.request({
-      url: config.libraryMajorUrl,
+      url: libraryMajorUrl,
       data: {
         // sessionId: app.sessionId,
         college: e.currentTarget.dataset.id
@@ -168,7 +175,7 @@ Page({
   clickCateHot(e) {
     var that = this;
     wx.request({
-      url: config.libraryCategoryUrl,
+      url: libraryCategoryUrl,
       data: {
         // sessionId: app.sessionId,
         cate: e.currentTarget.dataset.id,
@@ -225,7 +232,7 @@ Page({
   showModal(e) {
     var that = this;
     wx.request({
-      url: config.showUrl,
+      url: showUrl,
       data: {
         // sessionId: app.sessionId,
         id: e.currentTarget.dataset.id
@@ -274,7 +281,7 @@ Page({
       return;
     }
     // 判断是哪种图书热点
-    var url = config.hotUrl;
+    var url = hotUrl;
     // 读者热点-近2年入藏复本总借量
     if (e.currentTarget.dataset.id == 1) {
       var type = 2;
@@ -285,17 +292,14 @@ Page({
     }
     // 分类热点，查询图书分类法总类列表
     else if (e.currentTarget.dataset.id == 3) {
-      url = config.bookCateUrl;
+      url = bookCateUrl;
     }
     // 专业热点，查询学院列表
     else if (e.currentTarget.dataset.id == 4) {
-      url = config.collegeUrl;
+      url = collegeUrl;
     }
 
     // 请求标签所在的列表
-    // wx.showLoading({
-    //   title: '正在加载',
-    // })
     wx.request({
       url: url,
       data: {
@@ -304,7 +308,6 @@ Page({
       },
       success: res => {
         if (res.data.meta.status == 200) {
-          // wx.hideLoading();
           if (e.currentTarget.dataset.id == 1) {
             that.setData({
               readerHotList: res.data.data
@@ -323,20 +326,26 @@ Page({
             })
           }
         } else if (res.data.meta.status == 400) {
-          // wx.hideLoading();
           wx.showToast({
             title: '加载失败',
             icon: 'none',
             duration: 2000
           })
         }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '加载失败',
+          showCancel: false,
+          content: '请检查学校图书馆能否访问\n http://wxlib.djtu.edu.cn'
+        })
       }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -345,7 +354,7 @@ Page({
     // })
     // 页面加载，请求读者热点
     wx.request({
-      url: config.hotUrl,
+      url: hotUrl,
       data: {
         // sessionId: app.sessionId,
         type: 2
@@ -364,6 +373,13 @@ Page({
             duration: 2000
           })
         }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '加载失败',
+          showCancel: false,
+          content: '请检查学校图书馆能否访问\n http://wxlib.djtu.edu.cn'
+        })
       }
     })
   },
@@ -371,54 +387,54 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(ops) {
+  onShareAppMessage: function (ops) {
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
+      success: function (res) {},
+      fail: function (res) {}
     }
   }
 })

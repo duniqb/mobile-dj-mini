@@ -18,6 +18,10 @@ https://github.com/aitwzl/mobole-dj
 ## 体验
 
 ![扫码体验](https://wx2.sinaimg.cn/mw690/6cb17e18ly1gc1mwsqtoej20u01d8k13.jpg)
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 ## 致谢
 

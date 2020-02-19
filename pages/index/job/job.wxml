@@ -18,7 +18,7 @@
   <van-datetime-picker type="year-month" value="{{ currentDate }}" min-date="{{ minDate }}"  max-date="{{ maxDate }}" bind:input="onInput" bind:confirm="onConfirm" visible-item-count="2" title="划动选择月份" />
 
   <!-- 列表 -->
-  <view class="cu-timeline" wx:for="{{calendarList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{calendarList}}" wx:key="index">
     <view class="time">{{item.date}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./recruit/recruit?id={{item.id}}">
@@ -30,7 +30,7 @@
   </view>
 </block>
 <block wx:if="{{TabCur == 1}}">
-  <view class="cu-timeline" wx:for="{{demandList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{demandList}}" wx:key="index">
     <view class="time">{{item.releaseDate}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./demand/demand?id={{item.id}}">
@@ -42,7 +42,7 @@
   </view>
 </block>
 <block wx:if="{{TabCur == 2}}">
-  <view class="cu-timeline" wx:for="{{recruitList}}" wx:key>
+  <view class="cu-timeline" wx:for="{{recruitList}}" wx:key="index">
     <view class="time">{{item.releaseDate}}</view>
     <view class="cu-item">
       <navigator open-type="navigate" hover-class='none' url="./recruit/recruit?id={{item.id}}">

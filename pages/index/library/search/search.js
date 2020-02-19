@@ -1,5 +1,8 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import {
+  queryLibraryUrl,
+  showUrl
+} from '../../../../config.js';
 Page({
 
   /**
@@ -13,7 +16,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(params) {
+  onLoad: function (params) {
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -22,7 +25,7 @@ Page({
       title: '正在搜索',
     })
     wx.request({
-      url: config.queryLibraryUrl,
+      url: queryLibraryUrl,
       data: {
         // sessionId: app.sessionId,
         name: params.name
@@ -41,6 +44,14 @@ Page({
             duration: 2000
           })
         }
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showModal({
+          title: '加载失败',
+          showCancel: false,
+          content: '请检查学校图书馆能否访问\n http://wxlib.djtu.edu.cn'
+        })
       }
     })
   },
@@ -50,7 +61,7 @@ Page({
   showModal(e) {
     var that = this;
     wx.request({
-      url: config.showUrl,
+      url: showUrl,
       data: {
         // sessionId: app.sessionId,
         id: e.currentTarget.dataset.id
@@ -82,54 +93,54 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(ops) {
+  onShareAppMessage: function (ops) {
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
+      success: function (res) {},
+      fail: function (res) {}
     }
   }
 })

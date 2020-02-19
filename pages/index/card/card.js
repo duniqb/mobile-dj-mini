@@ -128,6 +128,14 @@ Page({
             verifyUrl: res.data.data
           })
         } else if (res.data.meta.status === 400) {}
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showModal({
+          title: '验证码加载失败',
+          showCancel: false,
+          content: '请检查学校一卡通能否访问\n http://ykt.djtu.edu.cn'
+        })
       }
     })
   },
