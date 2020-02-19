@@ -65,7 +65,9 @@ var config = {
 
   // 校友圈
   feedListUrl: host + '/api/v1/feed/list',
-  feedDetailUrl: host + '/api/v1/feed/detail'
+  feedDetailUrl: host + '/api/v1/feed/detail',
+  feedLikeTitleUrl: host + '/api/v1/feed/likeTitle',
+  feedUnlikeTitleUrl: host + '/api/v1/feed/unlikeTitle'
 }
 
 module.exports = config;

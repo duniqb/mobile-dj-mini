@@ -13,7 +13,7 @@ Component({
       },
       {
         icon: 'eye-o',
-        text: '发现',
+        text: '圈子',
         url: '/pages/feed/feed'
       },
       {

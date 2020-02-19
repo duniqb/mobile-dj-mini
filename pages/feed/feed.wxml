@@ -21,7 +21,7 @@
 			</view>
 		</view>
 		<view class="text-gray text-lg text-right padding">
-			<text class="cuIcon-appreciatefill margin-lr-xs"></text>{{item.likeList.length == 0 ? '' : item.likeList.length}}
+			<text class="cuIcon-appreciatefill margin-lr-xs" bindtap="likeTitle" id="{{item._id}}"></text>{{item.likeList.length == 0 ? '' : item.likeList.length}}
 			<text class="cuIcon-messagefill margin-lr-xs"></text>{{item.commentList.length == 0 ? '' : item.commentList.length}}
 		</view>
 	</view>

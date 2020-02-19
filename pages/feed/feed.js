@@ -12,6 +12,45 @@ Page({
     feedList: []
   },
   /**
+   * 点赞文章或取消
+   * @param {*} event 
+   */
+  likeTitle: function (event) {
+    console.log(event.target.id)
+    var that = this;
+    wx.request({
+      url: config.feedLikeTitleUrl,
+      data: {
+        sessionId: app.sessionId,
+        titleId: event.target.id
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'PUT',
+      success(res) {
+        console.log(res.data)
+        if (res.data.meta.status == 200) {
+          console.log(res.data.meta.msg)
+
+        }
+        // 重复点赞
+        else if (res.data.meta.status == 401) {
+          console.log(res.data.meta.msg)
+
+        }
+        // 点赞失败
+        else if (res.data.meta.status == 400) {
+          console.log(res.data.meta.msg)
+          wx.showToast({
+            title: '点赞失败',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  /**
    * 到详情页
    * @param {*} event 
    */
@@ -68,8 +107,20 @@ Page({
   },
   /**
    * 生命周期函数--监听页面加载
+   * 第一次启动时，读取缓存。请求加载最新，并缓存
    */
   onLoad: function (options) {
+    // 读取缓存
+    try {
+      var value = wx.getStorageSync('feedList')
+      if (value) {
+        console.log('本地 feedList 获取成功：')
+        this.feedList = value
+        console.log(value)
+      }
+    } catch (e) {
+      console.log('本地 feedList 获取失败')
+    }
     var that = this;
     wx.request({
       url: config.feedListUrl,
@@ -85,7 +136,29 @@ Page({
           console.log(res.data.data)
           for (var i = 0; i < res.data.data.length; i++) {
             res.data.data[i].time = that.timeFormat(Date.parse(res.data.data[i].time))
+            console.log(res.data.data[i]._id)
+            // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
+            if (res.data.data[i]._id <= feedList[0]._id) {
+              break;
+            }
           }
+
+          // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
+          var feedList = res.data.data;
+          var newFeedList = that.data.feedList;
+
+          that.setData({
+            feedList: newFeedList.concat(feedList),
+            page: page,
+            totalPage: res.data.data.total,
+            serverUrl: serverUrl
+          });
+
+          // 缓存
+          wx.setStorage({
+            key: "feedList",
+            data: that.data.feedList
+          })
           that.setData({
             feedList: res.data.data
           })
