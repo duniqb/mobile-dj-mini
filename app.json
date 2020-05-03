@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/news/news",
     "pages/index/index",
     "pages/feed/feed",
 
@@ -27,7 +28,7 @@
     "pages/index/library/library",
     "pages/index/calendar/calendar",
     "pages/index/library/search/search",
-    "pages/news/news",
+  
     "pages/news/detail/detail"
   ],
   "permission": {

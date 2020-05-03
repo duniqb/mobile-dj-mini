@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../config.js')
+import { calendarUrl } from '../../../config.js';
 
 Page({
 
@@ -23,12 +23,13 @@ Page({
     })
     var that = this;
     wx.request({
-      url: config.calendarUrl,
+      url: calendarUrl,
       data: {
         // sessionId: app.sessionId,
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
+          console.log("校历：",res.data)
           that.setData({
             dayOfTerm: res.data.data.dayOfTerm,
             endOfTermDay: res.data.data.endOfTermDay,

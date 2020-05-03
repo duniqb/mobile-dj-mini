@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require("../../config.js")
+import { newsListUrl } from "../../config.js";
 Page({
   /**
    * 页面的初始数据
@@ -40,13 +40,13 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.newsListUrl,
+      url: newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: e.currentTarget.dataset.id + 1
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           if (e.currentTarget.dataset.id + 1 == 1) {
             that.setData({
@@ -67,7 +67,7 @@ Page({
               noticeTotalPage: res.data.data.totalPage
             })
           }
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -99,20 +99,20 @@ Page({
     })
     // 页面加载，请求交大要闻
     wx.request({
-      url: config.newsListUrl,
+      url: newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: 1
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           this.setData({
             focusList: res.data.data.list,
             focusPage: res.data.data.page,
             focusTotalPage: res.data.data.totalPage
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -198,14 +198,14 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.newsListUrl,
+      url: newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: parseInt(that.data.TabCur) + 1,
         page: page
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
           if (that.data.TabCur + 1 == 1) {
@@ -233,7 +233,7 @@ Page({
               noticeTotalPage: res.data.data.totalPage
             })
           }
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',

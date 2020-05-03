@@ -3,7 +3,6 @@ import QQMapWX from '../../libs/qqmap-wx-jssdk.min.js';
 
 var qqmapsdk;
 import {
-  miniSlideImageUrl,
   miniTipUrl,
   festivalUrl,
   repairNoticeUrl

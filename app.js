@@ -27,9 +27,8 @@ App({
     try {
       var value = wx.getStorageSync('sessionId')
       if (value) {
-        console.log('本地 sessionId 获取成功')
+        console.log('本地 sessionId 获取成功', value)
         this.sessionId = value
-        console.log(value)
       }
     } catch (e) {
       console.log('本地 sessionId 获取失败')
@@ -41,7 +40,6 @@ App({
         sessionId: this.sessionId
       },
       success: res => {
-        console.log("打印结果", res)
         if (res.data.code === 0) {
           console.log("登录态1：" + res.data.msg)
         } else if (res.data.code === 400) {
@@ -60,16 +58,13 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("得到的登录code是：", res.code)
         wx.request({
           url: miniLoginUrl,
           data: {
             code: res.code
           },
           success: res => {
-            console.log("再次登录：", res)
             if (res.data.code == 0) {
-              console.log("登录成功的返回：", res)
               console.log('sessionId是：' + res.data.data)
               this.sessionId = res.data.data
               // 存储 sessionId
@@ -107,7 +102,6 @@ App({
   decryt(sessionId, iv, encryptData) {
     wx.getUserInfo({
       success: res => {
-        console.log(res);
         this.iv = res.iv
         this.encryptData = res.encryptedData
         wx.request({

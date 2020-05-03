@@ -41,13 +41,14 @@ Page({
     })
     wx.request({
       url: newsDetailUrl,
+      timeout: 5000,
       data: {
         // sessionId: app.sessionId,
         type: params.type,
         id: params.id
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           this.setData({
             title: res.data.data.title,
@@ -59,7 +60,7 @@ Page({
             type: params.type,
             id: params.id
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
