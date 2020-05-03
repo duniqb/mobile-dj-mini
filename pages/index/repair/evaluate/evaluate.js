@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import { repairEvaluateUrl, repairDetailUrl } from '../../../../config.js';
 
 Page({
 
@@ -28,7 +28,7 @@ Page({
         title: '正在提交',
       })
       wx.request({
-        url: config.logisticsEvaluateUrl,
+        url: repairEvaluateUrl,
         data: {
           // sessionId: app.sessionId,
           phone: this.data.phone,
@@ -111,7 +111,7 @@ Page({
       title: '正在查询',
     })
     wx.request({
-      url: config.logisticsDetailUrl,
+      url: repairDetailUrl,
       data: {
         // sessionId: app.sessionId,
         listNumber: params.listNumber

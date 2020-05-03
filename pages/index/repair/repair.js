@@ -1,5 +1,5 @@
 const app = getApp()
-import { logisticsNoticeUrl } from '../../../config.js'
+import { repairNoticeUrl } from '../../../config.js'
 
 Page({
 
@@ -81,7 +81,7 @@ Page({
     var that = this;
     // 查询通知
     wx.request({
-      url: logisticsNoticeUrl,
+      url: repairNoticeUrl,
       data: {
         // sessionId: app.sessionId,
       },

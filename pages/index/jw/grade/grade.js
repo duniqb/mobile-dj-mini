@@ -1,5 +1,5 @@
 const app = getApp()
-import { infoUrl, gradeUrl } from '../../../../config.js'
+import { studentInfoUrl, studentGradeUrl } from '../../../../config.js'
 Page({
 
   /**
@@ -30,7 +30,7 @@ Page({
     var that = this;
     // 检查是否已存在该学生信息
     wx.request({
-      url: infoUrl,
+      url: studentInfoUrl,
       data: {
         sessionId: app.sessionId
       },
@@ -41,7 +41,7 @@ Page({
           })
           // 获取等级考试信息
           wx.request({
-            url: gradeUrl,
+            url: studentGradeUrl,
             data: {
               sessionId: app.sessionId,
             },
@@ -79,7 +79,7 @@ Page({
     // 检查是否已存在该学生信息
     if (!that.data.isExist) {
       wx.request({
-        url: infoUrl,
+        url: studentInfoUrl,
         data: {
           sessionId: app.sessionId
         },
@@ -90,7 +90,7 @@ Page({
             })
             // 获取等级考试信息
             wx.request({
-              url: gradeUrl,
+              url: studentGradeUrl,
               data: {
                 sessionId: app.sessionId,
               },

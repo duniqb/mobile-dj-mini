@@ -15,7 +15,7 @@
 			{{info.content}}
 		</view>
 		<view class="grid flex-sub padding-lr col-3 grid-square">
-			<view class="bg-img" style="background-image:url(https://box.bdimg.com/static/fisp_static/common/img/searchbox/logo_news_276_88_1f9876a.png);" wx:for="3" wx:key="index">
+			<view class="bg-img" style="background-image:url({{item}});" bindtap="showImg" id="{{item}}" wx:for="{{images}}" wx:key="index">
 			</view>
 		</view>
 		<view class="text-gray text-sm text-right padding">

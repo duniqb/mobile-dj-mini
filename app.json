@@ -2,9 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/feed/feed",
+
+
     "pages/feed/detail/detail",
 
-    "pages/index/logistics/logistics",
+    "pages/index/repair/repair",
     "pages/index/card/card",
     "pages/index/jw/score/score",
     "pages/index/jw/jw",
@@ -13,10 +15,10 @@
     "pages/index/jw/grade/grade",
     "pages/mine/bind/bind",
     "pages/mine/mine",
-    "pages/index/logistics/progress/progress",
-    "pages/index/logistics/report/report",
-    "pages/index/logistics/evaluate/evaluate",
-    "pages/index/logistics/progress/detail/detail",
+    "pages/index/repair/progress/progress",
+    "pages/index/repair/report/report",
+    "pages/index/repair/evaluate/evaluate",
+    "pages/index/repair/progress/detail/detail",
     "pages/index/job/job",
     "pages/index/job/demand/demand",
     "pages/index/job/recruit/recruit",

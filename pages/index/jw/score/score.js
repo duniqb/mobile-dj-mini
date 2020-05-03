@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import { studentScoreUrl } from '../../../../config.js';
 
 const select = {
   '学年': ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '全部'],
@@ -53,7 +53,7 @@ Page({
     // 按照学号 + 学年 + 学期查询成绩
     if (that.data.year != -1 && that.data.term != -1) {
       wx.request({
-        url: config.studentScoreUrl,
+        url: studentScoreUrl,
         data: {
           sessionId: app.sessionId,
           year: that.data.year,
@@ -79,7 +79,7 @@ Page({
     // 按照学号 + 学年查询成绩
     else if (that.data.year != -1 && that.data.term == -1) {
       wx.request({
-        url: config.studentScoreUrl,
+        url: studentScoreUrl,
         data: {
           sessionId: app.sessionId,
           year: that.data.year
@@ -104,7 +104,7 @@ Page({
     // 按照学号查询全部成绩
     else if (that.data.year == -1 && that.data.term == -1) {
       wx.request({
-        url: config.studentScoreUrl,
+        url: studentScoreUrl,
         data: {
           sessionId: app.sessionId
         },

@@ -1,6 +1,6 @@
 const app = getApp()
 import {
-  detailUrl
+  newsDetailUrl
 } from "../../../config.js"
 
 Page({
@@ -40,7 +40,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: detailUrl,
+      url: newsDetailUrl,
       data: {
         // sessionId: app.sessionId,
         type: params.type,

@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../config.js')
+import { feedLikeTitleUrl, feedListUrl } from '../../config.js';
 
 Page({
 
@@ -8,7 +8,7 @@ Page({
    */
   data: {
     page: 1,
-    size: 10,
+    size: 5,
     feedList: []
   },
   /**
@@ -19,7 +19,7 @@ Page({
     console.log(event.target.id)
     var that = this;
     wx.request({
-      url: config.feedLikeTitleUrl,
+      url: feedLikeTitleUrl,
       data: {
         sessionId: app.sessionId,
         titleId: event.target.id
@@ -110,6 +110,7 @@ Page({
    * 第一次启动时，读取缓存。请求加载最新，并缓存
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     // 读取缓存
     try {
       var value = wx.getStorageSync('feedList')
@@ -123,7 +124,7 @@ Page({
     }
     var that = this;
     wx.request({
-      url: config.feedListUrl,
+      url: feedListUrl,
       data: {
         page: that.data.page,
         size: that.data.size
@@ -133,25 +134,25 @@ Page({
       },
       success(res) {
         if (res.data.meta.status == 200) {
+          console.log("本次请求：")
           console.log(res.data.data)
-          for (var i = 0; i < res.data.data.length; i++) {
-            res.data.data[i].time = that.timeFormat(Date.parse(res.data.data[i].time))
-            console.log(res.data.data[i]._id)
+          // 修改时间显示
+          for (var i = 0; i < res.data.data.titleList.length; i++) {
+            res.data.data.titleList[i].time = that.timeFormat(Date.parse(res.data.data.titleList[i].time))
             // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
-            if (res.data.data[i]._id <= feedList[0]._id) {
+            if (that.data.feedList.length > 0 && res.data.data.titleList[i]._id <= that.data.feedList[0]._id) {
               break;
             }
           }
 
           // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
-          var feedList = res.data.data;
+          var feedList = res.data.data.titleList;
           var newFeedList = that.data.feedList;
 
           that.setData({
             feedList: newFeedList.concat(feedList),
-            page: page,
-            totalPage: res.data.data.total,
-            serverUrl: serverUrl
+            page: res.data.data.page,
+            totalPage: res.data.data.total
           });
 
           // 缓存
@@ -160,7 +161,7 @@ Page({
             data: that.data.feedList
           })
           that.setData({
-            feedList: res.data.data
+            feedList: res.data.data.titleList
           })
         }
       }

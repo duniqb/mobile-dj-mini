@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import { repairReportUrl, repairDataUrl } from '../../../../config.js';
 Page({
 
   /**
@@ -48,7 +48,7 @@ Page({
       title: '正在提交',
     })
     wx.request({
-      url: config.logisticsReportUrl,
+      url: repairReportUrl,
       data: {
         // sessionId: app.sessionId,
         buildingId: this.data.buildingId,
@@ -154,7 +154,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.logisticsDataUrl,
+      url: repairDataUrl,
       data: {
         // sessionId: app.sessionId,
         id: 'distinctId',
@@ -206,7 +206,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.logisticsDataUrl,
+      url: repairDataUrl,
       data: {
         // sessionId: app.sessionId,
         id: 'buildingId',
@@ -255,7 +255,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.logisticsDataUrl,
+      url: logisticsDataUrl,
       data: {
         // sessionId: app.sessionId,
         id: 'roomId',
@@ -300,7 +300,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.logisticsDataUrl,
+      url: repairDataUrl,
       data: {
         // sessionId: app.sessionId,
         id: 'equipmentId',

@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../config.js')
+import { feedDetailUrl } from '../../../config.js';
 
 Page({
 
@@ -8,7 +8,20 @@ Page({
    */
   data: {
     info: null,
-    time: ''
+    time: '',
+    id: '',
+    images: []
+  },
+  /**
+   * 显示图片
+   * @param {*} event 
+   */
+  showImg(event) {
+    var that = this;
+    wx.previewImage({
+      current: event.target.id, // 当前显示图片的http链接
+      urls: that.data.images // 需要预览的图片http链接列表
+    })
   },
   /**
    * 处理时间
@@ -25,12 +38,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (params) {
-    console.log(params.id)
-    wx.showLoading({
-      title: '正在加载',
-    })
     wx.request({
-      url: config.feedDetailUrl,
+      url: feedDetailUrl,
       data: {
         // sessionId: app.sessionId,
         id: params.id
@@ -40,14 +49,14 @@ Page({
       },
       success: res => {
         if (res.data.meta.status == 200) {
-          wx.hideLoading();
           console.log(res.data.data)
           this.setData({
             info: res.data.data,
-            time: this.timeFormat(new Date(res.data.data.time))
+            time: this.timeFormat(new Date(res.data.data.time)),
+            id: params.id,
+            images: res.data.data.images
           })
         } else if (res.data.meta.status == 400) {
-          wx.hideLoading();
           wx.showToast({
             title: '加载失败',
             icon: 'none',
@@ -104,6 +113,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: "【校友圈】" + this.data.info.nickname + "发布了新动态",
+      path: '/pages/feed/detail/detail?id=' + this.data.id, // 路径，传递参数到指定页面。
+      success: function (res) {},
+      fail: function (res) {}
+    }
   }
 })

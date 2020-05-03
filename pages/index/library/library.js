@@ -1,11 +1,11 @@
 const app = getApp()
 import {
-  hotUrl,
+  libraryHotUrl,
   libraryMajorUrl,
   libraryCategoryUrl,
-  showUrl,
-  bookCateUrl,
-  collegeUrl
+  libraryShowUrl,
+  libraryBookCateUrl,
+  libraryCollegeUrl
 } from '../../../config.js'
 Page({
 
@@ -61,7 +61,7 @@ Page({
    */
   clickCourseList(e) {
     wx.request({
-      url: hotUrl,
+      url: libraryHotUrl,
       data: {
         // sessionId: app.sessionId,
         sq: e.currentTarget.dataset.id,
@@ -232,7 +232,7 @@ Page({
   showModal(e) {
     var that = this;
     wx.request({
-      url: showUrl,
+      url: libraryShowUrl,
       data: {
         // sessionId: app.sessionId,
         id: e.currentTarget.dataset.id
@@ -281,7 +281,7 @@ Page({
       return;
     }
     // 判断是哪种图书热点
-    var url = hotUrl;
+    var url = libraryHotUrl;
     // 读者热点-近2年入藏复本总借量
     if (e.currentTarget.dataset.id == 1) {
       var type = 2;
@@ -292,11 +292,11 @@ Page({
     }
     // 分类热点，查询图书分类法总类列表
     else if (e.currentTarget.dataset.id == 3) {
-      url = bookCateUrl;
+      url = libraryBookCateUrl;
     }
     // 专业热点，查询学院列表
     else if (e.currentTarget.dataset.id == 4) {
-      url = collegeUrl;
+      url = libraryCollegeUrl;
     }
 
     // 请求标签所在的列表
@@ -354,7 +354,7 @@ Page({
     // })
     // 页面加载，请求读者热点
     wx.request({
-      url: hotUrl,
+      url: libraryHotUrl,
       data: {
         // sessionId: app.sessionId,
         type: 2

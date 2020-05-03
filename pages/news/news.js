@@ -40,7 +40,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.newsUrl,
+      url: config.newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: e.currentTarget.dataset.id + 1
@@ -99,7 +99,7 @@ Page({
     })
     // 页面加载，请求交大要闻
     wx.request({
-      url: config.newsUrl,
+      url: config.newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: 1
@@ -198,7 +198,7 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: config.newsUrl,
+      url: config.newsListUrl,
       data: {
         // sessionId: app.sessionId,
         type: parseInt(that.data.TabCur) + 1,

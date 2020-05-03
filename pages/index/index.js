@@ -3,10 +3,10 @@ import QQMapWX from '../../libs/qqmap-wx-jssdk.min.js';
 
 var qqmapsdk;
 import {
-  slideImageUrl,
-  tipUrl,
+  miniSlideImageUrl,
+  miniTipUrl,
   festivalUrl,
-  logisticsNoticeUrl
+  repairNoticeUrl
 } from '../../config.js';
 Page({
   data: {
@@ -27,27 +27,15 @@ Page({
     swiperList: [{
       id: 1,
       type: 'image',
-      url: slideImageUrl + '1.jpg',
+      url: 'https://mobile-dj.oss-cn-beijing.aliyuncs.com/slide/1.jpg',
     }, {
       id: 2,
       type: 'image',
-      url: slideImageUrl + '2.jpg',
+      url: 'https://mobile-dj.oss-cn-beijing.aliyuncs.com/slide/2.jpg',
     }, {
       id: 3,
       type: 'image',
-      url: slideImageUrl + '3.jpg',
-    }, {
-      id: 4,
-      type: 'image',
-      url: slideImageUrl + '4.jpg',
-    }, {
-      id: 5,
-      type: 'image',
-      url: slideImageUrl + '5.jpg',
-    }, {
-      id: 6,
-      type: 'image',
-      url: slideImageUrl + '6.jpg',
+      url: 'https://mobile-dj.oss-cn-beijing.aliyuncs.com/slide/3.jpg',
     }],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -78,7 +66,7 @@ Page({
       color: 'olive',
       badge: 0,
       name: '后勤报修',
-      navUrl: './logistics/logistics'
+      navUrl: './repair/repair'
     }, {
       id: 4,
       icon: 'activity',
@@ -244,18 +232,18 @@ Page({
     this.getTabBar().init();
     // 查询后勤通知
     wx.request({
-      url: logisticsNoticeUrl,
+      url: repairNoticeUrl,
       data: {
         // sessionId: app.sessionId,
       },
       success: res => {
-        if (res.data.meta.status == 200) {
-          if (res.data.data.content != '') {
+        if (res.data.code == 0) {
+          if (res.data.code != '') {
             that.setData({
               noticeShow: true,
-              noticeTitle: res.data.data.title,
-              noticeContent: res.data.data.content,
-              noticeDate: res.data.data.date
+              noticeTitle: res.data.title,
+              noticeContent: res.data.content,
+              noticeDate: res.data.date
             })
           }
         }
@@ -302,7 +290,7 @@ Page({
   getTip: function () {
     var that = this;
     wx.request({
-      url: tipUrl,
+      url: miniTipUrl,
       data: {
         sessionId: app.sessionId,
         province: this.province,
@@ -312,7 +300,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             weather: res.data.data.weather,
             degree: res.data.data.degree + '℃',
@@ -334,7 +322,7 @@ Page({
       },
       success(res) {
         that.setData({
-          festivalTips: that.randomTip(res.data.data) != undefined ? that.randomTip(res.data.data) : null
+          festivalTips: that.randomTip(res.data) != undefined ? that.randomTip(res.data) : null
         })
       }
     })

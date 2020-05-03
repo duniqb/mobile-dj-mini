@@ -1,13 +1,13 @@
 const app = getApp()
-var config = require("../../config.js")
+import { host, registerUrl, queryUrl, addUrl } from "../../config.js";
 
 Page({
   data: {
     avatarUrl: null,
     nickName: '',
     isRegister: false,
-    waveUrl: config.host + 'wave.gif',
-    backImgUrl: config.host + '/slide/back.png'
+    waveUrl: host + 'wave.gif',
+    backImgUrl: host + '/slide/back.png'
 
   },
   onLoad: function() {
@@ -24,7 +24,7 @@ Page({
   checkRegister: function() {
     var that = this;
     wx.request({
-      url: config.registerUrl,
+      url: registerUrl,
       data: {
         sessionId: app.sessionId
       },
@@ -33,7 +33,7 @@ Page({
           console.log("是否已注册：" + res.data.meta.msg)
           // 获取用户数据
           wx.request({
-            url: config.queryUrl,
+            url: queryUrl,
             data: {
               sessionId: app.sessionId,
             },
@@ -83,7 +83,7 @@ Page({
     })
     // 保存用户
     wx.request({
-      url: config.addUrl,
+      url: addUrl,
       method: 'post',
       data: {
         sessionId: app.sessionId,

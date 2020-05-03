@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../../config.js')
+import { studentCreditUrl } from '../../../../config.js';
 
 Page({
 
@@ -29,7 +29,7 @@ Page({
     wx.hideShareMenu();
     var that = this;
     wx.request({
-      url: config.studentCreditUrl,
+      url: studentCreditUrl,
       data: {
         sessionId: app.sessionId
       },
