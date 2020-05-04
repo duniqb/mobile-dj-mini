@@ -1,8 +1,0 @@
-.text-middle {
-  text-align: center;
-}
-
-.time {
-  margin-left: 10rpx;
-  margin-bottom: 10rpx;
-}
