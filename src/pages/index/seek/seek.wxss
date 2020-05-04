@@ -1,0 +1,8 @@
+.modal-content {
+  text-align: left;
+  margin-left: 30rpx;
+}
+
+.padding-xl {
+  padding: 0rpx;
+}

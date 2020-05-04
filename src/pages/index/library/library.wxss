@@ -1,0 +1,30 @@
+.nav {
+  margin-top: 40rpx;
+}
+
+.padding-xl {
+  padding: 0rpx;
+}
+
+.detail-content {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.detail {
+  margin-top: 10rpx;
+  margin-left: 30rpx;
+}
+
+.cu-modal {
+  z-index: 2;
+}
+
+.modal-content {
+  text-align: left;
+  margin-left: 30rpx;
+}
+
+.text-middle {
+  text-align: center;
+}

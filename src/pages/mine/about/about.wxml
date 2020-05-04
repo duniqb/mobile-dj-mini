@@ -1,0 +1,27 @@
+<view class="cu-list menu margin-bottom-xl shadow-lg ">
+	<view class="cu-item arrow">
+		<navigator class="content" open-type="navigate" hover-class="none" url="./update/update">
+			<text class="cuIcon-pullup text-green"></text>
+			<text class="text-grey">更新日志</text>
+		</navigator>
+	</view>
+	<view class="cu-item arrow">
+		<button class="cu-btn content" open-type="contact">
+			<text class="cuIcon-btn text-blue"></text>
+			<text class="text-grey">联系客服</text>
+		</button>
+	</view>
+</view>
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+	<view class='text-center margin-bottom text-lg  text-grey'>关于掌上大交</view>
+	<view class='text-content'>
+		<view>同学们好！欢迎使用掌上大交小程序。</view>
+		<view class='margin-top-sm'>这是我们开发的一款校园辅助微信小程序。大家不仅可以在这里查询成绩，图书，校历等，还可以发布校园圈子记录生活、查询就业信息，更多功能等你发现。如果你有一些好的想法可以在客服消息里提出来，我们会逐步实现。</view>
+		<view class='margin-top-sm' bindtap="CopyLink" data-link="http://dj.duniqb.cn">
+			小程序前后端都已经公开源码，感兴趣的同学可以去看看。点击复制网站：dj.duniqb.cn
+		</view>
+		<view class='margin-top-sm'>更多功能敬请期待！</view>
+		<view class='text-right margin-top-xl'>掌上大交开发团队</view>
+		<view class='text-right'>duniqb@qq.com</view>
+	</view>
+</view>

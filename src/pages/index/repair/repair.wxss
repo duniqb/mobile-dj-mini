@@ -1,0 +1,11 @@
+.notice-content {
+  text-indent: 2em;
+}
+
+.notice-date {
+  text-align: right;
+}
+
+.padding-xl {
+  padding: 30rpx;
+}

@@ -1,4 +1,6 @@
 {
+	"miniprogramRoot": "./src",
+	"cloudfunctionRoot": "./cloudfunctions/",
 	"description": "项目配置文件",
 	"packOptions": {
 		"ignore": []
@@ -23,7 +25,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.3",
+	"libVersion": "2.11.0",
 	"appid": "wxe1f564d00f76340a",
 	"projectname": "mobileDJ",
 	"debugOptions": {

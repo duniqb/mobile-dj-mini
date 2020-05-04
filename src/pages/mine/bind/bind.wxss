@@ -1,0 +1,8 @@
+.text-middle {
+  text-align: center;
+}
+
+.image {
+  height: 80rpx;
+  width: 256rpx;
+}

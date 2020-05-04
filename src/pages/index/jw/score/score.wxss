@@ -1,0 +1,7 @@
+.text-middle {
+  text-align: center;
+}
+
+.text-left {
+  margin-left: 120rpx;
+}

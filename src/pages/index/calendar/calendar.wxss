@@ -1,0 +1,9 @@
+.cu-item {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 30rpx;
+}
+
+.content {
+  text-align: center;
+}

@@ -1,0 +1,18 @@
+.text-middle {
+  text-align: center;
+}
+
+.cu-list {
+  margin-bottom: 30rpx;
+}
+
+.text-middle-btn {
+  text-align: center;
+  margin-top: 30rpx;
+}
+
+.rate {
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
