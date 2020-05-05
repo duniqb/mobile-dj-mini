@@ -1,10 +1,11 @@
 <view class="cu-card dynamic no-card">
 	<view class="cu-item shadow solids-bottom" wx:for="{{feedList}}" wx:key="index">
+		<!-- 头像与时间 -->
 		<view class="cu-list menu-avatar">
 			<view class="cu-item">
 				<view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
 				<view class="content flex-sub">
-					<view>{{item.nickname}}</view>
+					<view>{{item.author}}</view>
 					<view class="text-gray text-sm flex justify-between">
 						{{item.time}}
 					</view>
@@ -12,17 +13,19 @@
 			</view>
 		</view>
 		<!-- 到详情页 -->
-		<view class="text-content" bindtap="toDetail" id="{{item._id}}">
+		<view class="text-content" bindtap="toDetail" id="{{item.id}}">
 			{{item.content}}
 		</view>
 		<!-- 图片 -->
-		<view class="grid flex-sub padding-lr col-3 grid-square" wx:if="{{item.images.length > 0}}">
-			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.images}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.images}}">
+		<view class="grid flex-sub padding-lr col-3 grid-square" wx:if="{{item.imgUrlList.length > 0}}">
+			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.imgUrlList}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.imgUrlList}}">
 			</view>
 		</view>
-		<view class="text-gray text-lg text-right padding">
-			<text class="cuIcon-appreciatefill margin-lr-xs" bindtap="likeTitle" id="{{item._id}}"></text>{{item.likeList.length == 0 ? '' : item.likeList.length}}
-			<text class="cuIcon-messagefill margin-lr-xs"></text>{{item.commentList.length == 0 ? '' : item.commentList.length}}
+		<!-- 点赞与评论数量 -->
+		<view class="text-gray text-xl text-right padding">
+			<text class="text-{{item.isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeTitle" id="{{item.id}}"></text>{{item.likeCount}}
+			<!-- 跳转到详情页 -->
+			<text class=" cuIcon-commentfill margin-lr-xs"></text>{{item.commentCount}}
 		</view>
 	</view>
 </view>

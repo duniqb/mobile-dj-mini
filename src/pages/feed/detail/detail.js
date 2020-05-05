@@ -1,5 +1,7 @@
 const app = getApp()
-import { feedDetailUrl } from '../../../config.js';
+import {
+  feedDetailUrl
+} from '../../../config.js';
 
 Page({
 
@@ -20,7 +22,7 @@ Page({
     var that = this;
     wx.previewImage({
       current: event.target.id, // 当前显示图片的http链接
-      urls: that.data.images // 需要预览的图片http链接列表
+      urls: event.currentTarget.dataset.images // 需要预览的图片http链接列表
     })
   },
   /**
@@ -39,22 +41,21 @@ Page({
    */
   onLoad: function (params) {
     wx.request({
-      url: feedDetailUrl,
+      url: feedDetailUrl + '/' + params.id,
       data: {
         // sessionId: app.sessionId,
-        id: params.id
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: res => {
-        if (res.data.meta.status == 200) {
-          console.log(res.data.data)
+        if (res.data.code == 0) {
+          console.log(res)
           this.setData({
-            info: res.data.data,
-            time: this.timeFormat(new Date(res.data.data.time)),
+            article: res.data.article,
+            time: this.timeFormat(new Date(res.data.article.time)),
             id: params.id,
-            images: res.data.data.images
+            // images: res.data.data.images
           })
         } else if (res.data.meta.status == 400) {
           wx.showToast({

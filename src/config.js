@@ -62,15 +62,16 @@ var config = {
   jwNoticeListUrl: host + '/jw/noticeList',
   jwNoticeUrl: host + '/jw/notice',
 
-  // 校友圈
-  feedListUrl: host + '//feed/list',
-  feedDetailUrl: host + '//feed/detail',
-  feedLikeTitleUrl: host + '//feed/likeTitle',
-  feedUnlikeTitleUrl: host + '//feed/unlikeTitle',
 
   // 失物招领
   seekListUrl: host + '/seek/list',
-  seekDetailUrl: host + '/seek/info'
+  seekDetailUrl: host + '/seek/info',
+
+
+  // 校友圈
+  feedListUrl: host + '/article/list',
+  feedDetailUrl: host + '/article/info',
+  feedLikeTitleUrl: host + '/likearticle/update'
 }
 
 module.exports = config;

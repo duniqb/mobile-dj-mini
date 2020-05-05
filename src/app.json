@@ -1,20 +1,15 @@
 {
   "pages": [
-
+    "pages/feed/feed",
     "pages/index/index",
     "pages/index/seek/publish/publish",
     "pages/index/seek/seek",
 
-
-
     "pages/mine/about/about",
-
-
-
     "pages/mine/mine",
     "pages/news/news",
 
-    "pages/feed/feed",
+
 
 
     "pages/feed/detail/detail",

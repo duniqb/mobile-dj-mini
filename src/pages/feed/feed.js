@@ -1,5 +1,8 @@
 const app = getApp()
-import { feedLikeTitleUrl, feedListUrl } from '../../config.js';
+import {
+  feedLikeTitleUrl,
+  feedListUrl
+} from '../../config.js';
 
 Page({
 
@@ -7,8 +10,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page: 1,
-    size: 5,
+    totalCount: 0,
+    pageSize: 10,
+    totalPage: 0,
+    currPage: 1,
     feedList: []
   },
   /**
@@ -16,34 +21,33 @@ Page({
    * @param {*} event 
    */
   likeTitle: function (event) {
-    console.log(event.target.id)
     var that = this;
     wx.request({
       url: feedLikeTitleUrl,
       data: {
         sessionId: app.sessionId,
-        titleId: event.target.id
+        articleId: event.target.id
       },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'PUT',
       success(res) {
-        console.log(res.data)
-        if (res.data.meta.status == 200) {
-          console.log(res.data.meta.msg)
-
-        }
-        // 重复点赞
-        else if (res.data.meta.status == 401) {
-          console.log(res.data.meta.msg)
-
+        if (res.data.code == 0) {
+          console.log('点赞结果', res.data)
+          var newFeedList = that.data.feedList;
+          // 修改该文章的点赞红心状态和数字
+          for (var i = 0; i < that.data.feedList.length; i++) {
+            if (that.data.feedList[i].id == event.target.id) {
+              newFeedList[i].isLike = !that.data.feedList[i].isLike;
+              newFeedList[i].likeCount = res.data.likeCount;
+            }
+          }
+          that.setData({
+            feedList: newFeedList
+          })
         }
         // 点赞失败
-        else if (res.data.meta.status == 400) {
-          console.log(res.data.meta.msg)
+        else if (res.data.code == 400) {
+          console.log(res.data.msg)
           wx.showToast({
-            title: '点赞失败',
+            title: '操作失败',
             duration: 2000
           })
         }
@@ -126,34 +130,34 @@ Page({
     wx.request({
       url: feedListUrl,
       data: {
-        page: that.data.page,
-        size: that.data.size
+        sessionId: app.sessionId,
+        // page: that.data.page,
+        // size: that.data.size
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        if (res.data.meta.status == 200) {
-          console.log("本次请求：")
-          console.log(res.data.data)
+        if (res.data.code == 0) {
+          console.log("本次请求：", res)
           // 修改时间显示
-          for (var i = 0; i < res.data.data.titleList.length; i++) {
-            res.data.data.titleList[i].time = that.timeFormat(Date.parse(res.data.data.titleList[i].time))
+          for (var i = 0; i < res.data.page.list.length; i++) {
+            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
             // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
-            if (that.data.feedList.length > 0 && res.data.data.titleList[i]._id <= that.data.feedList[0]._id) {
-              break;
-            }
+            // if (that.data.feedList.length > 0 && res.data.data.titleList[i]._id <= that.data.feedList[0]._id) {
+            //   break;
+            // }
           }
 
           // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
-          var feedList = res.data.data.titleList;
-          var newFeedList = that.data.feedList;
+          // var feedList = res.data.data.titleList;
+          // var newFeedList = that.data.feedList;
 
-          that.setData({
-            feedList: newFeedList.concat(feedList),
-            page: res.data.data.page,
-            totalPage: res.data.data.total
-          });
+          // that.setData({
+          //   feedList: newFeedList.concat(feedList),
+          //   page: res.data.data.page,
+          //   totalPage: res.data.data.total
+          // });
 
           // 缓存
           wx.setStorage({
@@ -161,8 +165,9 @@ Page({
             data: that.data.feedList
           })
           that.setData({
-            feedList: res.data.data.titleList
+            feedList: res.data.page.list
           })
+          console.log("已赋值feed列表：", that.data.feedList)
         }
       }
     })

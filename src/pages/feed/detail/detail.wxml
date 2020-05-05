@@ -2,9 +2,9 @@
 	<view class="cu-item shadow">
 		<view class="cu-list menu-avatar">
 			<view class="cu-item">
-				<view class="cu-avatar round lg" style="background-image:url({{info.avatar}});"></view>
+				<view class="cu-avatar round lg" style="background-image:url({{article.avatar}});"></view>
 				<view class="content flex-sub">
-					<view>{{info.nickname}}</view>
+					<view>{{article.author}}</view>
 					<view class="text-gray text-sm flex justify-between">
 						{{time}}
 					</view>
@@ -12,10 +12,11 @@
 			</view>
 		</view>
 		<view class="text-content">
-			{{info.content}}
+			{{article.content}}
 		</view>
+		<!-- 图片 -->
 		<view class="grid flex-sub padding-lr col-3 grid-square">
-			<view class="bg-img" style="background-image:url({{item}});" bindtap="showImg" id="{{item}}" wx:for="{{images}}" wx:key="index">
+			<view class="bg-img" style="background-image:url({{item}});" bindtap="showImg" wx:for="{{article.imgUrlList}}" wx:key="index" id="{{item}}" data-images="{{article.imgUrlList}}">
 			</view>
 		</view>
 		<view class="text-gray text-sm text-right padding">

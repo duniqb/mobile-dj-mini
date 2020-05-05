@@ -1,0 +1,7 @@
+.cu-card.dynamic>.cu-item>.text-content {
+  padding: 0 30rpx 0;
+  max-height: 200rem;
+  overflow: visible;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
