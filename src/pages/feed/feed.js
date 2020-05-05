@@ -29,14 +29,18 @@ Page({
         articleId: event.target.id
       },
       success(res) {
-        if (res.data.code == 0) {
+        if (res.data.code == 0 || res.data.code == 1) {
           console.log('点赞结果', res.data)
           var newFeedList = that.data.feedList;
           // 修改该文章的点赞红心状态和数字
           for (var i = 0; i < that.data.feedList.length; i++) {
             if (that.data.feedList[i].id == event.target.id) {
-              newFeedList[i].isLike = !that.data.feedList[i].isLike;
               newFeedList[i].likeCount = res.data.likeCount;
+              if (res.data.code == 0) {
+                newFeedList[i].isLike = true;
+              } else if (res.data.code == 1) {
+                newFeedList[i].isLike = false;
+              }
             }
           }
           that.setData({

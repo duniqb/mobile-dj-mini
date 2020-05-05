@@ -1,6 +1,7 @@
 const app = getApp()
 import {
-  feedDetailUrl
+  feedDetailUrl,
+  feedLikeTitleUrl
 } from '../../../config.js';
 
 Page({
@@ -9,10 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: null,
+    article: {},
     time: '',
-    id: '',
-    images: []
+    id: ''
   },
   /**
    * 显示图片
@@ -37,16 +37,52 @@ Page({
     return date.getFullYear() + '年' + month + '月' + date.getDate() + "日 " + hour + ':' + minute;
   },
   /**
+   * 点赞文章或取消
+   * @param {*} event 
+   */
+  likeTitle: function (event) {
+    var that = this;
+    wx.request({
+      url: feedLikeTitleUrl,
+      data: {
+        sessionId: app.sessionId,
+        articleId: event.target.id
+      },
+      success(res) {
+        if (res.data.code == 0 || res.data.code == 1) {
+          console.log('点赞结果', res.data)
+          // 修改该文章的点赞红心状态和数字
+          var articleNew = that.data.article;
+          articleNew.likeCount = res.data.likeCount;
+          if (res.data.code == 0) {
+            articleNew.isLike = true;
+          } else if (res.data.code == 1) {
+            articleNew.isLike = false;
+          }
+          that.setData({
+            article: articleNew
+          })
+        }
+        // 点赞失败
+        else if (res.data.code == 400) {
+          console.log(res.data.msg)
+          wx.showToast({
+            title: '操作失败',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (params) {
     wx.request({
-      url: feedDetailUrl + '/' + params.id,
+      url: feedDetailUrl,
       data: {
-        // sessionId: app.sessionId,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
+        sessionId: app.sessionId,
+        id: params.id
       },
       success: res => {
         if (res.data.code == 0) {
@@ -54,7 +90,7 @@ Page({
           this.setData({
             article: res.data.article,
             time: this.timeFormat(new Date(res.data.article.time)),
-            id: params.id,
+            id: params.id
             // images: res.data.data.images
           })
         } else if (res.data.meta.status == 400) {
@@ -100,7 +136,40 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.showNavigationBarLoading();
+    var that = this;
+    wx.request({
+      url: feedDetailUrl,
+      data: {
+        sessionId: app.sessionId,
+        id: that.data.article.id
+      },
+      success: res => {
+        if (res.data.code == 0) {
+          wx.hideNavigationBarLoading()
+          wx.stopPullDownRefresh();
+          console.log(res)
+          this.setData({
+            article: res.data.article
+          })
+        } else if (res.data.meta.status == 400) {
+          wx.hideNavigationBarLoading()
+          wx.stopPullDownRefresh();
+          wx.showToast({
+            title: '加载失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fail: res => {
+        wx.showToast({
+          title: '刷新失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**

@@ -12,7 +12,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- 到详情页 -->
+		<!-- 点击内容到详情页 -->
 		<view class="text-content" bindtap="toDetail" id="{{item.id}}">
 			{{item.content}}
 		</view>
@@ -20,12 +20,15 @@
 		<view class="grid flex-sub padding-lr col-3 grid-square" wx:if="{{item.imgUrlList.length > 0}}">
 			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.imgUrlList}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.imgUrlList}}">
 			</view>
+			<!-- 空白点击区域，用以点击进入详情 -->
+			<view class="red" wx:for="{{item.blankImage}}" wx:for-item="item2" wx:key="index" bindtap="toDetail" id="{{item.id}}">
+			</view>
 		</view>
 		<!-- 点赞与评论数量 -->
 		<view class="text-gray text-xl text-right padding">
-			<text class="text-{{item.isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeTitle" id="{{item.id}}"></text>{{item.likeCount}}
+			<text class="text-{{item.isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeTitle" id="{{item.id}}"></text>{{item.likeCount == 0 ? '' : item.likeCount}}
 			<!-- 跳转到详情页 -->
-			<text class=" cuIcon-commentfill margin-lr-xs"></text>{{item.commentCount}}
+			<text class=" cuIcon-commentfill margin-lr-xs"></text>{{item.commentCount == 0 ? '' : item.commentCount}}
 		</view>
 	</view>
 </view>

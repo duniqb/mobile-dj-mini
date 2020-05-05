@@ -1,1 +1,4 @@
 /* pages/discovery/index.wxss */
+.red{
+  background-color: red;
+}
