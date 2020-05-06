@@ -16,6 +16,11 @@ Page({
     currPage: 1,
     feedList: []
   },
+  publish() {
+    wx.navigateTo({
+      url: './publish/publish',
+    })
+  },
   /**
    * 点赞文章或取消
    * @param {*} event 

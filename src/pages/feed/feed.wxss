@@ -1,4 +1,11 @@
 /* pages/discovery/index.wxss */
-.red{
-  background-color: red;
+.round-click {
+  border-radius: 100%;
+  position: fixed;
+  bottom: 150rpx;
+  right: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
 }

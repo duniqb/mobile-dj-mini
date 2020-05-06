@@ -1,3 +1,9 @@
+<view class="round-click  text-sl">
+	<!-- <navigator url='./publish/publish'> -->
+		<text class="cuIcon-roundadd text-blue" bindtap="publish"></text>
+	<!-- </navigator> -->
+</view>
+
 <view class="cu-card dynamic no-card">
 	<view class="cu-item shadow solids-bottom" wx:for="{{feedList}}" wx:key="index">
 		<!-- 头像与时间 -->
@@ -21,7 +27,7 @@
 			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.imgUrlList}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.imgUrlList}}">
 			</view>
 			<!-- 空白点击区域，用以点击进入详情 -->
-			<view class="red" wx:for="{{item.blankImage}}" wx:for-item="item2" wx:key="index" bindtap="toDetail" id="{{item.id}}">
+			<view wx:for="{{item.blankImage}}" wx:for-item="item2" wx:key="index" bindtap="toDetail" id="{{item.id}}">
 			</view>
 		</view>
 		<!-- 点赞与评论数量 -->

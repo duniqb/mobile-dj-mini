@@ -71,7 +71,8 @@ var config = {
   // 校友圈
   feedListUrl: host + '/article/list',
   feedDetailUrl: host + '/article/info',
-  feedLikeTitleUrl: host + '/likearticle/update'
+  feedLikeTitleUrl: host + '/likearticle/update',
+  feedPolicyUrl: host + '/oss/policy'
 }
 
 module.exports = config;
