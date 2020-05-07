@@ -5,9 +5,15 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  let msgR = {
+    errCode: 0,
+    errMsg: ''
+  };
+  let imgR = {
+    errCode: 0,
+    errMsg: ''
+  };
   try {
-    let msgR = false;
-    let imageR = false;
     //  检查文本内容是否违规
     if (event.msg) {
       msgR = await cloud.openapi.security.msgSecCheck({
@@ -16,7 +22,7 @@ exports.main = async (event, context) => {
     }
     //  检查图像内容是否违规
     if (event.img) {
-      imageR = await cloud.openapi.security.imgSecCheck({
+      imgR = await cloud.openapi.security.imgSecCheck({
         media: {
           header: {
             'Content-Type': 'application/octet-stream'
@@ -28,7 +34,7 @@ exports.main = async (event, context) => {
     }
     return {
       msgR,
-      imageR
+      imgR
     };
   } catch (e) {
     return e

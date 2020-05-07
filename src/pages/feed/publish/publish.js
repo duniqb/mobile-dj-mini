@@ -4,7 +4,6 @@ import {
 } from '../../../config.js';
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -12,54 +11,10 @@ Page({
     imgList: [],
     address: '',
     content: '',
-    sign: {}
-  },
-  /**
-   * 上传图片到阿里云
-   * @param {*} params 
-   */
-  uploadImgFile(params = {}) {
-    var that = this;
-    let data = new Promise((resolve, reject) => {
-      // 获取文件扩展名以生成正确的文件名
-      const imgsrc = that.data.imgList[0];
-      const index = that.data.imgList[0].lastIndexOf("\.");
-      const imgExtension = imgsrc.substring(index + 1, that.data.imgList[0].length);
-      // 这里是 OSS 上的完整路径名+文件名
-      const imgPath = params.fileName + "." + imgExtension;
-      wx.uploadFile({
-        url: params.url, //上传地址,
-        filePath: that.data.imgList[0],
-        name: 'file',
-        formData: {
-          name: that.data.imgList[0],
-          key: imgPath, //文件上传的位置(默认根目录)
-          policy: params.policy,
-          OSSAccessKeyId: params.accessid,
-          success_action_status: '200', //让服务端返回200,不然，默认会返回204
-          signature: params.signature,
-        },
-
-        success: function (res) {
-          wx.showToast({
-            title: "上传成功",
-            icon: 'success',
-            duration: 2000
-          })
-          console.log('上传时的文件：', that.data.imgList[0])
-          console.log('上传成功：', res)
-          let imgUrl = params.url + "/" + imgPath
-          console.log('可访问的图片地址：', imgUrl)
-        },
-        fail: function (res) {
-          console.log('上传失败', res)
-          reject("上传失败");
-        }
-      })
-      // },
-      // })
-    })
-    return data;
+    // 签名数据
+    sign: {},
+    // 要保存到数据库的图片列表
+    imgListSave: []
   },
   textareaAInput(e) {
     this.setData({
@@ -71,49 +26,133 @@ Page({
    */
   publish() {
     var that = this;
-    console.log('imgList', this.data.imgList)
-    console.log('address', this.data.address)
-    console.log('content', this.data.content)
-    // 获取签名
-    wx.request({
-      url: feedPolicyUrl,
-      data: {
-        // sessionId: app.sessionId,
-      },
-      success(res) {
-        if (res.data.code == 0) {
-          console.log('签名数据：', res.data)
-          that.setData({
-            sign: res.data.data
-          })
-          console.log('sign 数据：', that.data.sign)
-          var obj = {
-            url: that.data.sign.host, //上传路径
-            fileName: that.data.sign.dir + new Date().getTime(), //上传到xxx文件夹下（我这里图片重新命名）
-            policy: that.data.sign.policy, //后端返回的policy
-            accessid: that.data.sign.accessid, //后端返回的accessid
-            signature: that.data.sign.signature, //后端返回的signature
-          }
+    console.log('imgList', that.data.imgList)
+    console.log('address', that.data.address)
+    console.log('content', that.data.content)
 
-          console.log('obj数据：', obj)
-          that.uploadImgFile(obj).then(function (res) {
-            if (res.statusCode == 200) {
-              // let src = res.imgUrl; //返回上传的图片地址
-              // console.log('图片地址：', src)
-            } else {
-              wx.showToast({
-                title: res.errMsg,
-                icon: 'none',
-                duration: 2000,
-              })
-            }
-          }).catch(function (err) {
-            console.log('err:' + err);
+    if (that.data.imgList.length >= 1 && that.data.content != '') {
+      console.log('开始鉴定内容安全')
+      // 鉴定图片安全
+      wx.cloud.callFunction({
+        name: 'imgSecCheck',
+        data: {
+          img: that.data.imgList
+        },
+        success(res) {
+          if (res.result.errCode == 0) {
+            console.log('鉴定图片通过', res) // 3
+            // 鉴定文字安全
+            wx.cloud.callFunction({
+              name: 'msgSecCheck',
+              data: {
+                msg: that.data.content
+              },
+              success(res) {
+                if (res.result.errCode == 0) {
+                  console.log('鉴定文字通过', res) // 3
+                  // 获取签名并上传
+                  wx.request({
+                    url: feedPolicyUrl,
+                    data: {
+                      // sessionId: app.sessionId,
+                    },
+                    success(res) {
+                      if (res.data.code == 0) {
+                        console.log('签名数据：', res.data)
+                        that.setData({
+                          sign: res.data.data
+                        })
+                        console.log('sign 数据：', that.data.sign)
+                        var successUp = 0; // 成功
+                        var failUp = 0; // 失败
+                        var length = that.data.imgList.length; // 总数
+                        var count = 0; // 第几张
+                        that.uploadOneByOne(that.data.imgList, successUp, failUp, count, length);
+                      }
+                    }
+                  })
+                } else if (res.result.errCode == 87014) {
+                  wx.showToast({
+                    title: '文字违规',
+                    icon: 'fail',
+                    duration: 2000
+                  })
+                }
+              }
+            })
+          } else if (res.result.errCode == 87014) {
+            wx.showToast({
+              title: '图片违规',
+              icon: 'fail',
+              duration: 2000
+            })
+          }
+        }
+      })
+    }
+  },
+  /**
+   * 上传多张图片到阿里云
+   * @param {*} params 
+   */
+  uploadOneByOne(imgPaths, successUp, failUp, count, length) {
+    var that = this;
+
+    wx.showLoading({
+      title: '正在上传第' + count + '张',
+    })
+    // 获取文件扩展名以生成正确的文件名
+    const imgsrc = imgPaths[count];
+    const index = imgPaths[count].lastIndexOf("\.");
+    const imgExtension = imgsrc.substring(index + 1, imgPaths[count].length);
+    // 这里是 OSS 上的完整路径名+文件名
+    const imgPath = that.data.sign.dir + new Date().getTime() + "." + imgExtension;
+
+    wx.uploadFile({
+      url: that.data.sign.host,
+      filePath: imgPaths[count],
+      name: 'file',
+      formData: {
+        name: imgPaths[count],
+        key: imgPath,
+        policy: that.data.sign.policy,
+        OSSAccessKeyId: that.data.sign.accessid,
+        success_action_status: '200', // 让服务端返回200,不然，默认会返回204
+        signature: that.data.sign.signature,
+      },
+      success: function (e) {
+        console.log("success:", e)
+        let imgUrl = that.data.sign.host + '/' + imgPath
+        that.data.imgListSave.push(imgUrl)
+        successUp++; // 成功+1
+      },
+      fail: function (e) {
+        console.log("fail:", e)
+        failUp++; // 失败+1
+      },
+      complete: function (e) {
+        console.log("complete:", e)
+        count++; // 下一张
+        if (count == length) {
+          // 上传完毕
+          console.log('上传成功 ' + successUp + ' ,' + '失败 ' + failUp);
+          console.log('上传完成，图片可访问列表：', that.data.imgListSave)
+          wx.showToast({
+            title: '上传成功' + successUp,
+            icon: 'success',
+            duration: 2000
           })
+        } else {
+          //递归调用，上传下一张
+          that.uploadOneByOne(imgPaths, successUp, failUp, count, length);
+          console.log('正在上传第 ' + count + ' 张');
         }
       }
     })
   },
+  /**
+   * 打开地图
+   */
   openMap() {
     var that = this;
     wx.chooseLocation({
@@ -150,6 +189,7 @@ Page({
     })
   },
   ChooseImage() {
+    this.data.imgList = [];
     wx.chooseImage({
       count: 9, //默认9
       sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
@@ -158,7 +198,6 @@ Page({
         console.log('选择的文件：', res)
         if (this.data.imgList.length != 0) {
           this.setData({
-            // imgList: this.data.imgList.concat(res.tempFilePaths)
             imgList: res.tempFilePaths
           })
         } else {

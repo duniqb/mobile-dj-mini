@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/feed/publish/publish",
+    "pages/news/news",
+
     "pages/feed/feed",
 
     "pages/index/index",
@@ -9,7 +11,7 @@
 
     "pages/mine/about/about",
     "pages/mine/mine",
-    "pages/news/news",
+
 
     "pages/feed/detail/detail",
 
