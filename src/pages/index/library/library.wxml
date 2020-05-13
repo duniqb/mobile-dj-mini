@@ -23,7 +23,7 @@
 <!-- 读者热点 -->
 <block wx:if="{{TabCur == 1}}">
   <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{readerHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+    <view class="cu-item" wx:for="{{readerHotList}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -37,7 +37,7 @@
 <!-- 荐购热点 -->
 <block wx:if="{{TabCur == 2}}">
   <view class="cu-list menu sm-border card-menu margin-top">
-    <view class="cu-item" wx:for="{{recommendHotList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+    <view class="cu-item" wx:for="{{recommendHotList}}"  wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -52,7 +52,7 @@
 <!-- 分类热点 -->
 <block wx:if="{{TabCur == 3}}">
   <view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCate}}">
-    <view class="cu-item arrow" wx:for="{{bookCateList}}" wx:key bindtap="clickCateHot" data-id="{{item.param}}">
+    <view class="cu-item arrow" wx:for="{{bookCateList}}"  wx:key="index" bindtap="clickCateHot" data-id="{{item.param}}">
       <view class="content">
         <text class="">{{item.id}}. </text>
         <text class="text-grey">{{item.cate}}</text>
@@ -66,7 +66,7 @@
         <text class="text-grey">返回上一级</text>
       </view>
     </view>
-    <view class="cu-item " wx:for="{{bookCateDetailList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+    <view class="cu-item " wx:for="{{bookCateDetailList}}"  wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -86,7 +86,7 @@
 <!-- 专业热点 -->
 <block wx:if="{{TabCur == 4}}">
   <view class="cu-list menu sm-border card-menu margin-top" wx:if="{{showCollege}}">
-    <view class="cu-item arrow" wx:for="{{collegeList}}" wx:key bindtap="clickMajorHot" data-id="{{item.name}}">
+    <view class="cu-item arrow" wx:for="{{collegeList}}"  wx:key="index" bindtap="clickMajorHot" data-id="{{item.name}}">
       <view class="content">
         <text class="">{{item.curNo + 1}}. </text>
         <text class="text-grey">{{item.name}}</text>
@@ -100,7 +100,7 @@
         <text class="text-grey">返回上一级</text>
       </view>
     </view>
-    <view class="cu-item " wx:for="{{majorList}}" wx:key bindtap="clickMajorList" data-id="{{item.name}}">
+    <view class="cu-item " wx:for="{{majorList}}"  wx:key="index" bindtap="clickMajorList" data-id="{{item.name}}">
       <view class="content">
         <text class="">{{item.curNo + 1}}. </text>
         <text class="text-grey">{{item.name}}</text>
@@ -119,7 +119,7 @@
         <text class="text-grey">返回上一级</text>
       </view>
     </view>
-    <view class="cu-item " wx:for="{{courseList}}" wx:key bindtap="clickCourseList" data-id="{{item.sq}}">
+    <view class="cu-item " wx:for="{{courseList}}"  wx:key="index" bindtap="clickCourseList" data-id="{{item.sq}}">
       <view class="content">
         <text class="">{{item.curNo + 1}}. </text>
         <text class="text-grey">{{item.name}}</text>
@@ -138,7 +138,7 @@
         <text class="text-grey">返回上一级</text>
       </view>
     </view>
-    <view class="cu-item " wx:for="{{majorDetailList}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+    <view class="cu-item " wx:for="{{majorDetailList}}"  wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
       <view class="content">
         <text class="">{{item.curNo}}. </text>
         <text class="text-grey">{{item.bookName}}</text>
@@ -193,7 +193,7 @@
         </view>
         <view class="cu-item">
           <view class="content detail-content">
-            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key>{{index + 1}}. {{item}}</view>
+            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key="index">{{index + 1}}. {{item}}</view>
           </view>
         </view>
         <view class="cu-item">

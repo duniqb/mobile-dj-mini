@@ -1,19 +1,19 @@
 {
   "pages": [
+    "pages/feed/detail/detail",
+    "pages/feed/feed",
+    "pages/index/index",
+  
     "pages/feed/publish/publish",
+
     "pages/news/news",
 
-    "pages/feed/feed",
 
-    "pages/index/index",
     "pages/index/seek/publish/publish",
     "pages/index/seek/seek",
 
     "pages/mine/about/about",
     "pages/mine/mine",
-
-
-    "pages/feed/detail/detail",
 
     "pages/index/repair/repair",
     "pages/index/card/card",

@@ -72,7 +72,13 @@ var config = {
   feedListUrl: host + '/article/list',
   feedDetailUrl: host + '/article/info',
   feedLikeTitleUrl: host + '/likearticle/update',
-  feedPolicyUrl: host + '/oss/policy'
-}
+  feedPolicyUrl: host + '/oss/policy',
+  feedSaveArticleUrl: host + '/article/save',
+  feedSaveImgUrl: host + '/imgurl/save',
+  feedCommentListUrl: host + '/comment/list',
+  feedLikeListUrl: host + '/likearticle/list',
+  feedCommentPublishUrl: host + '/comment/save',
+  feedCommentReplyPublishUrl: host + '/commentreply/save',
 
+}
 module.exports = config;

@@ -300,6 +300,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
+        console.log(res)
         if (res.data.code == 0) {
           that.setData({
             weather: res.data.data.weather,

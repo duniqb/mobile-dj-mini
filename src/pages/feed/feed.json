@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "校友圈"
+  "navigationBarTitleText": "校友圈",
+  "enablePullDownRefresh": true 
 }

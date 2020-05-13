@@ -11,10 +11,143 @@ Page({
    */
   data: {
     totalCount: 0,
-    pageSize: 10,
+    pageSize: 4,
     totalPage: 0,
     currPage: 1,
     feedList: []
+  },
+  /**
+   * 请求新数据
+   */
+  getList() {
+    var that = this;
+    wx.request({
+      url: feedListUrl,
+      data: {
+        sessionId: app.sessionId,
+        page: that.data.currPage,
+        limit: that.data.pageSize
+      },
+      success(res) {
+        if (res.data.code == 0) {
+          console.log("本次请求：", res)
+          // 修改时间显示
+          for (var i = 0; i < res.data.page.list.length; i++) {
+            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
+          }
+          that.setData({
+            currPage: res.data.page.currPage,
+            totalPage: res.data.page.totalPage,
+            feedList: res.data.page.list
+          });
+          console.log("已赋值feed列表：", that.data.feedList)
+        }
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   * 第一次启动时，读取缓存。请求加载最新，并缓存
+   */
+  onLoad: function (options) {
+    wx.hideShareMenu();
+    if (this.data.feedList.length == 0) {
+      this.getList();
+    }
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    var that = this;
+    if (that.data.currPage === that.data.totalPage) {
+      wx.showToast({
+        title: '没有更多',
+        icon: 'none',
+      })
+      return;
+    }
+
+    console.log("当前页：", that.data.currPage)
+    wx.showLoading({
+      title: '正在加载',
+    })
+    var page = that.data.currPage + 1;
+    wx.request({
+      url: feedListUrl,
+      data: {
+        sessionId: app.sessionId,
+        page: page,
+        limit: that.data.pageSize
+      },
+      success(res) {
+        if (res.data.code == 0) {
+          wx.hideLoading();
+          console.log("本次请求：", res)
+          // 修改时间显示
+          for (var i = 0; i < res.data.page.list.length; i++) {
+            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
+          }
+          // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
+          var feedList = res.data.page.list;
+          var newFeedList = that.data.feedList;
+
+          that.setData({
+            feedList: newFeedList.concat(feedList),
+            currPage: res.data.page.currPage,
+            totalPage: res.data.page.totalPage
+          });
+          console.log("连接后的feedList：", that.data.feedList)
+          console.log("已赋值feed列表：", that.data.feedList)
+        }
+      }
+    })
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading({
+      complete: (res) => {},
+    })
+    var that = this;
+    wx.request({
+      url: feedListUrl,
+      data: {
+        sessionId: app.sessionId,
+        page: 1,
+        limit: that.data.pageSize
+      },
+      success(res) {
+        if (res.data.code == 0) {
+          wx.hideNavigationBarLoading({
+            complete: (res) => {},
+          })
+          console.log("本次请求的结果：", res)
+          // 修改时间显示
+          for (var i = 0; i < res.data.page.list.length; i++) {
+            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
+            // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
+            if (res.data.page.list[i].timestamp > that.data.feedList[0].timestamp) {
+              res.data.page.list = res.data.page.list.slice(0, i - 1);
+              break;
+            }
+          }
+
+          // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
+          var feedList = res.data.page.list;
+          var newFeedList = that.data.feedList;
+          that.setData({
+            feedList: feedList.concat(newFeedList)
+          });
+          console.log("已赋值feed列表：", that.data.feedList)
+        }
+      }
+    })
   },
   publish() {
     wx.navigateTo({
@@ -119,115 +252,9 @@ Page({
     return result;
   },
   /**
-   * 生命周期函数--监听页面加载
-   * 第一次启动时，读取缓存。请求加载最新，并缓存
-   */
-  onLoad: function (options) {
-    wx.hideShareMenu();
-    // 读取缓存
-    try {
-      var value = wx.getStorageSync('feedList')
-      if (value) {
-        console.log('本地 feedList 获取成功：')
-        this.feedList = value
-        console.log(value)
-      }
-    } catch (e) {
-      console.log('本地 feedList 获取失败')
-    }
-    var that = this;
-    wx.request({
-      url: feedListUrl,
-      data: {
-        sessionId: app.sessionId,
-        // page: that.data.page,
-        // size: that.data.size
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        if (res.data.code == 0) {
-          console.log("本次请求：", res)
-          // 修改时间显示
-          for (var i = 0; i < res.data.page.list.length; i++) {
-            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
-            // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
-            // if (that.data.feedList.length > 0 && res.data.data.titleList[i]._id <= that.data.feedList[0]._id) {
-            //   break;
-            // }
-          }
-
-          // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
-          // var feedList = res.data.data.titleList;
-          // var newFeedList = that.data.feedList;
-
-          // that.setData({
-          //   feedList: newFeedList.concat(feedList),
-          //   page: res.data.data.page,
-          //   totalPage: res.data.data.total
-          // });
-
-          // 缓存
-          wx.setStorage({
-            key: "feedList",
-            data: that.data.feedList
-          })
-          that.setData({
-            feedList: res.data.page.list
-          })
-          console.log("已赋值feed列表：", that.data.feedList)
-        }
-      }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getTabBar().init()
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getTabBar().init();
   }
 })

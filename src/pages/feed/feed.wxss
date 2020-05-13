@@ -9,3 +9,7 @@
   justify-content: center;
   z-index: 9;
 }
+
+.cu-padding {
+  padding: 10rpx; 
+}

@@ -4,7 +4,7 @@
 			<view class="cu-item">
 				<view class="cu-avatar round lg" style="background-image:url({{article.avatar}});"></view>
 				<view class="content flex-sub">
-					<view>{{article.author}}</view>
+					<view class="user-color">{{article.author}}</view>
 					<view class="text-gray text-sm flex justify-between">
 						{{time}}
 					</view>
@@ -16,13 +16,85 @@
 		</view>
 		<!-- 图片 -->
 		<view class="grid flex-sub padding-lr col-3 grid-square">
-			<view class="bg-img" style="background-image:url({{item}});" bindtap="showImg" wx:for="{{article.imgUrlList}}" wx:key="index" id="{{item}}" data-images="{{article.imgUrlList}}">
+			<view class="bg-img" style="background-image:url({{item}});" bindblur="cancelReply" bindtap="showImg" wx:for="{{article.imgUrlList}}" wx:key="index" id="{{item}}" data-images="{{article.imgUrlList}}">
 			</view>
 		</view>
-		<!-- 点赞与评论数量 -->
-		<view class="text-gray text-xl text-right padding">
-			<text class="text-{{article.isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeTitle" id="{{article.id}}"></text>{{article.likeCount == 0 ? '' : article.likeCount}}
-			<text class=" cuIcon-commentfill margin-lr-xs"></text>{{article.commentCount == 0 ? '' : article.commentCount}}
+	</view>
+</view>
+
+<!-- 操作条 -->
+<scroll-view scroll-x class="bg-white nav">
+	<view class="flex text-center">
+		<view class="cu-item flex-sub {{0==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="0">
+			评论 ({{article.commentCount == 0 ? '' : article.commentCount}})
 		</view>
+		<view class="cu-item flex-sub {{1==TabCur?'text-blue cur':''}}" wx:key bindtap="tabSelect" data-id="1">
+			赞 ({{article.likeCount == 0 ? '' : article.likeCount}})
+		</view>
+	</view>
+</scroll-view>
+
+<!-- 评论列表 -->
+<view wx:if="{{TabCur == 0}}">
+	<!-- 评论表单 -->
+	<form>
+		<view class="cu-form-group">
+			<input fixed="true" maxlength="140" bindinput="textareaInput" placeholder="说点什么吧..."></input>
+			<button class="cu-btn bg-blue shadow" bindtap="publishComment">发送</button>
+		</view>
+	</form>
+	<!-- 评论 -->
+	<view class="cu-list menu-avatar comment solids-top margin-top">
+		<view class="cu-item" wx:for="{{commentList}}" wx:key="index">
+			<view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+			<view class="content" bindtap="showModal" data-target="bottomModal" data-id="{{item}}">
+				<view class="user-color">{{item.name}}</view>
+				<view class="text-gray text-content text-sm">
+					{{item.time}}
+				</view>
+				{{item.content}}
+				<!-- 回复 -->
+				<view class="bg-reply padding-sm radius margin-top-sm  text-df" wx:if="{{item.replyList.length > 0}}">
+					<view class="flex" wx:for="{{item.replyList}}" wx:key="index" wx:for-item="reply">
+						<view bindtap="showModal" data-target="bottomModal" data-id="{{reply}}">
+							<text class="user-color">{{reply.fromName}}:</text>回复<text class="user-color">{{reply.toName}}:</text>{{reply.content}}
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 点赞列表 -->
+<view wx:if="{{TabCur == 1}}">
+	<view class="cu-list menu-avatar comment solids-top">
+		<view class="cu-item" wx:for="{{likeList}}" wx:key="index">
+			<view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+			<view class="content">
+				<view class="user-color">{{item.name}}</view>
+				<view class="text-gray text-content text-sm">
+					{{item.time}}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 回复模态框 -->
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white">
+			<view class="action text-grey" bindtap="hideModal">取消</view>
+			<view class="action text-blue" bindtap="publishReply">发送</view>
+		</view>
+		<form>
+			<view class="text-left reply-tip">
+				回复 {{replyToName}}：{{replyToContent}}
+			</view>
+			<view class="cu-form-group margin-top text-left">
+				<input fixed="true" maxlength="140" bindinput="textareaReplyInput" value='{{inputValue}}' placeholder="你来谈谈?"></input>
+			</view>
+		</form>
 	</view>
 </view>

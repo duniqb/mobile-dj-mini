@@ -20,9 +20,12 @@
 	<view class="cu-form-group margin-top" bindtap="openMap">
 		<text class="cuIcon-location lg"> 所在位置</text>
 		<text>{{address}}</text>
+		<button class="cu-btn icon" wx:if="{{address != ''}}" catchtap="clearAddress">
+			<text class="cuIcon-close"></text>
+		</button>
 		<view class="cuIcon-right text-grey"></view>
 	</view>
 	<view class="padding flex flex-direction">
-		<button class="cu-btn bg-blue margin-tb-sm lg" bindtap="publish">发表</button>
+		<button class="cu-btn bg-blue margin-tb-sm lg" bindtap="secCheck"> <text class="cuIcon-loading2 iconfont-spin"  wx:if="{{publishing == true}}"></text> 发表</button>
 	</view>
 </form>

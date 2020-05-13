@@ -1,6 +1,8 @@
 const app = getApp()
 import {
-  feedPolicyUrl
+  feedPolicyUrl,
+  feedSaveArticleUrl,
+  feedSaveImgUrl
 } from '../../../config.js';
 
 Page({
@@ -14,7 +16,19 @@ Page({
     // 签名数据
     sign: {},
     // 要保存到数据库的图片列表
-    imgListSave: []
+    imgListSave: [],
+    // 发表状态，控制发表按钮动画
+    publishing: false
+  },
+  /**
+   * 清除地址信息
+   * @param {} e 
+   */
+  clearAddress(e) {
+    console.log('清除地址：', e)
+    this.setData({
+      address: ''
+    })
   },
   textareaAInput(e) {
     this.setData({
@@ -26,10 +40,81 @@ Page({
    */
   publish() {
     var that = this;
+    var sessionId = app.sessionId;
+    var article = {
+      "address": that.data.address,
+      "content": that.data.content
+    }
+    // 保存内容
+    wx.request({
+      url: feedSaveArticleUrl + '/' + sessionId,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(article),
+      success: res => {
+        if (res.data.code == 0) {
+          console.log("内容上传成功", res)
+          var articleId = res.data.data;
+          console.log('内容上传成功')
+          if (that.imgList != []) {
+            // 保存图片
+            wx.request({
+              url: feedSaveImgUrl + '/' + articleId,
+              method: 'POST',
+              header: {
+                'Content-Type': 'application/json'
+              },
+              data: JSON.stringify(that.data.imgListSave),
+              success: res => {
+                if (res.data.code == 0) {
+                  that.setData({
+                    publishing: false
+                  })
+                  console.log('保存图片列表成功')
+                  wx.showToast({
+                    title: '发表成功',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                  wx.navigateBack({
+                    complete: (res) => {},
+                  })
+                }
+              }
+            })
+          }
+          that.setData({
+            publishing: false
+          })
+          wx.showToast({
+            title: '发表成功',
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack({
+            complete: (res) => {},
+          })
+        } else if (res.data.code == 400) {
+          console.log('内容上传失败')
+        }
+      }
+    })
+  },
+  /**
+   * 安全检查
+   */
+  secCheck() {
+    this.setData({
+      publishing: false
+    })
+    var that = this;
     console.log('imgList', that.data.imgList)
     console.log('address', that.data.address)
     console.log('content', that.data.content)
 
+    // 图片+文字
     if (that.data.imgList.length >= 1 && that.data.content != '') {
       console.log('开始鉴定内容安全')
       // 鉴定图片安全
@@ -72,6 +157,9 @@ Page({
                     }
                   })
                 } else if (res.result.errCode == 87014) {
+                  that.setData({
+                    publishing: false
+                  })
                   wx.showToast({
                     title: '文字违规',
                     icon: 'fail',
@@ -81,8 +169,53 @@ Page({
               }
             })
           } else if (res.result.errCode == 87014) {
+            that.setData({
+              publishing: false
+            })
             wx.showToast({
               title: '图片违规',
+              icon: 'fail',
+              duration: 2000
+            })
+          }
+        }
+      })
+    }
+    // 只有文字
+    else if (that.data.content != '') {
+      // 鉴定文字安全
+      wx.cloud.callFunction({
+        name: 'msgSecCheck',
+        data: {
+          msg: that.data.content
+        },
+        success(res) {
+          if (res.result.errCode == 0) {
+            console.log('鉴定文字通过', res) // 3
+            // 获取签名并上传
+            wx.request({
+              url: feedPolicyUrl,
+              data: {
+                // sessionId: app.sessionId,
+              },
+              success(res) {
+                if (res.data.code == 0) {
+                  console.log('签名数据：', res.data)
+                  that.setData({
+                    sign: res.data.data
+                  })
+                  console.log('sign 数据：', that.data.sign)
+                  // 开始发表
+                  that.publish();
+                }
+              }
+            })
+          } else if (res.result.errCode == 87014) {
+            that.setData({
+              publishing: false
+            })
+            wx.showToast({
+              title: '文字违规',
               icon: 'fail',
               duration: 2000
             })
@@ -142,6 +275,9 @@ Page({
             icon: 'success',
             duration: 2000
           })
+
+          // 开始发表
+          that.publish();
         } else {
           //递归调用，上传下一张
           that.uploadOneByOne(imgPaths, successUp, failUp, count, length);
@@ -225,7 +361,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
 

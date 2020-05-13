@@ -1,4 +1,3 @@
-//app.js
 import {
   host,
   miniSessionUrl,
@@ -6,7 +5,6 @@ import {
   miniDecryptUrl
 } from "./config.js";
 App({
-
   serverUrl: host,
   userInfo: null,
   // 将 user 全局保存在本地缓存，下次打开不用登陆

@@ -5,3 +5,20 @@
   font-size: 30rpx;
   margin-bottom: 20rpx;
 }
+
+.user-color {
+  color: #67738F;
+}
+
+.bg-reply {
+  /* margin-left: 30rpx; */
+  /* font-size: 25rpx; */
+  background-color: #F7F7F7;
+  /* margin-top: 0rpx; */
+  border-radius: 0rpx;
+}
+
+.reply-tip {
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+}
