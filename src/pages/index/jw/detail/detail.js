@@ -29,14 +29,15 @@ Page({
         id: params.id
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code == 0) {
+          console.log(res)
           wx.hideLoading();
           that.setData({
-            notice: res.data.data,
+            notice: res.data.notice,
             id: params.id,
-            title: res.data.data.title
+            title: res.data.notice.title
           })
-        } else if (res.data.meta.status === 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '没有记录',

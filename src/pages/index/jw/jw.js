@@ -31,7 +31,7 @@ Page({
     wx.hideShareMenu();
     var that = this;
     // 检查是否已登录教务
-    this.checkLogin();
+    // this.checkLogin();
     // 加载通知
     wx.request({
       url: jwNoticeListUrl,
@@ -40,13 +40,14 @@ Page({
         page: 1
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code == 0) {
+          console.log(res)
           wx.hideLoading();
           that.setData({
             noticeList: res.data.data.list,
-            page: res.data.data.page
+            page: res.data.data.page 
           })
-        } else if (res.data.meta.status === 400) {
+        } else if( res.data.code ==  400) {
           wx.hideLoading();
         }
       }
@@ -66,13 +67,13 @@ Page({
         sessionId: app.sessionId
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             jwExist: true,
             name: res.data.data.name + '，你好！'
           })
-        } else if (res.data.meta.status === 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           var stuNo = wx.getStorageSync('stuNo');
           var password = wx.getStorageSync('password');
@@ -97,7 +98,7 @@ Page({
    */
   onShow: function() {
     // 检查是否已登录教务
-    this.checkLogin();
+    // this.checkLogin();
   },
 
   /**
@@ -139,7 +140,7 @@ Page({
         page: page
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           var noticeList = res.data.data.list;
           var newList = that.data.noticeList;
@@ -147,7 +148,7 @@ Page({
             noticeList: newList.concat(noticeList),
             page: res.data.data.page,
           })
-        } else if (res.data.meta.status === 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
         }
       }
