@@ -2,10 +2,6 @@ const app = getApp()
 import { jobCalendarUrl, jobDemandListUrl, jobRecruitListUrl } from '../../../config.js'
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     TabCur: 0,
     scrollLeft: 0,
@@ -19,7 +15,8 @@ Page({
     // 时间选择
     currentDate: new Date().getTime(),
     minDate: new Date(2019, 8, 1).getTime(),
-    maxDate: new Date(2020, 11, 1).getTime(),
+    // 三个月后
+    maxDate: new Date(new Date().setMonth(new Date().getMonth() + 3)).getTime(),
   },
   /**
    * 点击确定月份
@@ -30,7 +27,7 @@ Page({
 
     var that = this;
     wx.showLoading({
-      title: '正在加载',
+      title: '正在查询',
     })
     wx.request({
       url: jobCalendarUrl,
@@ -40,12 +37,12 @@ Page({
         month: month
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             calendarList: res.data.data
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '没有记录',
@@ -111,12 +108,12 @@ Page({
           month: month
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             that.setData({
               calendarList: res.data.data
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showModal({
               title: '加载失败',
@@ -142,14 +139,14 @@ Page({
           page: 1
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             that.setData({
               demandList: res.data.data.list,
               demandListPage: res.data.data.page,
               demandListTotalPage: res.data.data.totalPage
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showModal({
               title: '加载失败',
@@ -175,14 +172,14 @@ Page({
           page: 1
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             that.setData({
               recruitList: res.data.data.list,
               recruitListPage: res.data.data.page,
               recruitListTotalPage: res.data.data.totalPage
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showModal({
               title: '加载失败',
@@ -223,12 +220,12 @@ Page({
         month: month
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             calendarList: res.data.data
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showModal({
             title: '加载失败',
@@ -316,7 +313,7 @@ Page({
           page: page
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             var demandList = res.data.data.list;
             var newList = that.data.demandList;
@@ -325,7 +322,7 @@ Page({
               demandListPage: res.data.data.page,
               demandListTotalPage: res.data.data.totalPage
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showToast({
               title: '加载失败',
@@ -343,7 +340,7 @@ Page({
           page: page
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             var recruitList = res.data.data.list;
             var newList = that.data.recruitList;
@@ -352,7 +349,7 @@ Page({
               recruitListPage: res.data.data.page,
               recruitListTotalPage: res.data.data.totalPage
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showToast({
               title: '加载失败',
@@ -372,8 +369,8 @@ Page({
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function (res) {},
-      fail: function (res) {}
+      success: function (res) { },
+      fail: function (res) { }
     }
   }
 })

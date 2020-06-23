@@ -8,7 +8,7 @@
         <text class="margin-lr-xs"></text>{{browser}}
       </view>
     </view>
-    <view class="content" wx:for="{{content}}" wx:key>
+    <view class="content" wx:for="{{content}}" wx:key="index">
       <view class="desc">
        <block wx:if="{{item != ''}}">
         <view class="text-content">{{item}}</view>

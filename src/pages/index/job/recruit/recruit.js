@@ -41,7 +41,7 @@ Page({
         id: params.id
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code ==  0) {
           console.log(res.data)
           wx.hideLoading();
           this.setData({
@@ -61,7 +61,7 @@ Page({
             zipCode: res.data.data.zipCode,
             companyInfo: res.data.data.companyInfo,
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
