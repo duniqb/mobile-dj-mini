@@ -9,7 +9,7 @@
 
 <!-- 查询结果 -->
 <view class="margin-top">
-  <view class="cu-timeline" wx:for="{{repairList}}" wx:key wx:if="{{showRepair}}">
+  <view class="cu-timeline" wx:for="{{repairList}}" wx:key="index" wx:if="{{showRepair}}">
     <view class="time" bindtap="clickItem" data-id="{{item.listNumber}}">{{item.date}}</view>
     <view class="cu-item">
       <view class="cu-list menu sm-border card-menu margin-top">
@@ -55,7 +55,7 @@
       <text class="">待维修</text>
     </view>
   </view>
-  <view class="cu-item" wx:for="{{recentList}}" wx:key>
+  <view class="cu-item" wx:for="{{recentList}}" wx:key="index">
     <view class="content">
       <text class="text-grey ">{{item.area}}</text>
     </view>

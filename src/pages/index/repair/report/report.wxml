@@ -8,7 +8,7 @@
 <!-- 步骤条 -->
 <view class="bg-white padding">
   <view class="cu-steps">
-    <view class="cu-item {{index > num?'':'text-blue'}}" wx:for="{{numList}}" wx:key>
+    <view class="cu-item {{index > num?'':'text-blue'}}" wx:for="{{numList}}" wx:key="index">
       <text class="num" data-index="{{index + 1}}"></text> {{item.name}}
     </view>
   </view>

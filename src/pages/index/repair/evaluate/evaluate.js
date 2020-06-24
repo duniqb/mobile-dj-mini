@@ -37,7 +37,7 @@ Page({
           listScore: this.data.value
         },
         success: res => {
-          if (res.data.meta.status == 200) {
+          if (res.data.code == 0) {
             wx.hideLoading();
             that.setData({
               showEvaluate: false
@@ -45,7 +45,7 @@ Page({
             wx.navigateBack({
               delta: 1
             })
-          } else if (res.data.meta.status == 400) {
+          } else if (res.data.code == 400) {
             wx.hideLoading();
             wx.showToast({
               title: '评价失败',
@@ -117,7 +117,7 @@ Page({
         listNumber: params.listNumber
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             date: res.data.data.date,
@@ -127,7 +127,7 @@ Page({
             title: res.data.data.title,
             showEvaluate: res.data.data.showEvaluate
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '查询失败',

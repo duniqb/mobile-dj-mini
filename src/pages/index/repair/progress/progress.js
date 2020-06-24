@@ -69,7 +69,7 @@ Page({
         phone: this.data.value
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             repairList: res.data.data,
@@ -77,7 +77,7 @@ Page({
             showRepair: true,
           })
           wx.setStorageSync('repairPhone', that.data.value);
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '查询失败',
@@ -113,12 +113,12 @@ Page({
         // sessionId: app.sessionId,
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             recentList: res.data.data,
             value: repairPhone
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '最新维修数量查询失败',
             icon: 'none',

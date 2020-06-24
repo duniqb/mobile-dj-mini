@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/index/seek/seek",
     "pages/index/index",
-   
+    "pages/index/repair/repair",
+    "pages/index/repair/report/report",
+
+ 
+    "pages/index/seek/seek",
+
     "pages/index/seek/publish/publish",
   
     "pages/index/library/search/search",
@@ -17,10 +21,9 @@
     "pages/feed/publish/publish",
     "pages/news/news",
  
-
     "pages/mine/about/about",
     "pages/mine/mine",
-    "pages/index/repair/repair",
+
     "pages/index/card/card",
     "pages/index/jw/score/score",
 
@@ -29,7 +32,7 @@
     "pages/index/jw/grade/grade",
     "pages/mine/bind/bind",
     "pages/index/repair/progress/progress",
-    "pages/index/repair/report/report",
+
     "pages/index/repair/evaluate/evaluate",
     "pages/index/repair/progress/detail/detail",
 

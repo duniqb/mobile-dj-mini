@@ -76,7 +76,7 @@
   </view>
 </view>
 
-<view class='margin-xl bg-white padding-xl radius shadow-lg' wx:if="{{noticeShow}}">
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
   <view class='text-center margin-bottom text-lg  text-orange'>{{noticeTitle}}</view>
   <view class='text-content'>
     <view class='margin-top-sm notice-content'> {{noticeContent}}</view>

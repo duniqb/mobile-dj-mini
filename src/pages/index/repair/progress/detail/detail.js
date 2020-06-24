@@ -48,7 +48,7 @@ Page({
         listNumber: params.listNumber
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             date: res.data.data.date,
@@ -61,7 +61,7 @@ Page({
             title: res.data.data.title,
             listNumber: res.data.data.listNumber
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '查询失败',
@@ -119,11 +119,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
+    
   }
 })

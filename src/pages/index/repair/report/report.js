@@ -60,12 +60,12 @@ Page({
         roomId: this.data.roomId,
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             showReportButton: false
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '报修失败',
@@ -161,7 +161,7 @@ Page({
         value: this.data.distinctId
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           var list = [];
           for (var i = 0; i < res.data.data.buildings.length; i++) {
             list[i] = res.data.data.buildings[i].buildingName
@@ -171,7 +171,7 @@ Page({
             buildings: res.data.data.buildings,
             picker2: list
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -213,7 +213,7 @@ Page({
         value: this.data.buildings[e.detail.value].buildingId
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           var list = [];
           for (var i = 0; i < res.data.data.rooms.length; i++) {
             list[i] = res.data.data.rooms[i].roomName
@@ -224,7 +224,7 @@ Page({
             picker3: list,
             buildingId: this.data.buildings[e.detail.value].buildingId
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -255,14 +255,14 @@ Page({
       title: '正在加载',
     })
     wx.request({
-      url: logisticsDataUrl,
+      url: repairDataUrl,
       data: {
         // sessionId: app.sessionId,
         id: 'roomId',
         value: this.data.rooms[e.detail.value].roomId
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           var list = [];
           for (var i = 0; i < res.data.data.equipments.length; i++) {
             list[i] = res.data.data.equipments[i].equipmentName
@@ -273,7 +273,7 @@ Page({
             picker4: list,
             roomId: this.data.rooms[e.detail.value].roomId
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -307,14 +307,14 @@ Page({
         value: this.data.equipments[e.detail.value].equipmentId
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             equipmentDetail: res.data.data.json,
             equipmentId: res.data.data.json.equipmentId,
             comment: res.data.data.json.comment
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -389,11 +389,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
+   
   }
 })

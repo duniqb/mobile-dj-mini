@@ -7,10 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    noticeShow: false,
     noticeTitle: '',
     noticeContent: '',
-    noticeDate: '2019-10-10',
+    noticeDate: '',
     iconList: [{
       icon: 'repair',
       color: 'red',
@@ -74,11 +73,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    var that = this;
     wx.showShareMenu({
       withShareTicket: true
     })
-    var that = this;
     // 查询通知
     wx.request({
       url: repairNoticeUrl,
@@ -86,20 +85,12 @@ Page({
         // sessionId: app.sessionId,
       },
       success: res => {
-        if (res.data.meta.status == 200) {
-          if (res.data.data.content != '') {
-            that.setData({
-              noticeShow: true,
-              noticeTitle: res.data.data.title,
-              noticeContent: res.data.data.content,
-              noticeDate: res.data.data.date
-            })
-          }
-        } else if (res.data.meta.status == 400) {
-          wx.showToast({
-            title: '查询通知失败',
-            icon: 'none',
-            duration: 2000
+        if (res.data.code == 0) {
+          console.log(res)
+          that.setData({
+            noticeTitle: res.data.data.title,
+            noticeContent: res.data.data.content,
+            noticeDate: res.data.data.date
           })
         }
       }
@@ -109,54 +100,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
+  onShareAppMessage: function () {
+
   }
 })

@@ -58,7 +58,7 @@
 </view>
 
 <!-- 进度 -->
-<view class="cu-timeline" wx:for="{{timeLineList}}" wx:key>
+<view class="cu-timeline" wx:for="{{timeLineList}}" wx:key="index">
   <view class="time">{{item.time}}</view>
   <view class="cu-item">
     <view class="content">
