@@ -137,7 +137,7 @@ Page({
                   console.log('鉴定文字通过', res) // 3
                   // 获取签名并上传
                   wx.request({
-                    url: feedPolicyUrl,
+                    url: feedPolicyUrl + '/article',
                     data: {
                       // sessionId: app.sessionId,
                     },
@@ -194,7 +194,7 @@ Page({
             console.log('鉴定文字通过', res) // 3
             // 获取签名并上传
             wx.request({
-              url: feedPolicyUrl,
+              url: feedPolicyUrl + '/article',
               data: {
                 // sessionId: app.sessionId,
               },

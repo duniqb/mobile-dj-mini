@@ -66,6 +66,9 @@ var config = {
   // 失物招领
   seekListUrl: host + '/seek/list',
   seekDetailUrl: host + '/seek/info',
+  seekSaveUrl: host + '/seek/save',
+  seekSaveImgUrl: host + '/imgurl/save',
+  seekPolicyUrl: host + '/oss/policy',
 
 
   // 校友圈

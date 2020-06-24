@@ -58,7 +58,7 @@
 				</view>
 				<view class="cu-item">
 					<view class="content modal-content">
-						<text class="text-grey">发布人：{{seek.openid}}</text>
+						<text class="text-grey">发布人：{{seek.author}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -79,6 +79,12 @@
 				<view class="cu-item">
 					<view class="content modal-content">
 						<text class="text-grey">详情：{{seek.content}}</text>
+					</view>
+				</view>
+
+				<!-- 图片 -->
+				<view class="grid flex-sub padding-lr col-3 grid-square margin-top" wx:if="{{seek.imgUrlList.length > 0}}">
+					<view class="bg-img" style="background-image:url({{item}});" wx:for="{{seek.imgUrlList}}" wx:for-item="item" wx:key="index" bindtap="showImg" id="{{item}}" data-images="{{seek.imgUrlList}}">
 					</view>
 				</view>
 			</view>

@@ -1,15 +1,23 @@
 {
   "pages": [
-    "pages/index/job/job",
+    "pages/index/seek/seek",
     "pages/index/index",
+   
+    "pages/index/seek/publish/publish",
+  
+    "pages/index/library/search/search",
+    
+    "pages/index/calendar/calendar",
+     "pages/index/job/job",
+
     "pages/index/jw/jw",
 
     "pages/feed/feed",
     "pages/feed/detail/detail",
     "pages/feed/publish/publish",
     "pages/news/news",
-    "pages/index/seek/publish/publish",
-    "pages/index/seek/seek",
+ 
+
     "pages/mine/about/about",
     "pages/mine/mine",
     "pages/index/repair/repair",
@@ -29,8 +37,8 @@
     "pages/index/job/recruit/recruit",
     "pages/mine/about/update/update",
     "pages/index/library/library",
-    "pages/index/calendar/calendar",
-    "pages/index/library/search/search",
+
+
     "pages/news/detail/detail"
   ],
   "permission": {
