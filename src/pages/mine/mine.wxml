@@ -17,9 +17,9 @@
 
   <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg ">
     <view class="cu-item arrow">
-      <navigator class="content" open-type="navigate" hover-class="none" url="./bind/bind">
+      <navigator class="content" open-type="navigate" hover-class="none" url="./likebook/likebook">
         <text class="cuIcon-discoverfill text-orange"></text>
-        <text class="text-grey">教务绑定</text>
+        <text class="text-grey">图书收藏</text>
       </navigator>
     </view>
     <view class="cu-item arrow">

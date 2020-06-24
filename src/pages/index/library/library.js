@@ -5,7 +5,9 @@ import {
   libraryCategoryUrl,
   libraryShowUrl,
   libraryBookCateUrl,
-  libraryCollegeUrl
+  libraryCollegeUrl,
+  libraryLikeUrl,
+  libraryIsLikeUrl
 } from '../../../config.js'
 Page({
 
@@ -13,6 +15,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 是否收藏图书
+    isLike: false,
     TabCur: 1,
     scrollLeft: 0,
     // 热点图书列表
@@ -48,6 +52,33 @@ Page({
     majorDetailList: []
   },
   /**
+   * 收藏或取消收藏图书
+   */
+  likeBook() {
+    var that = this;
+    var sessionId = app.sessionId;
+    var book = {
+      "author": this.data.bookDetail.author,
+      "bookId": this.data.bookDetail.id,
+      "bookName": this.data.bookDetail.bookName
+    }
+    wx.request({
+      url: libraryLikeUrl + '?sessionId=' + sessionId,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(book),
+      success: res => {
+        if (res.data.code == 0) {
+          that.setData({
+            isLike: res.data.data
+          })
+        }
+      }
+    })
+  },
+  /**
    * 专业热点，从图书列表页返回课程列表，返回上一级
    */
   backCourseList() {
@@ -68,13 +99,13 @@ Page({
         type: 6
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           this.setData({
             showMajorDetail: true,
             showCourse: false,
             majorDetailList: res.data.data
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '没有记录',
             icon: 'none',
@@ -106,13 +137,13 @@ Page({
         college: this.data.tempCollege
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             courseList: res.data.data.list,
             showMajor: false,
             showCourse: true
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '没有记录',
             icon: 'none',
@@ -143,14 +174,14 @@ Page({
         college: e.currentTarget.dataset.id
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             majorList: res.data.data.list,
             showCollege: false,
             showMajor: true,
             tempCollege: e.currentTarget.dataset.id
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '没有记录',
             icon: 'none',
@@ -182,13 +213,13 @@ Page({
         type: 2
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             bookCateDetailList: res.data.data,
             showBookCateDetail: true,
             showBookCate: false
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '没有记录',
             icon: 'none',
@@ -237,8 +268,9 @@ Page({
         // sessionId: app.sessionId,
         id: e.currentTarget.dataset.id
       },
+      timeout: 5000,
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             bookDetail: res.data.data
           })
@@ -246,11 +278,26 @@ Page({
             // modalName: e.currentTarget.dataset.target
             modalName: e.currentTarget.dataset.target,
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '加载失败',
             icon: 'none',
             duration: 2000
+          })
+        }
+      }
+    })
+    // 是否收藏图书
+    wx.request({
+      url: libraryIsLikeUrl + "/" + app.sessionId,
+      data: {
+        id: e.currentTarget.dataset.id
+      },
+      timeout: 5000,
+      success: res => {
+        if (res.data.code == 0) {
+          that.setData({
+            isLike: res.data.data
           })
         }
       }
@@ -307,7 +354,7 @@ Page({
         type: type
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           if (e.currentTarget.dataset.id == 1) {
             that.setData({
               readerHotList: res.data.data
@@ -325,7 +372,7 @@ Page({
               collegeList: res.data.data.list
             })
           }
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '加载失败',
             icon: 'none',
@@ -360,12 +407,12 @@ Page({
         type: 2
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           wx.hideLoading();
           this.setData({
             readerHotList: res.data.data
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           // wx.hideLoading();
           wx.showToast({
             title: '加载失败',
@@ -430,11 +477,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (ops) {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function (res) {},
-      fail: function (res) {}
-    }
+
   }
 })

@@ -1,7 +1,9 @@
 const app = getApp()
 import {
-  queryLibraryUrl,
-  showUrl
+  libraryQueryUrl,
+  libraryShowUrl,
+  libraryLikeUrl,
+  libraryIsLikeUrl
 } from '../../../../config.js';
 Page({
 
@@ -9,10 +11,37 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLike: false,
     list: [],
-    bookDetail: null, 
+    bookDetail: null,
   },
-
+/**
+   * 收藏或取消收藏图书
+   */
+  likeBook() {
+    var that = this;
+    var sessionId = app.sessionId;
+    var book = {
+      "author": this.data.bookDetail.author,
+      "bookId": this.data.bookDetail.id,
+      "bookName": this.data.bookDetail.bookName
+    }
+    wx.request({
+      url: libraryLikeUrl + '?sessionId=' + sessionId,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(book),
+      success: res => {
+        if (res.data.code == 0) {
+          that.setData({
+            isLike: res.data.data
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -25,18 +54,20 @@ Page({
       title: '正在搜索',
     })
     wx.request({
-      url: queryLibraryUrl,
+      url: libraryQueryUrl,
       data: {
         // sessionId: app.sessionId,
         name: params.name
       },
+      timeout: 5000,
       success: res => {
-        if (res.data.meta.status == 200) {
+        console.log(res)
+        if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
             list: res.data.data
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
             title: '没有结果',
@@ -61,13 +92,13 @@ Page({
   showModal(e) {
     var that = this;
     wx.request({
-      url: showUrl,
+      url: libraryShowUrl,
       data: {
         // sessionId: app.sessionId,
         id: e.currentTarget.dataset.id
       },
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
           that.setData({
             bookDetail: res.data.data
           })
@@ -75,11 +106,26 @@ Page({
             // modalName: e.currentTarget.dataset.target
             modalName: e.currentTarget.dataset.target,
           })
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.showToast({
             title: '加载失败',
             icon: 'none',
             duration: 2000
+          })
+        }
+      }
+    })
+    // 是否收藏图书
+    wx.request({
+      url: libraryIsLikeUrl + "/" + app.sessionId,
+      data: {
+        id: e.currentTarget.dataset.id
+      },
+      timeout: 5000,
+      success: res => {
+        if (res.data.code == 0) {
+          that.setData({
+            isLike: res.data.data
           })
         }
       }
@@ -139,8 +185,8 @@ Page({
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function (res) {},
-      fail: function (res) {}
+      success: function (res) { },
+      fail: function (res) { }
     }
   }
 })

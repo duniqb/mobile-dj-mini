@@ -23,6 +23,9 @@ var config = {
   libraryQueryUrl: host + '/library/query',
   libraryCategoryUrl: host + '/library/category',
   libraryMajorUrl: host + '/library/major',
+  libraryLikeUrl: host + '/likebook/update',
+  libraryIsLikeUrl: host + '/likebook/info',
+  libraryLikeBookUrl: host + '/likebook/list',
 
   // 校历
   festivalUrl: host + '/calendar/festival',

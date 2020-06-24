@@ -1,60 +1,61 @@
 <view class="cu-list menu">
-  <view class="cu-item detail-list" wx:for="{{list}}" wx:key bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
-    <view class="content detail-content">
-      <text class="bookName">{{index + 1}}. {{item.bookName}}</text>
-      <view class="text-left text-grey detail">作者/出版社：{{item.author}}</view>
-      <view class="text-left text-grey detail">索书号：{{item.index}}</view>
-    </view>
-  </view>
-</view> 
+	<view class="cu-item detail-list" wx:for="{{list}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+		<view class="content detail-content">
+			<text class="bookName">{{index + 1}}. {{item.bookName}}</text>
+			<view class="text-left text-grey detail">作者/出版社：{{item.author}}</view>
+			<view class="text-left text-grey detail">索书号：{{item.index}}</view>
+		</view>
+	</view>
+</view>
 
 <!-- 模态框 -->
 <view class="cu-modal {{modalName=='Modal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">{{bookDetail.bookName}}</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
-      </view>
-    </view>
-    <view class="padding-xl">
-      <view class="cu-list menu">
-        <view class="cu-item">
-          <view class="content modal-content">
-            <text class="text-grey">作者：{{bookDetail.author == null ? '无' : bookDetail.author}}</text>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content modal-content">
-            <text class="text-grey">出版社：{{bookDetail.publisher == null ? '无' : bookDetail.publisher}}</text>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content modal-content">
-            <text class="text-grey">ISBN号：{{bookDetail.isbn == null ? '无' : bookDetail.isbn}}</text>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content modal-content">
-            <text class="text-grey">CALIS号：{{bookDetail.calis == null ? '无' : bookDetail.calis}}</text>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content modal-content">
-            <text class="text-grey">索书号：{{bookDetail.index == null ? '无' : bookDetail.index}}</text>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content detail-content">
-            <view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key>{{index + 1}}. {{item}}</view>
-          </view>
-        </view>
-        <view class="cu-item">
-          <view class="content">
-            <view class="text-left padding text-grey">{{bookDetail.summary == null ? '无简介': bookDetail.summary}}</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">{{bookDetail.bookName}}</view>
+			<text class="text-{{isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeBook"></text>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl">
+			<view class="cu-list menu">
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">作者：{{bookDetail.author == null ? '无' : bookDetail.author}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">出版社：{{bookDetail.publisher == null ? '无' : bookDetail.publisher}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">ISBN号：{{bookDetail.isbn == null ? '无' : bookDetail.isbn}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">CALIS号：{{bookDetail.calis == null ? '无' : bookDetail.calis}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">索书号：{{bookDetail.index == null ? '无' : bookDetail.index}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content detail-content">
+						<view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key="index">{{index + 1}}. {{item}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<view class="text-left padding text-grey">{{bookDetail.summary == null ? '无简介': bookDetail.summary}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

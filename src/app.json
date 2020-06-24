@@ -1,49 +1,40 @@
 {
   "pages": [
     "pages/index/index",
+
+    "pages/mine/likebook/likebook",
+
+    "pages/mine/mine",
+
+
+    "pages/index/library/library",
     "pages/index/repair/repair",
     "pages/index/repair/report/report",
-
- 
     "pages/index/seek/seek",
-
     "pages/index/seek/publish/publish",
-  
     "pages/index/library/search/search",
-    
     "pages/index/calendar/calendar",
-     "pages/index/job/job",
-
+    "pages/index/job/job",
     "pages/index/jw/jw",
-
     "pages/feed/feed",
     "pages/feed/detail/detail",
     "pages/feed/publish/publish",
     "pages/news/news",
- 
     "pages/mine/about/about",
-    "pages/mine/mine",
-
     "pages/index/card/card",
     "pages/index/jw/score/score",
-
     "pages/index/jw/credit/credit",
     "pages/index/jw/detail/detail",
     "pages/index/jw/grade/grade",
     "pages/mine/bind/bind",
     "pages/index/repair/progress/progress",
-
     "pages/index/repair/evaluate/evaluate",
     "pages/index/repair/progress/detail/detail",
-
     "pages/index/job/demand/demand",
     "pages/index/job/recruit/recruit",
     "pages/mine/about/update/update",
-    "pages/index/library/library",
-
-
     "pages/news/detail/detail"
-  ],
+    ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于获取天气信息"
@@ -70,7 +61,8 @@
     "color": "#000000",
     "selectedColor": "#000000",
     "backgroundColor": "#000000",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index"
       },
       {
