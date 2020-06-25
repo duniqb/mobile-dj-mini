@@ -64,6 +64,8 @@ var config = {
   jwClearUrl: host + '/jw/clear',
   jwNoticeListUrl: host + '/jw/noticeList',
   jwNoticeUrl: host + '/jw/notice',
+  jwScoreUrl: host + '/jw/score',
+  jwIsLoginUrl: host + '/jw/jwIsLogin',
 
 
   // 失物招领

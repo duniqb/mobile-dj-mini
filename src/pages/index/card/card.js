@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../../config.js')
+import { cardLoginUrl, cardVerifyUrl } from '../../../config.js';
 
 Page({
 
@@ -53,7 +53,7 @@ Page({
       header.Cookie = cookie;
     }
     wx.request({
-      url: config.cardLoginUrl,
+      url: cardLoginUrl,
       data: {
         stuNo: that.data.stuNo,
         password: that.data.password,
@@ -111,7 +111,7 @@ Page({
   changeVerify() {
     var that = this;
     wx.request({
-      url: config.cardVerifyUrl,
+      url: cardVerifyUrl,
       data: {
         // sessionId: app.sessionId
       },

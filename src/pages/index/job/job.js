@@ -9,7 +9,7 @@ Page({
     demandList: [],
     recruitList: [],
     demandListPage: 1,
-    demandListTotalPage: 1,
+    demandListTotalPage: 1, 
     recruitListPage: 1,
     recruitListTotalPage: 1,
     // 时间选择

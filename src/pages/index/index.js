@@ -50,8 +50,7 @@ Page({
       icon: 'news',
       color: 'orange',
       badge: 0,
-      name: '一卡通',
-      navUrl: './card/card'
+      name: '一卡通'
     }, {
       id: 2,
       icon: 'searchlist',
@@ -99,7 +98,7 @@ Page({
       color: 'blue',
       badge: 0,
       name: '学院专区'
-    }, ],
+    },],
     gridCol: 3,
     skin: false
   },
@@ -121,7 +120,7 @@ Page({
    * 点击九宫格
    */
   bindGrid: function (e) {
-    if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8) {
+    if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8 || e.currentTarget.dataset.id == 1) {
       wx.showToast({
         title: '未完成的功能',
         icon: 'none',
@@ -339,8 +338,8 @@ Page({
     return {
       title: '我发现一个很有用的校园小程序，推荐给你~',
       path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function (res) {},
-      fail: function (res) {}
+      success: function (res) { },
+      fail: function (res) { }
     }
   }
 })

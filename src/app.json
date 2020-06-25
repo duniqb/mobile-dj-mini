@@ -1,12 +1,15 @@
 {
   "pages": [
+    "pages/index/jw/jw",
+    "pages/index/jw/login/login",
+
+  
+    "pages/index/jw/score/score",
+
     "pages/index/index",
-
+    "pages/index/card/card",
     "pages/mine/likebook/likebook",
-
     "pages/mine/mine",
-
-
     "pages/index/library/library",
     "pages/index/repair/repair",
     "pages/index/repair/report/report",
@@ -15,18 +18,16 @@
     "pages/index/library/search/search",
     "pages/index/calendar/calendar",
     "pages/index/job/job",
-    "pages/index/jw/jw",
+
     "pages/feed/feed",
     "pages/feed/detail/detail",
     "pages/feed/publish/publish",
     "pages/news/news",
     "pages/mine/about/about",
-    "pages/index/card/card",
-    "pages/index/jw/score/score",
+
     "pages/index/jw/credit/credit",
     "pages/index/jw/detail/detail",
     "pages/index/jw/grade/grade",
-    "pages/mine/bind/bind",
     "pages/index/repair/progress/progress",
     "pages/index/repair/evaluate/evaluate",
     "pages/index/repair/progress/detail/detail",

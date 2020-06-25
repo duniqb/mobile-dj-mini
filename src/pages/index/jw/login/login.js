@@ -1,28 +1,22 @@
 const app = getApp()
-var config = require("../../../config.js")
+import { jwLoginUrl, jwVerifyUrl } from '../../../../config.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    jwExist: false,
     name: null,
     verifyUrl: '',
-    stuNo: '',
-    password: '',
+    stuNo: '1821010431',
+    password: '62052219950825133X',
     verify: ''
   },
   /**
-   * 登录按钮
+   * 登录教务
    */
-  loginBtn() {
+  loginJW() {
     var that = this;
-
-    console.log("登录按钮 3个数据：")
-    console.log("1：" + this.data.stuNo)
-    console.log("2：" + this.data.password)
-    console.log("3：" + this.data.verify)
     if (this.data.stuNo == '' || this.data.password == '') {
       wx.showToast({
         title: '请填写登录信息',
@@ -30,21 +24,6 @@ Page({
       })
       return;
     }
-    wx.showModal({
-      title: '登录教务',
-      content: '确认登录？',
-      success(res) {
-        if (res.confirm) {
-          that.loginJW();
-        } else if (res.cancel) {}
-      }
-    })
-  },
-  /**
-   * 登录教务
-   */
-  loginJW() {
-    var that = this;
     // 发起登录
     wx.showLoading({
       title: '正在登录',
@@ -58,7 +37,7 @@ Page({
       header.Cookie = cookie;
     }
     wx.request({
-      url: config.jwLoginUrl,
+      url: jwLoginUrl,
       data: {
         sessionId: app.sessionId,
         stuNo: that.data.stuNo,
@@ -67,21 +46,23 @@ Page({
       },
       header,
       success: res => {
-        if (res.data.meta.status == 200) {
+        if (res.data.code == 0) {
+          console.log(res.data)
           wx.hideLoading();
           wx.showToast({
             title: '登录成功',
             icon: 'none',
             duration: 2000
           })
-
+          wx.navigateBack({
+            complete: (res) => { },
+          })
           wx.setStorageSync('stuNo', that.data.stuNo);
           wx.setStorageSync('password', that.data.password);
-          this.checkLogin();
-        } else if (res.data.meta.status == 400) {
+        } else if (res.data.code == 400) {
           wx.hideLoading();
           wx.showToast({
-            title: '登录失败，请重新登录',
+            title: '登录失败，请检查后重新登录',
             icon: 'none',
             duration: 2000
           })
@@ -94,6 +75,7 @@ Page({
    * 监听输入框改变
    */
   onStuNoChange(event) {
+    console.log(event.detail.value)
     this.setData({
       stuNo: event.detail.value,
     })
@@ -111,14 +93,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // 检查是否已登录教务
-    this.checkLogin();
+    this.changeVerify();
   },
   /**
    * 退出教务登录
    */
-  exitJwBtn: function() {
+  exitJwBtn: function () {
     var that = this;
     wx.showModal({
       title: '退出登录',
@@ -126,22 +108,22 @@ Page({
       success(res) {
         if (res.confirm) {
           that.exitJw();
-        } else if (res.cancel) {}
+        } else if (res.cancel) { }
       }
     })
   },
-  exitJw: function() {
+  exitJw: function () {
     var that = this;
     wx.showLoading({
       title: '正在退出',
     })
     wx.request({
-      url: config.jwClearUrl,
+      url: jwClearUrl,
       data: {
         sessionId: app.sessionId
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code === 0) {
           wx.hideLoading();
           wx.showToast({
             title: '退出成功',
@@ -152,7 +134,7 @@ Page({
 
           wx.removeStorage({
             key: 'password',
-            success(res) {}
+            success(res) { }
           })
           that.setData({
             jwExist: false,
@@ -161,7 +143,7 @@ Page({
           })
 
           this.changeVerify();
-        } else if (res.data.meta.status === 400) {
+        } else if (res.data.code === 400) {
           wx.hideLoading();
           wx.showToast({
             title: '退出失败',
@@ -173,115 +155,77 @@ Page({
     })
   },
   /**
-   * 检查是否已登录教务
-   */
-  checkLogin: function() {
-    wx.showLoading({
-      title: '正在查询',
-    })
-    var that = this;
-    wx.request({
-      url: config.jwExistUrl,
-      data: {
-        sessionId: app.sessionId
-      },
-      success: res => {
-        if (res.data.meta.status === 200) {
-          console.log("200")
-          console.log(res.data)
-          wx.hideLoading();
-          that.setData({
-            jwExist: true,
-            name: res.data.data.name
-          })
-        } else if (res.data.meta.status === 400) {
-          console.log("400")
-          console.log(res.data)
-          wx.hideLoading();
-          var stuNo = wx.getStorageSync('stuNo');
-          var password = wx.getStorageSync('password');
-          that.setData({
-            jwExist: false,
-            stuNo: stuNo,
-            password: password
-          })
-          // 验证码
-          that.changeVerify();
-        }
-      }
-    })
-  },
-  /**
    * 改变验证码
    */
   changeVerify() {
     var that = this;
     wx.request({
-      url: config.jwVerifyUrl,
+      url: jwVerifyUrl,
       data: {
-        // sessionId: app.sessionId
+        sessionId: app.sessionId
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code === 0) {
+          console.log(res)
           // 保存 Cookie 到 Storage
           if (res && res.header && res.header['Set-Cookie']) {
             wx.setStorageSync('cookieKey', res.header['Set-Cookie']);
           }
           that.setData({
-            verifyUrl: res.data.data
+            verifyUrl: res.data.url
           })
-        } else if (res.data.meta.status === 400) {}
+        } else if (res.data.code === 400) { }
       }
     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
