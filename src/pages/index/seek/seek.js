@@ -89,7 +89,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.hideShareMenu();
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     that.getList();
 
     // wx.request({
@@ -259,6 +261,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '【失物招领】最新发布',
+      path: 'pages/index/seek/seek', // 路径，传递参数到指定页面。
+      success: function (res) { },
+      fail: function (res) { }
+    }
   }
-})
+}) 

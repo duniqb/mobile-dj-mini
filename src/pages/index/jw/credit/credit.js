@@ -34,7 +34,7 @@ Page({
         sessionId: app.sessionId
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code === 0) {
           wx.hideLoading();
           that.setData({
             creditRequirements: res.data.data.creditRequirements,
@@ -44,7 +44,7 @@ Page({
             requiredCredits: res.data.data.requiredCredits,
             stuNo: res.data.data.stuNo
           })
-        } else if (res.data.meta.status === 400) {
+        } else if (res.data.code === 400) {
           wx.hideLoading();
         }
       }

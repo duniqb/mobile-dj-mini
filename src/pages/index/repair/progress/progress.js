@@ -102,9 +102,8 @@ Page({
    */
   onLoad: function(options) {
     let repairPhone = wx.getStorageSync('repairPhone');
-    wx.showShareMenu({
-      withShareTicket: true
-    })
+    wx.hideShareMenu()
+
     var that = this;
     // 查询最新维修数量
     wx.request({
@@ -175,11 +174,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
-      success: function(res) {},
-      fail: function(res) {}
-    }
+    
   }
 })

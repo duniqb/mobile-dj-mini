@@ -84,12 +84,12 @@ Page({
       color: 'pink',
       badge: 0,
       name: '校历',
-      navUrl: './calendar/calendar'
+      // navUrl: './calendar/calendar'
     }, {
       id: 7,
       icon: 'group',
       color: 'purple',
-      badge: 0,
+      badge: 0, 
       name: '就业信息',
       navUrl: './job/job'
     }, {
@@ -120,7 +120,7 @@ Page({
    * 点击九宫格
    */
   bindGrid: function (e) {
-    if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8 || e.currentTarget.dataset.id == 1) {
+    if (e.currentTarget.dataset.id == 5 || e.currentTarget.dataset.id == 8 || e.currentTarget.dataset.id == 1 || e.currentTarget.dataset.id == 6) {
       wx.showToast({
         title: '未完成的功能',
         icon: 'none',
@@ -155,7 +155,6 @@ Page({
       this.getLocation();
     } else {
       this.getTip();
-      this.getFestival();
     }
     wx.showShareMenu({
       withShareTicket: true
@@ -280,7 +279,6 @@ Page({
           }
         });
         that.getTip();
-        that.getFestival();
       }
     })
   },
@@ -307,23 +305,6 @@ Page({
             tips: that.randomTip(res.data.data.tips)
           })
         }
-      }
-    })
-  },
-  getFestival: function () {
-    var that = this;
-    wx.request({
-      url: festivalUrl,
-      data: {
-        // sessionId: app.sessionId,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        that.setData({
-          festivalTips: that.randomTip(res.data) != undefined ? that.randomTip(res.data) : null
-        })
       }
     })
   },

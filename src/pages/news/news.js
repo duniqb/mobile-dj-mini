@@ -243,5 +243,16 @@ Page({
         }
       }
     })
+  },
+  /**
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function () {
+    return {
+      title: "【交大要闻】",
+      path: '/pages/news/news', // 路径，传递参数到指定页面。
+      success: function (res) { },
+      fail: function (res) { }
+    }
   }
 })

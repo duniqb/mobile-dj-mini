@@ -14,10 +14,11 @@ Page({
     isLike: false,
     list: [],
     bookDetail: null,
+    name: ''
   },
-/**
-   * 收藏或取消收藏图书
-   */
+  /**
+     * 收藏或取消收藏图书
+     */
   likeBook() {
     var that = this;
     var sessionId = app.sessionId;
@@ -65,7 +66,8 @@ Page({
         if (res.data.code == 0) {
           wx.hideLoading();
           that.setData({
-            list: res.data.data
+            list: res.data.data,
+            name: params.name
           })
         } else if (res.data.code == 400) {
           wx.hideLoading();
@@ -183,8 +185,8 @@ Page({
    */
   onShareAppMessage: function (ops) {
     return {
-      title: '我发现一个很有用的校园小程序，推荐给你~',
-      path: 'pages/index/index', // 路径，传递参数到指定页面。
+      title: '【图书馆】馆藏查询',
+      path: 'pages/index/library/search/search?name=' + this.data.name, // 路径，传递参数到指定页面。
       success: function (res) { },
       fail: function (res) { }
     }

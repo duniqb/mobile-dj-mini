@@ -66,6 +66,7 @@ var config = {
   jwNoticeUrl: host + '/jw/notice',
   jwScoreUrl: host + '/jw/score',
   jwIsLoginUrl: host + '/jw/jwIsLogin',
+  jwGradeUrl: host + '/jw/grade',
 
 
   // 失物招领

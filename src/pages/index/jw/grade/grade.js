@@ -1,19 +1,14 @@
 const app = getApp()
-import { studentInfoUrl, studentGradeUrl } from '../../../../config.js'
+import { jwGradeUrl } from '../../../../config.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isExist: true,
     gradeList: []
   },
-  loginBtn() {
-    wx.navigateTo({
-      url: '../../../mine/bind/bind',
-    })
-  },
+
   /**
    * 点击跳转到绑定页
    */
@@ -30,27 +25,27 @@ Page({
     var that = this;
     // 检查是否已存在该学生信息
     wx.request({
-      url: studentInfoUrl,
+      url: jwGradeUrl,
       data: {
         sessionId: app.sessionId
       },
       success: res => {
-        if (res.data.meta.status === 200) {
+        if (res.data.code === 0) {
           that.setData({
             isExist: true
           })
           // 获取等级考试信息
           wx.request({
-            url: studentGradeUrl,
+            url: jwGradeUrl,
             data: {
               sessionId: app.sessionId,
             },
             success: res => {
-              if (res.data.meta.status === 200) {
+              if (res.data.code === 0) {
                 that.setData({
                   gradeList: res.data.data,
                 })
-              } else if (res.data.meta.status === 400) {
+              } else if (res.data.code === 400) {
                 wx.showToast({
                   title: '没有记录',
                   icon: 'none',
@@ -59,7 +54,7 @@ Page({
               }
             }
           })
-        } else if (res.data.meta.status === 400) {}
+        } else if (res.data.code === 400) { }
       }
     })
   },
@@ -75,43 +70,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    // 检查是否已存在该学生信息
-    if (!that.data.isExist) {
-      wx.request({
-        url: studentInfoUrl,
-        data: {
-          sessionId: app.sessionId
-        },
-        success: res => {
-          if (res.data.meta.status === 200) {
-            that.setData({
-              isExist: true
-            })
-            // 获取等级考试信息
-            wx.request({
-              url: studentGradeUrl,
-              data: {
-                sessionId: app.sessionId,
-              },
-              success: res => {
-                if (res.data.meta.status === 200) {
-                  that.setData({
-                    gradeList: res.data.data,
-                  })
-                } else if (res.data.meta.status === 400) {
-                  wx.showToast({
-                    title: '没有记录',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              }
-            })
-          } else if (res.data.meta.status === 400) {}
-        }
-      })
-    }
+
   },
 
   /**

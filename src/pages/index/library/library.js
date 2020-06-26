@@ -472,11 +472,16 @@ Page({
   onReachBottom: function () {
 
   },
-
+ 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function (ops) {
-
+    return {
+      title: "【图书馆】热点列表",
+      path: '/pages/index/library/library', // 路径，传递参数到指定页面。
+      success: function (res) { },
+      fail: function (res) { }
+    }
   }
 })

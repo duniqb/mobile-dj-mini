@@ -11,12 +11,12 @@ Page({
    */
   data: {
     totalCount: 0,
-    pageSize: 4,
+    pageSize: 10,
     totalPage: 0,
-    currPage: 1,
+    currPage: 0,
     feedList: []
   },
-  /**
+  /** 
    * 请求新数据
    */
   getList() {
@@ -24,9 +24,7 @@ Page({
     wx.request({
       url: feedListUrl,
       data: {
-        sessionId: app.sessionId,
-        page: that.data.currPage,
-        limit: that.data.pageSize
+        sessionId: app.sessionId
       },
       success(res) {
         if (res.data.code == 0) {
@@ -36,9 +34,11 @@ Page({
             res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
           }
           that.setData({
-            currPage: res.data.page.currPage,
+            feedList: res.data.page.list,
+            totalCount: res.data.page.totalCount,
+            pageSize: res.data.page.pageSize,
             totalPage: res.data.page.totalPage,
-            feedList: res.data.page.list
+            currPage: res.data.page.currPage,
           });
           console.log("已赋值feed列表：", that.data.feedList)
         }
@@ -120,31 +120,29 @@ Page({
       data: {
         sessionId: app.sessionId,
         page: 1,
-        limit: that.data.pageSize
+        limit: 10
       },
       success(res) {
+        wx.hideNavigationBarLoading({
+          complete: (res) => {},
+        })
         if (res.data.code == 0) {
-          wx.hideNavigationBarLoading({
-            complete: (res) => {},
-          })
           console.log("本次请求的结果：", res)
           // 修改时间显示
           for (var i = 0; i < res.data.page.list.length; i++) {
             res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
-            // 新数据中的时间要大于已缓存的数据的最顶部数据的时间
-            if (res.data.page.list[i].timestamp > that.data.feedList[0].timestamp) {
-              res.data.page.list = res.data.page.list.slice(0, i - 1);
-              break;
-            }
           }
 
           // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
           var feedList = res.data.page.list;
           var newFeedList = that.data.feedList;
           that.setData({
-            feedList: feedList.concat(newFeedList)
+            feedList: feedList.concat(newFeedList),
+            currPage: res.data.page.currPage,
+            totalPage: res.data.page.totalPage
           });
           console.log("已赋值feed列表：", that.data.feedList)
+          console.log("连接后的feedList：", that.data.feedList)
         }
       }
     })
@@ -256,5 +254,6 @@ Page({
    */
   onShow: function () {
     this.getTabBar().init();
+    this.getList();
   }
 })

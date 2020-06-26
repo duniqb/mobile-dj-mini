@@ -13,7 +13,7 @@ Page({
     page: 1,
     totalPage: 1
   },
-  clickCourse() {
+  clickUndo() {
     wx.showToast({
       title: '未完成的功能',
       icon: 'none'

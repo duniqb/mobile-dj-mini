@@ -1,12 +1,18 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/feed/feed",
+
+    "pages/index/jw/grade/grade",
     "pages/index/jw/jw",
+
+    "pages/index/jw/credit/credit",
     "pages/index/jw/login/login",
 
   
     "pages/index/jw/score/score",
 
-    "pages/index/index",
+
     "pages/index/card/card",
     "pages/mine/likebook/likebook",
     "pages/mine/mine",
@@ -19,15 +25,15 @@
     "pages/index/calendar/calendar",
     "pages/index/job/job",
 
-    "pages/feed/feed",
+
     "pages/feed/detail/detail",
     "pages/feed/publish/publish",
     "pages/news/news",
     "pages/mine/about/about",
 
-    "pages/index/jw/credit/credit",
+   
     "pages/index/jw/detail/detail",
-    "pages/index/jw/grade/grade",
+ 
     "pages/index/repair/progress/progress",
     "pages/index/repair/evaluate/evaluate",
     "pages/index/repair/progress/detail/detail",

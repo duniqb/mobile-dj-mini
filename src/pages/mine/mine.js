@@ -14,6 +14,8 @@ Page({
     backImgUrl: 'https://mobile-dj.oss-cn-beijing.aliyuncs.com/static/back.png'
   },
   onLoad: function () {
+    wx.hideShareMenu()
+
     this.userInfo = app.getGlobalUserInfo();
     // 检查是否已注册
     this.checkRegister();
@@ -74,7 +76,7 @@ Page({
       title: '正在登录',
     })
     var that = this;
-    // 成功获取 userInfo 后给此页面赋值
+    // 成功获取 userInfo 后给此页面赋值 
     this.userInfo = e.detail.userInfo;
     that.setData({
       avatarUrl: e.detail.userInfo.avatarUrl,

@@ -159,7 +159,7 @@ Page({
       return;
     }
     var comment = {
-      articleId: that.data.article.id,
+      articleId: that.data.articleId,
       content: that.data.commentContent
     }
 
@@ -238,6 +238,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (params) {
+    console.log(params.id)
+    this.setData({
+      articleId: params.id
+    })
     // 请求内容
     this.getArticle();
     // 请求评论
@@ -273,7 +277,7 @@ Page({
       data: {
         sessionId: app.sessionId,
         // id: params.id
-        id: 3
+        id: that.data.articleId
       },
       success: res => {
         if (res.data.code == 0) {
@@ -299,9 +303,12 @@ Page({
       data: {
         // sessionId: app.sessionId,
         // id: params.id
-        id: 3
-      },
+        id: that.data.articleId
+      }, 
       success: res => {
+        wx.hideNavigationBarLoading({
+          complete: (res) => {},
+        })
         if (res.data.code == 0) {
           console.log('请求评论成功：', res)
           for (let i = 0; i < res.data.page.list.length; i++) {
@@ -363,7 +370,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading();
+    wx.showNavigationBarLoading({
+      complete: (res) => {},
+    })
+    // wx.showNavigationBarLoading();
     var that = this;
     // 请求评论
     this.getCommentList();
@@ -384,8 +394,8 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: "【校友圈】" + this.data.info.nickname + "发布了新动态",
-      path: '/pages/feed/detail/detail?id=' + this.data.id, // 路径，传递参数到指定页面。
+      title: "【校友圈】" + this.data.article.author + " 发布了新动态",
+      path: '/pages/feed/detail/detail?id=' + this.data.article.id, // 路径，传递参数到指定页面。
       success: function (res) { },
       fail: function (res) { }
     }

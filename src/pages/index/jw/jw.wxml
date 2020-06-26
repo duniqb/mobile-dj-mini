@@ -20,13 +20,13 @@
 				<text>成绩查询</text>
 			</navigator>
 		</view>
-		<view class="cu-item">
-			<navigator open-type="navigate" hover-class='none' url="./credit/credit" data-id="1">
+		<view class="cu-item" bindtap="clickUndo">
+			<!-- <navigator open-type="navigate" hover-class='none' url="./credit/credit" data-id="1"> -->
 				<view class="cuIcon-search text-orange"></view>
 				<text>学分查询</text>
-			</navigator>
+			<!-- </navigator> -->
 		</view>
-		<view class="cu-item" bindtap="clickCourse">
+		<view class="cu-item" bindtap="clickUndo">
 			<!-- <navigator open-type="navigate" hover-class='none' url="" data-id="2"> -->
 			<view class="cuIcon-form text-yellow"></view>
 			<text>课程表</text>

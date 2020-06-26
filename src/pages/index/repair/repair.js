@@ -137,12 +137,17 @@ Page({
    */
   onReachBottom: function () {
 
-  },
+  }, 
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '【后勤报修】后勤通知',
+      path: 'pages/index/repair/repair', // 路径，传递参数到指定页面。
+      success: function (res) { },
+      fail: function (res) { }
+    }
   }
 })
