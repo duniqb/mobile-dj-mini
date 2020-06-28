@@ -22,7 +22,7 @@ Page({
   showDialogModal(e) {
     console.log(e.target.dataset.id)
     var that = this;
-    that.setData({
+    that.setData({ 
       modalName: e.currentTarget.dataset.target,
       currId: e.target.dataset.id
     })
@@ -77,7 +77,7 @@ Page({
           wx.showToast({
             title: '加载失败',
             icon: 'none',
-            duration: 2000
+            duration: 2000 
           })
         }
       }

@@ -19,7 +19,14 @@
 			<view class="bg-img" style="background-image:url({{item}});" bindblur="cancelReply" bindtap="showImg" wx:for="{{article.imgUrlList}}" wx:key="index" id="{{item}}" data-images="{{article.imgUrlList}}">
 			</view>
 		</view>
-	</view>
+ 
+		<view class="margin-top-sm flex justify-between">
+			<view class="padding text-gray text-df"><text class="cuIcon-locationfill" wx:if="{{article.address != ''}}"> {{article.address}}</text></view>
+			<view class="padding text-gray text-right text-xl">
+				<text class="text-grey text-lg" bindtap="showDialogModal" data-target="DialogModal" data-id="{{article.id}}" wx:if="{{article.isAdmin}}">删除 </text>
+			</view>
+		</view>
+	</view>  
 </view>
 
 <!-- 操作条 -->
@@ -96,5 +103,23 @@
 				<input fixed="true" maxlength="140" bindinput="textareaReplyInput" value='{{inputValue}}' placeholder="你来谈谈?"></input>
 			</view>
 		</form>
+	</view>
+</view>
+
+<!-- 删除模态框 -->
+<view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">确认删除？(管理员)</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-blue text-blue" bindtap="hideModal">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="delete">确定</button>
+			</view>
+		</view>
 	</view>
 </view>

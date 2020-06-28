@@ -15,7 +15,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
-		"autoAudits": false,
+		"autoAudits": true,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
 		"checkInvalidKey": true,
@@ -32,7 +32,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.4",
+	"libVersion": "2.11.2",
 	"appid": "wxe1f564d00f76340a",
 	"projectname": "mobile-dj-mini",
 	"debugOptions": {

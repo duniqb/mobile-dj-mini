@@ -4,7 +4,8 @@ import {
   feedCommentListUrl,
   feedCommentPublishUrl,
   feedLikeListUrl,
-  feedCommentReplyPublishUrl
+  feedCommentReplyPublishUrl,
+  feedDeleteArticleUrl
 } from '../../../config.js';
 
 Page({
@@ -31,6 +32,52 @@ Page({
     commentId: 0,
     openIdTo: '',
     inputValue: ''
+  },
+  showDialogModal(e) {
+    console.log(e.target.dataset.id)
+    var that = this;
+    that.setData({
+      modalName: e.currentTarget.dataset.target,
+      currId: e.target.dataset.id
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  /**
+   * 删除
+   */
+  delete: function () {
+    var that = this;
+    console.log('id:',this.data.article.id)
+    var article = {
+      id: that.data.article.id
+    }
+    wx.request({
+      url: feedDeleteArticleUrl,
+      method: 'POST',
+      data: JSON.stringify(article),
+      success(res) {
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'none',
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+          that.hideModal();
+          console.log("删除成功", res)
+        }
+      },
+      fail(res) {
+        this.hideModal();
+
+        console.log(res)
+      }
+    })
   },
   tabSelect(e) {
     var that = this;
@@ -304,10 +351,10 @@ Page({
         // sessionId: app.sessionId,
         // id: params.id
         id: that.data.articleId
-      }, 
+      },
       success: res => {
         wx.hideNavigationBarLoading({
-          complete: (res) => {},
+          complete: (res) => { },
         })
         if (res.data.code == 0) {
           console.log('请求评论成功：', res)
@@ -371,7 +418,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading({
-      complete: (res) => {},
+      complete: (res) => { },
     })
     // wx.showNavigationBarLoading();
     var that = this;

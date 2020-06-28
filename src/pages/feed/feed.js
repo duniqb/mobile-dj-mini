@@ -1,7 +1,8 @@
 const app = getApp()
 import {
   feedLikeTitleUrl,
-  feedListUrl
+  feedListUrl,
+  feedDeleteArticleUrl
 } from '../../config.js';
 
 Page({
@@ -14,7 +15,52 @@ Page({
     pageSize: 10,
     totalPage: 0,
     currPage: 0,
-    feedList: []
+    feedList: [],
+    currId: ''
+  },
+  showDialogModal(e) {
+    console.log(e.target.dataset.id)
+    var that = this;
+    that.setData({
+      modalName: e.currentTarget.dataset.target,
+      currId: e.target.dataset.id
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  /**
+   * 删除
+   */
+  delete: function () {
+    var that = this;
+    console.log(this.data.currId)
+    var article = {
+      id: that.data.currId
+    }
+    wx.request({
+      url: feedDeleteArticleUrl,
+      method: 'POST',
+      data: JSON.stringify(article),
+      success(res) {
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'none',
+          })
+          that.hideModal();
+          console.log("删除成功", res)
+          that.getList();
+        }
+      },
+      fail(res) {
+        this.hideModal();
+
+        console.log(res)
+      }
+    })
   },
   /** 
    * 请求新数据
@@ -28,6 +74,9 @@ Page({
       },
       success(res) {
         if (res.data.code == 0) {
+          wx.hideNavigationBarLoading({
+            complete: (res) => { },
+          })
           console.log("本次请求：", res)
           // 修改时间显示
           for (var i = 0; i < res.data.page.list.length; i++) {
@@ -112,7 +161,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading({
-      complete: (res) => {},
+      complete: (res) => { },
     })
     var that = this;
     wx.request({
@@ -124,7 +173,7 @@ Page({
       },
       success(res) {
         wx.hideNavigationBarLoading({
-          complete: (res) => {},
+          complete: (res) => { },
         })
         if (res.data.code == 0) {
           console.log("本次请求的结果：", res)

@@ -1,18 +1,17 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/jw/jw",
+
+    "pages/mine/about/update/update",
+
     "pages/feed/feed",
 
     "pages/index/jw/grade/grade",
-    "pages/index/jw/jw",
-
+   
     "pages/index/jw/credit/credit",
-    "pages/index/jw/login/login",
-
-  
+    "pages/index/jw/login/login", 
     "pages/index/jw/score/score",
-
-
     "pages/index/card/card",
     "pages/mine/likebook/likebook",
     "pages/mine/mine",
@@ -24,22 +23,17 @@
     "pages/index/library/search/search",
     "pages/index/calendar/calendar",
     "pages/index/job/job",
-
-
     "pages/feed/detail/detail",
     "pages/feed/publish/publish",
     "pages/news/news",
     "pages/mine/about/about",
-
-   
     "pages/index/jw/detail/detail",
- 
     "pages/index/repair/progress/progress",
     "pages/index/repair/evaluate/evaluate",
     "pages/index/repair/progress/detail/detail",
     "pages/index/job/demand/demand",
     "pages/index/job/recruit/recruit",
-    "pages/mine/about/update/update",
+  
     "pages/news/detail/detail"
     ],
   "permission": {

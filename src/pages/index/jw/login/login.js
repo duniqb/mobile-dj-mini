@@ -8,8 +8,8 @@ Page({
   data: {
     name: null,
     verifyUrl: '',
-    stuNo: '1821010431',
-    password: '62052219950825133X',
+    stuNo: '',
+    password: '',
     verify: ''
   },
   /**
@@ -94,7 +94,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 检查是否已登录教务
+    try {
+      var stuNo = wx.getStorageSync('stuNo')
+      if (stuNo) {
+        this.setData({
+          stuNo: stuNo,
+        })
+      }
+    } catch (e) {
+    }
+    try {
+      var password = wx.getStorageSync('password')
+      if (password) {
+        this.setData({
+          password: password,
+        })
+      }
+    } catch (e) {
+    }
     this.changeVerify();
   },
   /**
@@ -109,48 +126,6 @@ Page({
         if (res.confirm) {
           that.exitJw();
         } else if (res.cancel) { }
-      }
-    })
-  },
-  exitJw: function () {
-    var that = this;
-    wx.showLoading({
-      title: '正在退出',
-    })
-    wx.request({
-      url: jwClearUrl,
-      data: {
-        sessionId: app.sessionId
-      },
-      success: res => {
-        if (res.data.code === 0) {
-          wx.hideLoading();
-          wx.showToast({
-            title: '退出成功',
-            icon: 'none',
-            duration: 2000
-          })
-          var stuNo = wx.getStorageSync('stuNo');
-
-          wx.removeStorage({
-            key: 'password',
-            success(res) { }
-          })
-          that.setData({
-            jwExist: false,
-            name: null,
-            stuNo: stuNo
-          })
-
-          this.changeVerify();
-        } else if (res.data.code === 400) {
-          wx.hideLoading();
-          wx.showToast({
-            title: '退出失败',
-            icon: 'none',
-            duration: 2000
-          })
-        }
       }
     })
   },

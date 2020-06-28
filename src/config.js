@@ -1,5 +1,7 @@
 "use strict";
-var host = 'http://192.168.1.200:8080/api/v2';
+var host = 'https://dj.duniqb.cn/api/v2';
+// var host = 'http://192.168.1.200:8080/api/v2';
+
 var config = {
   host,
   // 小程序
@@ -88,6 +90,7 @@ var config = {
   feedLikeListUrl: host + '/likearticle/list',
   feedCommentPublishUrl: host + '/comment/save',
   feedCommentReplyPublishUrl: host + '/commentreply/save',
+  feedDeleteArticleUrl: host + '/article/update',
 
 }
 module.exports = config;
