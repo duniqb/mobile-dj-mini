@@ -1,0 +1,79 @@
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content text-middle">
+      <text class="">请填写下列内容，如列表中没有，请选择其它</text>
+    </view>
+  </view>
+</view>
+<!-- 步骤条 -->
+<view class="bg-white padding">
+  <view class="cu-steps">
+    <view class="cu-item {{index > num?'':'text-blue'}}" wx:for="{{numList}}" wx:key="index">
+      <text class="num" data-index="{{index + 1}}"></text> {{item.name}}
+    </view>
+  </view>
+</view>
+
+<!-- 选择 -->
+<view class="cu-form-group margin-top">
+  <view class="title">选择校区</view>
+  <picker bindchange="PickerChange1" value="{{index1}}" range="{{picker1}}">
+    <view class="picker">
+      {{index1?picker1[index1]:'请选择'}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">选择地点</view>
+  <picker bindchange="PickerChange2" value="{{index2}}" range="{{picker2}}">
+    <view class="picker">
+      {{index2?picker2[index2]:'请选择'}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">选择位置</view>
+  <picker bindchange="PickerChange3" value="{{index3}}" range="{{picker3}}">
+    <view class="picker">
+      {{index3?picker3[index3]:'请选择'}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">选择设备</view>
+  <picker bindchange="PickerChange4" value="{{index4}}" range="{{picker4}}">
+    <view class="picker">
+      {{index4?picker4[index4]:'请选择'}}
+    </view>
+  </picker>
+</view>
+<!-- 当有提示时显示 -->
+<view class="cu-list menu" wx:if="{{comment != ''}}">
+  <view class="cu-item">
+    <view class="content text-middle">
+      <text class="text-orange text-df">{{comment}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 手机号码 -->
+<view class="cu-form-group">
+  <view class="title">具体地点</view>
+  <input placeholder="填写详细的房间号或位置" value="{{place}}" bind:change="onPlaceChange"></input>
+</view>
+<view class="cu-form-group">
+  <view class="title">手机号码</view>
+  <input placeholder="填写手机号，以便维修人员联系" type="number" value="{{phone}}" bind:change="onPhoneChange"></input>
+</view>
+<view class="cu-form-group">
+  <view class="title">故障描述</view>
+  <input placeholder="一单一报修，多个设备分开报修" value="{{describe}}" bind:change="onDescribeChange"></input>
+</view>
+
+<!-- 报修按钮 -->
+<view class="padding flex flex-direction" wx:if="{{!showReportButton}}">
+  <button class="cu-btn bg-grey margin-tb-sm lg">报修成功</button>
+</view>
+<view class="padding flex flex-direction" wx:if="{{showReportButton}}">
+  <button class="cu-btn bg-blue margin-tb-sm lg" bindtap="reportButton">发起报修</button>
+</view>

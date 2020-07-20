@@ -1,0 +1,50 @@
+.tower-swiper .tower-item {
+  transform: scale(calc(0.5 + var(--index) / 10));
+  margin-left: calc(var(--left) * 100rpx - 150rpx);
+  z-index: var(--index);
+}
+
+.page {
+  height: 100Vh;
+  width: 100vw;
+}
+
+.page.show {
+  overflow: hidden;
+}
+
+.switch-sex::after {
+  content: "\e716";
+}
+
+.switch-sex::before {
+  content: "\e7a9";
+}
+
+.switch-music::after {
+  content: "\e66a";
+}
+
+.switch-music::before {
+  content: "\e6db";
+}
+
+.tip-wrap {
+  height: 100%；;
+}
+
+.tip {
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  /* height: 400rpx; */
+}
+
+.modal-content {
+  text-align: left;
+  text-indent: 2em;
+  line-height: 1.5em;
+}
+
+.modal-date {
+  text-align: right;
+}

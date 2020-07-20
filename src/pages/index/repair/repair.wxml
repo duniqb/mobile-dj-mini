@@ -1,0 +1,85 @@
+<!-- 宫格 -->
+<view class="cu-list grid col-2 no-border">
+  <view class="cu-item">
+    <navigator open-type="navigate" hover-class='none' url="./report/report" data-id="0">
+      <view class="cuIcon-repair text-red"></view>
+      <text>故障报修</text>
+    </navigator>
+  </view>
+  <view class="cu-item">
+    <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="1">
+      <view class="cuIcon-search text-orange"></view>
+      <text>进度查询</text>
+    </navigator>
+  </view>
+  <view class="cu-item">
+    <navigator open-type="navigate" hover-class='none' url="./progress/progress" data-id="2">
+      <view class="cuIcon-appreciate text-green"></view>
+      <text>维修评价</text>
+    </navigator>
+  </view>
+  <view class="cu-item" bindtap="showModalGrid" data-target="ModalGrid">
+    <view class="cuIcon-phone text-blue"></view>
+    <text>维修电话</text>
+  </view>
+</view>
+
+<!-- 维修电话模态框 -->
+<view class="cu-modal {{modalName=='ModalGrid'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">请选择联系校区</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-list menu">
+      <view class="cu-item" bindtap="bindPhone" data-id="0">
+        <view class="content">
+          <text class="text-grey">旅顺校区紧急报修电话1</text>
+        </view>
+      </view>
+      <view class="cu-item" bindtap="bindPhone" data-id="1">
+        <view class="content">
+          <text class="text-grey">旅顺校区紧急报修电话2</text>
+        </view>
+      </view>
+      <view class="cu-item" bindtap="bindPhone" data-id="2">
+        <view class="content">
+          <text class="text-grey">沙河口校区紧急报修电话</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 通知模态框 -->
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{noticeTitle}}</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl modal-content">
+      {{noticeContent}}
+    </view>
+    <view class="padding-xl modal-date">
+      {{noticeDate}}
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn bg-blue margin-left" bindtap="hideModal">我知道了</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-orange'>{{noticeTitle}}</view>
+  <view class='text-content'>
+    <view class='margin-top-sm notice-content'> {{noticeContent}}</view>
+    <view class='margin-top-sm notice-date'> {{noticeDate}}</view>
+  </view>
+</view>

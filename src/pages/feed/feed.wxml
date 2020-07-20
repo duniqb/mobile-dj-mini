@@ -1,0 +1,62 @@
+<view class="round-click  text-sl">
+	<!-- <navigator url='./publish/publish'> -->
+	<text class="cuIcon-roundadd text-blue" bindtap="publish"></text>
+	<!-- </navigator> -->
+</view>
+
+<view class="cu-card dynamic no-card">
+	<view class="cu-item shadow solids-bottom" wx:for="{{feedList}}" wx:key="index">
+		<!-- 头像与时间 -->
+		<view class="cu-list menu-avatar">
+			<view class="cu-item">
+				<view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+				<view class="content flex-sub">
+					<view>{{item.author}}</view>
+					<view class="text-gray text-sm flex justify-between">
+						{{item.time}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 点击内容到详情页 -->
+		<view class="text-content" bindtap="toDetail" id="{{item.id}}">
+			{{item.content}}
+		</view>
+		<!-- 图片 -->
+		<view class="grid flex-sub padding-lr col-3 grid-square" wx:if="{{item.imgUrlList.length > 0}}">
+			<view class="bg-img" style="background-image:url({{item2}});" wx:for="{{item.imgUrlList}}" wx:for-item="item2" wx:key="index" bindtap="showImg" id="{{item2}}" data-images="{{item.imgUrlList}}">
+			</view>
+			<!-- 空白点击区域，用以点击进入详情 -->
+			<view wx:for="{{item.blankImage}}" wx:for-item="item2" wx:key="index" bindtap="toDetail" id="{{item.id}}">
+			</view>
+		</view>
+
+		<view class="margin-top-sm flex justify-between">
+			<view class="padding text-gray text-df"><text class="cuIcon-locationfill" wx:if="{{item.address != ''}}"> {{item.address}}</text></view>
+			<!-- 点赞与评论数量  text-right padding -->
+			<view class="padding text-gray text-right text-xl">
+				<text class="text-grey text-lg" bindtap="showDialogModal" data-target="DialogModal" data-id="{{item.id}}" wx-if="{{item.isAuthor}}">删除 </text>
+				<text class="text-{{item.isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeTitle" id="{{item.id}}"></text>{{item.likeCount == 0 ? '' : item.likeCount}}
+				<!-- 跳转到详情页 -->
+				<text class="cuIcon-commentfill margin-lr-xs"  bindtap="toDetail" id="{{item.id}}"></text>{{item.commentCount == 0 ? '' : item.commentCount}}
+			</view>
+		</view> 
+	</view>
+</view>
+
+<view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">确认删除？</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-blue text-blue" bindtap="hideModal">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="delete">确定</button>
+			</view>
+		</view>
+	</view>
+</view> 

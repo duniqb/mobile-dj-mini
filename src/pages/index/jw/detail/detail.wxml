@@ -1,0 +1,13 @@
+<view class="cu-card article no-card">
+  <view class="cu-item shadow">
+    <view class="title">
+      <view class="text-cut">{{notice.title}}</view>
+    </view>
+    <view class="content" wx:for="{{notice.content}}" wx:key="index">
+      <view class="desc">
+        <block wx:if="{{item != ''}}">
+          <view class="text-content">{{item}}</view>
+        </block>
+      </view>
+    </view>  </view>
+</view>

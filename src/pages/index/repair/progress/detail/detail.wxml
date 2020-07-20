@@ -1,0 +1,68 @@
+<!-- 报修信息 -->
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content text-middle">
+      <text class="">{{title}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">时间：</text>
+    </view>
+    <view class="content">
+      <text class="text-grey">{{date}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">报修单号：</text>
+    </view>
+    <view class="content">
+      <text class="text-grey">{{id}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">状态：</text>
+    </view>
+    <view class="content">
+      <text class="text-grey">{{state}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">位置：</text>
+    </view>
+    <view class="content">
+      <text class="text-grey">{{room}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">描述：</text>
+    </view>
+    <view class="content">
+      <text class="text-grey">{{description}}</text>
+    </view>
+  </view>
+  <view class="cu-item" wx:if="{{showEvaluate}}">
+    <view class="content text-middle">
+      <button class="cu-btn bg-blue" bindtap="bindButton">去评价</button>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content text-middle">
+      <text class="">维修进度</text>
+    </view>
+  </view>
+</view>
+
+<!-- 进度 -->
+<view class="cu-timeline" wx:for="{{timeLineList}}" wx:key="index">
+  <view class="time">{{item.time}}</view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey text-sm">{{item.comment}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,72 @@
+<!-- 查询框 -->
+<view class="cu-form-group">
+  <view class="title">手机号码</view>
+  <input placeholder="请输入报修时填写的手机号码" bind:change="onPhoneChange" type="number" value="{{value}}"></input>
+</view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-blue margin-tb-sm lg" bind:tap="onSearch">查询</button>
+</view>
+
+<!-- 查询结果 -->
+<view class="margin-top">
+  <view class="cu-timeline" wx:for="{{repairList}}" wx:key="index" wx:if="{{showRepair}}">
+    <view class="time" bindtap="clickItem" data-id="{{item.listNumber}}">{{item.date}}</view>
+    <view class="cu-item">
+      <view class="cu-list menu sm-border card-menu margin-top">
+        <view class="cu-item" bindtap="clickItem" data-id="{{item.listNumber}}">
+          <view class="content">
+            <text class="text-grey text-sm">{{item.title}}</text>
+          </view>
+        </view>
+        <view class="cu-item" bindtap="clickItem" data-id="{{item.listNumber}}">
+          <view class="content">
+            <text class="">报修单号：</text>
+            <text class="text-grey">{{item.id}}</text>
+          </view>
+        </view>
+        <view class="cu-item" bindtap="clickItem" data-id="{{item.listNumber}}">
+          <view class="content">
+            <text class="">状态：</text>
+            <text class="text-grey">{{item.state}}</text>
+          </view>
+        </view>
+        <view class="cu-item" wx:if="{{item.showEvaluate}}">
+          <view class="content text-middle">
+            <button class="cu-btn bg-blue" bindtap="bindButton" data-id="{{item.listNumber}}">去评价</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 最近维修记录 -->
+<view class="cu-list menu sm-border card-menu margin-top" wx:if="{{showRecent}}">
+  <view class="cu-item">
+    <view class="content content-left">
+      <text class="">最新 30 天</text>
+    </view>
+    <view class="content content-middle">
+      <text class="">已报修</text>
+    </view>
+    <view class="content content-middle">
+      <text class="">已维修</text>
+    </view>
+    <view class="content content-middle">
+      <text class="">待维修</text>
+    </view>
+  </view>
+  <view class="cu-item" wx:for="{{recentList}}" wx:key="index">
+    <view class="content">
+      <text class="text-grey ">{{item.area}}</text>
+    </view>
+    <view class="content content-middle">
+      <text class="text-grey ">{{item.reported}}</text>
+    </view>
+    <view class="content content-middle">
+      <text class="text-grey ">{{item.repaired}}</text>
+    </view>
+    <view class="content content-middle">
+      <text class="text-grey ">{{item.pending}}</text>
+    </view>
+  </view>
+</view>

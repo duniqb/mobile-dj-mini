@@ -1,0 +1,208 @@
+<!-- 搜索框 -->
+<van-search value="{{ value  }}" placeholder="请输入关键词" use-action-slot bind:search="onSearch" bind:change="onChange">
+	<view slot="action" bind:tap="onSearch">搜索</view>
+</van-search>
+
+<!-- 4 个 Tab -->
+<scroll-view scroll-x class="bg-white nav">
+	<view class="flex text-center">
+		<view class="cu-item flex-sub {{1==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="{{1}}">
+			读者热点
+		</view>
+		<view class="cu-item flex-sub {{2==TabCur?'text-green cur':''}}" bindtap="tabSelect" data-id="{{2}}">
+			荐购热点
+		</view>
+		<view class="cu-item flex-sub {{3==TabCur?'text-orange cur':''}}" bindtap="tabSelect" data-id="{{3}}">
+			分类热点
+		</view>
+		<view class="cu-item flex-sub {{4==TabCur?'text-red cur':''}}" bindtap="tabSelect" data-id="{{4}}">
+			专业热点
+		</view>
+	</view>
+</scroll-view>
+<!-- 读者热点 -->
+<block wx:if="{{TabCur == 1}}">
+	<view class="cu-list menu sm-border card-menu margin-top">
+		<view class="cu-item" wx:for="{{readerHotList}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+			<view class="content">
+				<text class="">{{item.curNo}}. </text>
+				<text class="text-grey">{{item.bookName}}</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag round bg-blue light">{{item.hot}}</view>
+			</view>
+		</view>
+	</view>
+</block>
+<!-- 荐购热点 -->
+<block wx:if="{{TabCur == 2}}">
+	<view class="cu-list menu sm-border card-menu margin-top">
+		<view class="cu-item" wx:for="{{recommendHotList}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+			<view class="content">
+				<text class="">{{item.curNo}}. </text>
+				<text class="text-grey">{{item.bookName}}</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag round bg-green light">{{item.hot}}</view>
+			</view>
+		</view>
+	</view>
+</block>
+
+<!-- 分类热点 -->
+<block wx:if="{{TabCur == 3}}">
+	<view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCate}}">
+		<view class="cu-item arrow" wx:for="{{bookCateList}}" wx:key="index" bindtap="clickCateHot" data-id="{{item.param}}">
+			<view class="content">
+				<text class="">{{item.id}}. </text>
+				<text class="text-grey">{{item.cate}}</text>
+			</view>
+		</view>
+	</view>
+	<!-- 分类热点的二级列表 -->
+	<view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showBookCateDetail}}">
+		<view class="cu-item " bindtap="bookCateBack">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+		<view class="cu-item " wx:for="{{bookCateDetailList}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+			<view class="content">
+				<text class="">{{item.curNo}}. </text>
+				<text class="text-grey">{{item.bookName}}</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag round bg-orange light">{{item.hot}}</view>
+			</view>
+		</view>
+		<view class="cu-item " bindtap="bookCateBack">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+	</view>
+</block>
+
+<!-- 专业热点 -->
+<block wx:if="{{TabCur == 4}}">
+	<view class="cu-list menu sm-border card-menu margin-top" wx:if="{{showCollege}}">
+		<view class="cu-item arrow" wx:for="{{collegeList}}" wx:key="index" bindtap="clickMajorHot" data-id="{{item.name}}">
+			<view class="content">
+				<text class="">{{item.curNo + 1}}. </text>
+				<text class="text-grey">{{item.name}}</text>
+			</view>
+		</view>
+	</view>
+	<!-- 专业热点的二级列表 - 专业列表 -->
+	<view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showMajor}}">
+		<view class="cu-item " bindtap="backCollegeList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+		<view class="cu-item " wx:for="{{majorList}}" wx:key="index" bindtap="clickMajorList" data-id="{{item.name}}">
+			<view class="content">
+				<text class="">{{item.curNo + 1}}. </text>
+				<text class="text-grey">{{item.name}}</text>
+			</view>
+		</view>
+		<view class="cu-item " bindtap="backCollegeList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+	</view>
+	<!-- 专业热点的三级列表 - 课程列表 -->
+	<view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showCourse}}">
+		<view class="cu-item " bindtap="backMajorList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+		<view class="cu-item " wx:for="{{courseList}}" wx:key="index" bindtap="clickCourseList" data-id="{{item.sq}}">
+			<view class="content">
+				<text class="">{{item.curNo + 1}}. </text>
+				<text class="text-grey">{{item.name}}</text>
+			</view>
+		</view>
+		<view class="cu-item " bindtap="backMajorList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+	</view>
+	<!-- 专业热点的四级列表 - 图书列表 -->
+	<view class="cu-list menu sm-border card-menu arrow margin-top" wx:if="{{showMajorDetail}}">
+		<view class="cu-item " bindtap="backCourseList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+		<view class="cu-item " wx:for="{{majorDetailList}}" wx:key="index" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+			<view class="content">
+				<text class="">{{item.curNo}}. </text>
+				<text class="text-grey">{{item.bookName}}</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag round bg-red light">{{item.hot}}</view>
+			</view>
+		</view>
+		<view class="cu-item " bindtap="backCourseList">
+			<view class="content text-middle">
+				<text class="text-grey">返回上一级</text>
+			</view>
+		</view>
+	</view>
+</block>
+
+<!-- 模态框 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">{{bookDetail.bookName}}</view>
+			<text class="text-{{isLike ? 'red' : 'gray'}} cuIcon-likefill margin-lr-xs" bindtap="likeBook"></text>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl">
+			<view class="cu-list menu">
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">作者：{{bookDetail.author == null ? '无' : bookDetail.author}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">出版社：{{bookDetail.publisher == null ? '无' : bookDetail.publisher}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">ISBN号：{{bookDetail.isbn == null ? '无' : bookDetail.isbn}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">CALIS号：{{bookDetail.calis == null ? '无' : bookDetail.calis}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">索书号：{{bookDetail.index == null ? '无' : bookDetail.index}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content detail-content">
+						<view class="text-left text-grey detail" wx:for="{{bookDetail.status}}" wx:key="index">{{index + 1}}. {{item}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<view class="text-left padding text-grey">{{bookDetail.summary == null ? '无简介': bookDetail.summary}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

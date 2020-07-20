@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "van-grid": "../vant//dist/grid/index",
-    "van-grid-item": "../vant/dist/grid-item/index"
-  },
-  "navigationBarTitleText": "掌上大交"
-}

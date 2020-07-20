@@ -1,0 +1,7 @@
+<van-cell title="选择多个日期" value="{{ text }}" bind:click="onDisplay" />
+<van-calendar
+  show="{{ show }}"
+  type="multiple"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+/>

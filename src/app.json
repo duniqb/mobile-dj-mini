@@ -1,0 +1,81 @@
+{
+  "pages": [
+    "pages/feed/feed",
+    "pages/index/index",
+ 
+    "pages/index/seek/seek",
+    "pages/index/jw/jw",
+    "pages/mine/about/update/update",
+    "pages/index/jw/grade/grade",
+    "pages/index/jw/credit/credit",
+    "pages/index/jw/login/login", 
+    "pages/index/jw/score/score",
+    "pages/index/card/card",
+    "pages/mine/likebook/likebook",
+    "pages/mine/mine",
+    "pages/index/library/library",
+    "pages/index/repair/repair",
+    "pages/index/repair/report/report",
+    "pages/index/seek/publish/publish",
+    "pages/index/library/search/search",
+    "pages/index/calendar/calendar",
+    "pages/index/job/job",
+    "pages/feed/detail/detail",
+    "pages/feed/publish/publish",
+    "pages/news/news",
+    "pages/mine/about/about",
+    "pages/index/jw/detail/detail",
+    "pages/index/repair/progress/progress",
+    "pages/index/repair/evaluate/evaluate",
+    "pages/index/repair/progress/detail/detail",
+    "pages/index/job/demand/demand",
+    "pages/index/job/recruit/recruit",
+    "pages/news/detail/detail"
+    ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取天气信息"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-search": "./vant/dist/search/index",
+    "van-field": "./vant/dist/field/index",
+    "van-datetime-picker": "./vant/dist/datetime-picker/index",
+    "van-notice-bar": "./vant/dist/notice-bar/index",
+    "van-rate": "./vant/dist/rate/index",
+    "van-steps": "./vant/dist/steps/index",
+    "van-dropdown-menu": "./vant/dist/dropdown-menu/index",
+    "van-dropdown-item": "./vant/dist/dropdown-item/index",
+    "van-picker": "/vant/dist/picker/index"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/index/index"
+      },
+      {
+        "pagePath": "pages/news/news"
+      },
+      {
+        "pagePath": "pages/feed/feed"
+      },
+      {
+        "pagePath": "pages/mine/mine"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap86.json",
+  "plugins": {},
+  "networkTimeout": {
+    "request": 3000
+  }
+}

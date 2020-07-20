@@ -1,0 +1,30 @@
+<view class="cu-timeline">
+	<view class="cu-time">v2.0.0</view>
+	<view class="cu-item">
+		<view class="content">
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-cyan">2020-06-27</view>
+			</view>
+			<view class="margin-top">2.0版上线，新增校友圈等玩法，更多特性等你发现。</view>
+		</view>
+	</view>
+	<view class="cu-time">v1.0.0</view>
+	<view class="cu-item">
+		<view class="content">
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-cyan">2019-12-20</view>
+			</view>
+			<view class="margin-top">正式版公测，欢迎提出意见！</view>
+		</view>
+	</view>
+	<view class="cu-time">v0.9.0</view>
+	<view class="cu-item">
+		<view class="content">
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-cyan">2019-12-19</view>
+			</view>
+			<view class="margin-top">体验版内测</view>
+		</view>
+	</view>
+
+</view>

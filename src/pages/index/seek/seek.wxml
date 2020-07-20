@@ -1,0 +1,111 @@
+<!-- 头图 -->
+<view class="bg-img padding-top-xl flex align-end" style="background-image: url('https://mobile-dj.oss-cn-beijing.aliyuncs.com/static/seek3.png');height: 300rpx;">
+	<view class="bg-shadeBottom padding padding-top-xl flex-sub">
+		世界这么大，能遇见，不容易。
+	</view>
+</view>
+
+<view class="cu-bar bg-white">
+	<view class="action">
+		<text class="cuIcon-title text-blue"></text>最新发布
+	</view>
+	<view class="action">
+		<navigator open-type="navigate" hover-class='none' url="./publish/publish">
+			<button class="cu-btn bg-blue shadow">我要发布</button>
+		</navigator>
+	</view>
+</view>
+
+<!-- 时间线 -->
+<view class="cu-timeline" wx:for="{{seekList}}" wx:key="index">
+	<view class="cu-time">{{item.date}}</view>
+	<view class="cu-item item-height" bindtap="showModal" data-target="Modal" data-id="{{item.id}}">
+		<view class="content flex justify-between">
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-cyan">时间</view>
+				<view class="cu-tag line-cyan">{{item.time}}</view>
+			</view>
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-cyan">位置</view>
+				<view class="cu-tag line-cyan">{{item.place}}</view>
+			</view>
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-{{item.type == 0 ? 'orange' : 'pink'}}">类型</view>
+				<view class="cu-tag line-{{item.type == 0 ? 'orange' : 'pink'}}">{{item.type == 0 ? '寻物' : '招领'}}</view>
+			</view>
+			<text class="text-red text-lg" catchtap="showDialogModal" data-target="DialogModal" data-id="{{item.id}}" wx-if="{{item.isAdmin}}"> 删</text>
+			<!-- 标题与内容 -->
+			<view class="margin-top text-lg text-cyan">{{item.title}}</view>
+			<view class="margin-top">{{item.content}}</view>
+		</view>
+	</view>
+</view>
+
+<!-- 模态框 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">{{seek.title}}</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl">
+			<view class="cu-list menu">
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">时间：{{seek.time}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">发布人：{{seek.author}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">地点：{{seek.place}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">类型：{{seek.type == 0 ? '寻物' : '招领'}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">联系方式：{{seek.contact}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content modal-content">
+						<text class="text-grey">详情：{{seek.content}}</text>
+					</view>
+				</view>
+
+				<!-- 图片 -->
+				<view class="grid flex-sub padding-lr col-3 grid-square margin-top" wx:if="{{seek.imgUrlList.length > 0}}">
+					<view class="bg-img" style="background-image:url({{item}});" wx:for="{{seek.imgUrlList}}" wx:for-item="item" wx:key="index" bindtap="showImg" id="{{item}}" data-images="{{seek.imgUrlList}}">
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">确认删除？(管理员)</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-blue text-blue" bindtap="hideModal">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="delete">确定</button>
+			</view>
+		</view>
+	</view>
+</view>

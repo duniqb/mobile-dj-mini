@@ -1,0 +1,37 @@
+<view class="cu-timeline" wx:for="{{gradeList}}" wx:key="index">
+	<view class="time">{{item.examDate}}</view>
+	<view class="cu-item">
+		<view class="cu-list menu sm-border card-menu margin-top">
+			<view class="cu-item">
+				<view class="content">
+					<text class="">类别：</text>
+					<text class="text-grey">{{item.examName}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="">成绩：</text>
+					<text class="text-grey">{{item.score}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="">状态：</text>
+					<text class="text-grey">{{item.approved}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="">准考证号：</text>
+					<text class="text-grey">{{item.ticketNumber}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="">考试时间：</text>
+					<text class="text-grey">{{item.examTime}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

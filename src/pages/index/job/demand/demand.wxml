@@ -1,0 +1,19 @@
+<view class="cu-card article no-card">
+  <view class="cu-item shadow">
+    <view class="title">
+      <view class="text-cut">{{title}}</view>
+      <view class="text-gray text-sm text-middle ">
+        <text class="margin-lr-xs"></text>{{releaseDate}}
+        <text class="margin-lr-xs"></text>{{from == null ? '' : from}}
+        <text class="margin-lr-xs"></text>{{browser}}
+      </view>
+    </view>
+    <view class="content" wx:for="{{content}}" wx:key="index">
+      <view class="desc">
+       <block wx:if="{{item != ''}}">
+        <view class="text-content">{{item}}</view>
+         </block>
+      </view>
+    </view>
+  </view>
+</view>
