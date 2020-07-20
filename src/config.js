@@ -16,7 +16,7 @@ var config = {
   // 新闻
   newsListUrl: host + '/news/list',
   newsDetailUrl: host + '/news/detail',
-
+ 
   // 图书馆
   libraryHotUrl: host + '/library/hot',
   libraryBookCateUrl: host + '/library/bookCate',
@@ -75,6 +75,7 @@ var config = {
   seekListUrl: host + '/seek/list',
   seekDetailUrl: host + '/seek/info',
   seekSaveUrl: host + '/seek/save',
+  seekDeleteUrl: host + '/seek/update',
   seekSaveImgUrl: host + '/imgurl/save',
   seekPolicyUrl: host + '/oss/policy',
 

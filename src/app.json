@@ -1,14 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/index/jw/jw",
-
-    "pages/mine/about/update/update",
-
     "pages/feed/feed",
-
+    "pages/index/index",
+ 
+    "pages/index/seek/seek",
+    "pages/index/jw/jw",
+    "pages/mine/about/update/update",
     "pages/index/jw/grade/grade",
-   
     "pages/index/jw/credit/credit",
     "pages/index/jw/login/login", 
     "pages/index/jw/score/score",
@@ -18,7 +16,6 @@
     "pages/index/library/library",
     "pages/index/repair/repair",
     "pages/index/repair/report/report",
-    "pages/index/seek/seek",
     "pages/index/seek/publish/publish",
     "pages/index/library/search/search",
     "pages/index/calendar/calendar",
@@ -33,7 +30,6 @@
     "pages/index/repair/progress/detail/detail",
     "pages/index/job/demand/demand",
     "pages/index/job/recruit/recruit",
-  
     "pages/news/detail/detail"
     ],
   "permission": {

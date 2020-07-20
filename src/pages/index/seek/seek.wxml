@@ -33,6 +33,7 @@
 				<view class="cu-tag bg-{{item.type == 0 ? 'orange' : 'pink'}}">类型</view>
 				<view class="cu-tag line-{{item.type == 0 ? 'orange' : 'pink'}}">{{item.type == 0 ? '寻物' : '招领'}}</view>
 			</view>
+			<text class="text-red text-lg" catchtap="showDialogModal" data-target="DialogModal" data-id="{{item.id}}" wx-if="{{item.isAdmin}}"> 删</text>
 			<!-- 标题与内容 -->
 			<view class="margin-top text-lg text-cyan">{{item.title}}</view>
 			<view class="margin-top">{{item.content}}</view>
@@ -87,6 +88,23 @@
 					<view class="bg-img" style="background-image:url({{item}});" wx:for="{{seek.imgUrlList}}" wx:for-item="item" wx:key="index" bindtap="showImg" id="{{item}}" data-images="{{seek.imgUrlList}}">
 					</view>
 				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">确认删除？(管理员)</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-blue text-blue" bindtap="hideModal">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="delete">确定</button>
 			</view>
 		</view>
 	</view>

@@ -1,6 +1,8 @@
+const app = getApp()
 import {
   seekListUrl,
-  seekDetailUrl
+  seekDetailUrl,
+  seekDeleteUrl
 } from '../../../config.js'
 
 Page({
@@ -14,11 +16,56 @@ Page({
     totalPage: 0,
     currPage: 0,
     seekList: [],
-    seek: {}
+    seek: {},
+    currId:''
+  },
+
+  /**
+   * 删除
+   */
+  delete: function () {
+    var that = this;
+    console.log(that.data.currId)
+    var seek = {
+      id: that.data.currId
+    }
+    wx.request({
+      url: seekDeleteUrl,
+      method: 'POST',
+      data: JSON.stringify(seek),
+      success(res) { 
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'none',
+          })
+          that.hideModal();
+          console.log("删除成功", res)
+          that.getList();
+        }
+      },
+      fail(res) {
+        this.hideModal();
+        console.log(res)
+      }
+    })
+  },
+  showDialogModal(e) {
+    console.log(e.target.dataset.id)
+    var that = this;
+    that.setData({
+      modalName: e.currentTarget.dataset.target,
+      currId: e.target.dataset.id
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
   /**
    * 人性化时间处理 传入时间戳
-   * @param {*} timestamp 
+   * @param {*} timestamp  
    */
   timeFormat(timestamp, format) {
     var t = new Date(timestamp);
@@ -93,38 +140,6 @@ Page({
       withShareTicket: true
     })
     that.getList();
-
-    // wx.request({
-    //   url: seekListUrl,
-    //   data: {
-    //     // sessionId: app.sessionId,
-    //     type: 1
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     if (res.data.code == 0) {
-    //       for (var i = 0; i < res.data.page.list.length; i++) {
-    //         res.data.page.list[i].time = new String(res.data.page.list[i].time).slice(11, 16)
-    //         res.data.page.list[i].date = new String(res.data.page.list[i].date).slice(5)
-    //       }
-    //       that.setData({
-    //         seekList: res.data.page.list,
-    //         totalCount: res.data.page.totalCount,
-    //         pageSize: res.data.page.pageSize,
-    //         totalPage: res.data.page.totalPage,
-    //         currPage: res.data.page.currPage,
-    //       })
-    //     } else if (res.data.code == 400) {
-    //       wx.showToast({
-    //         title: '加载失败',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     }
-    //   }
-    // })
   },
   /**
    * 显示图片
@@ -178,6 +193,7 @@ Page({
     wx.request({
       url: seekListUrl,
       data: {
+        sessionId: app.sessionId,
         type: 1
       },
       success(res) {

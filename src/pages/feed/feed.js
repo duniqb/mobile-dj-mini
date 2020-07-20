@@ -66,6 +66,9 @@ Page({
    * 请求新数据
    */
   getList() {
+    wx.showNavigationBarLoading({
+      complete: (res) => { },
+    })
     var that = this;
     wx.request({
       url: feedListUrl,
@@ -93,6 +96,9 @@ Page({
         }
       },
       fail(res) {
+        wx.hideNavigationBarLoading({
+          complete: (res) => { },
+        })
         console.log(res)
       }
     })
@@ -160,41 +166,43 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading({
-      complete: (res) => { },
-    })
-    var that = this;
-    wx.request({
-      url: feedListUrl,
-      data: {
-        sessionId: app.sessionId,
-        page: 1,
-        limit: 10
-      },
-      success(res) {
-        wx.hideNavigationBarLoading({
-          complete: (res) => { },
-        })
-        if (res.data.code == 0) {
-          console.log("本次请求的结果：", res)
-          // 修改时间显示
-          for (var i = 0; i < res.data.page.list.length; i++) {
-            res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
-          }
+    this.getList();
 
-          // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
-          var feedList = res.data.page.list;
-          var newFeedList = that.data.feedList;
-          that.setData({
-            feedList: feedList.concat(newFeedList),
-            currPage: res.data.page.currPage,
-            totalPage: res.data.page.totalPage
-          });
-          console.log("已赋值feed列表：", that.data.feedList)
-          console.log("连接后的feedList：", that.data.feedList)
-        }
-      }
-    })
+    // wx.showNavigationBarLoading({
+    //   complete: (res) => { },
+    // })
+    // var that = this;
+    // wx.request({
+    //   url: feedListUrl,
+    //   data: {
+    //     sessionId: app.sessionId,
+    //     page: 1,
+    //     limit: 10
+    //   },
+    //   success(res) {
+    //     wx.hideNavigationBarLoading({
+    //       complete: (res) => { },
+    //     })
+    //     if (res.data.code == 0) {
+    //       console.log("本次请求的结果：", res)
+    //       // 修改时间显示
+    //       for (var i = 0; i < res.data.page.list.length; i++) {
+    //         res.data.page.list[i].time = that.timeFormat(Date.parse(res.data.page.list[i].time))
+    //       }
+
+    //       // 将页面原有的 list 和查询返回的 list 拼接，然后新内容在前面显示
+    //       var feedList = res.data.page.list;
+    //       var newFeedList = that.data.feedList;
+    //       that.setData({
+    //         feedList: feedList.concat(newFeedList),
+    //         currPage: res.data.page.currPage,
+    //         totalPage: res.data.page.totalPage
+    //       });
+    //       console.log("已赋值feed列表：", that.data.feedList)
+    //       console.log("连接后的feedList：", that.data.feedList)
+    //     }
+    //   }
+    // })
   },
   publish() {
     wx.navigateTo({

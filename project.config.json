@@ -15,7 +15,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
-		"autoAudits": true,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
 		"checkInvalidKey": true,
