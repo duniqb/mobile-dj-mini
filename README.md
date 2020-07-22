@@ -14,7 +14,7 @@
 
 ## 后端
 
-https://github.com/duniqb/mobole-dj
+https://github.com/duniqb/mobile-dj
 
 后端使用 Java 语言开发，技术栈：
 
